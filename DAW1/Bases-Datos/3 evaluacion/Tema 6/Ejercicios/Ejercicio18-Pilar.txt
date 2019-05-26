@@ -1,0 +1,139 @@
+﻿Escribe un bloque anónimo que almacene la siguiente información del empleado de código 025100 en una variable de tipo registro:
+
+Nombre completo, salario bruto, salario neto, importe de la retención, % de certificados, % de no certificados, horas de formación y % de formacion con respecto a la empresa y a su departamento.
+
+Los datos personales, salariales y de formación son, a su vez, de tipo registro.
+
+------------------------------------------------------------------------------------------------------
+set serveroutput on size 100000;
+declare
+
+    TYPE r_personal IS RECORD
+    (
+    nom a.emp.nom%type,
+    apes a.emp.apes%type
+    );
+
+    TYPE r_salarial IS RECORD
+    (
+    bruto a.emp.sal%type,
+    neto a.emp.sal%type,
+    retencion a.emp.sal%type
+    );
+
+    TYPE r_formacion IS RECORD
+    (
+    certificados float,
+    no_certificados float,
+    horas a.cur.dur%type,
+    formacion_emp float,
+    formacion_dep float
+    );
+
+    TYPE r_empleado IS RECORD
+    (
+    personal r_personal,
+    salarial r_salarial,
+    formacion r_formacion
+    );
+
+    v_empleado r_empleado;
+
+    v_cursos number(3);
+    v_horas_emp number(5);
+    v_horas_dep number(5);
+    v_num a.dep.num%type;
+
+begin
+
+    select nom, apes, sal, sal-(sal*irpf/100),sal*irpf/100 
+    into v_empleado.personal.nom, v_empleado.personal.apes, v_empleado.salarial.bruto, v_empleado.salarial.neto, v_empleado.salarial.retencion
+    from a.emp
+    where cod='025100';
+
+    select count(codcur_cr) into v_cursos from a.ast
+    where cod_em='025100';
+
+    --Si tiene cursos calculo el resto de requisitos
+
+    if v_cursos > 0
+        then
+                    --Calculo el porcentaje de certificados
+           
+            select count(cer)*100/v_cursos
+            into v_empleado.formacion.certificados
+            from a.ast
+            where cod_em='025100' and cer='S';
+
+
+                    --Calculo el porcentaje de no certificados
+        
+            select count(cer)*100/v_cursos
+            into v_empleado.formacion.no_certificados
+            from a.ast
+            where cod_em='025100' and cer='N';
+
+
+                    --Calculo las horas de formación del empleado
+
+            select sum(dur) into v_empleado.formacion.horas from cur
+            where codcur in (select codcur_cr from a.ast where cod_em='025100');
+
+
+                    --Calculo las horas de formación de la empresa
+
+            select sum(dur) into v_horas_emp from a.cur, a.ast
+            where codcur=codcur_cr;
+
+
+                    --Calculo el portentaje de horas con respecto a la empresa.
+
+            v_empleado.formacion.formacion_emp := v_empleado.formacion.horas*100/v_horas_emp;
+
+
+                    --Calculo las horas de formación del departamento
+
+            select num_dp into v_num from a.emp
+            where cod='025100';
+
+            if v_num is not null
+                then
+                    select sum(dur) into v_horas_dep from a.emp,a.ast,a.cur
+                    where
+                    (
+                     codcur=codcur_cr
+                     and
+                     cod_em=cod
+                     and
+                     num_dp=v_num
+                    );
+
+                    v_empleado.formacion.formacion_dep := v_empleado.formacion.horas*100/v_horas_dep;
+            else
+
+                v_empleado.formacion.formacion_dep := 100;
+
+            end if;
+
+    else
+
+        v_empleado.formacion.certificados := 0;
+        v_empleado.formacion.no_certificados := 0;
+        v_empleado.formacion.horas := 0;
+        v_empleado.formacion.formacion_emp := 0;
+        v_empleado.formacion.formacion_dep := 0;
+
+    end if;
+
+    dbms_output.put_line('Nombre completo: '||v_empleado.personal.nom||' '||v_empleado.personal.apes);
+    dbms_output.put_line('Salario bruto: '||v_empleado.salarial.bruto);
+    dbms_output.put_line('Salario neto: '||v_empleado.salarial.neto);
+    dbms_output.put_line('Importe de la retención: '||v_empleado.salarial.retencion);
+    dbms_output.put_line('% de certificados: '||v_empleado.formacion.certificados);
+    dbms_output.put_line('% de no certificados: '||v_empleado.formacion.no_certificados);
+    dbms_output.put_line('Horas de formación: '||v_empleado.formacion.horas);
+    dbms_output.put_line('% de formacion con respecto a la empresa: '||round(v_empleado.formacion.formacion_emp,0));
+    dbms_output.put_line('% de formacion con respecto a su departamento: '||round(v_empleado.formacion.formacion_dep,0));
+    dbms_output.put_line(chr(10));
+
+end;

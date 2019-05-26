@@ -1,0 +1,17 @@
+alter table libro
+add constraint libro_ck1
+check (ejemplares>=1 and ejemplares<=6);
+
+select table_name,constraint_name,constraint_type,search_condition from dba_constraints
+where owner='AAYUSO'
+and table_name not like 'BIN%'
+order by 1,3;
+
+alter table autor
+modify codigo char(8);
+
+alter table escribe
+modify codigo char(8);
+
+alter table libro
+modify genero varchar(30) constraint libro_nn1 not null;

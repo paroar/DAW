@@ -1,0 +1,100 @@
+Solución ejercicio nº 6
+=======================
+
+1.
+
+select count(codcur) from a.cur
+where lug<>'Madrid';
+
+2.
+
+select count(distinct cod_em_as) from a.gas
+where imp>30;
+
+3.
+
+select sum(fal) from a.dep,a.emp,a.ast
+where
+(
+ num=num_dp
+ and
+ cod=cod_em
+ and
+ dep.nom='Financiero'
+);
+
+4.
+
+select count(distinct codpro_pr) from a.ses,a.cur
+where
+(
+ codcur=codcur_cr
+ and
+ dur>50
+);
+
+5.
+
+select avg(fal) from a.ast
+where fal>5;
+
+6.
+
+select avg(imp) from a.tgas,a.gas
+where
+(
+ codgas=codgas_tg
+ and
+ den='Alojamiento'
+);
+
+7.
+
+select count(cer) from a.dep,a.emp,a.ast
+where
+(
+ num=num_dp
+ and
+ cod=cod_em
+ and
+ dep.nom='Comercial'
+ and
+ cer='S'
+);
+
+8.
+
+select max(imp),min(imp) from a.dep,a.emp,a.gas
+where
+(
+ num=num_dp
+ and
+ cod=cod_em_as
+ and
+ dep.nom like 'Producci_n'
+);
+
+9.
+
+select max(fal) from a.dep,a.emp,a.ast
+where
+(
+ num=num_dp
+ and
+ cod=cod_em
+ and
+ dep.nom like 'Ingenier_a'
+ and
+ cer='S'
+);
+
+10.
+
+select count(distinct emp) from a.pro,a.ses
+where codpro=codpro_pr;
+
+
+
+
+
+

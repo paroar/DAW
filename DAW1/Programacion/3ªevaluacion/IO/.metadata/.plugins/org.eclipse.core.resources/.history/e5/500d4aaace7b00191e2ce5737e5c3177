@@ -1,0 +1,27 @@
+import static org.junit.Assert.*;
+
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+@RunWith(Parameterized.class)
+public class HoraCorrectaTest {
+	
+	private Hora hora;
+	
+	
+	@Parameters
+	public static Hora[] horas(){
+		Hora[] h = {new Hora(-1,-1,-1),new Hora(0,0,0),new Hora(1,1,1),new Hora(23,59,59),new Hora(24,60,60)};
+		return h;
+	}
+
+	@Test
+	public void testHoraCorrecta() {
+		boolean flag = this.hora.horaCorrecta();
+		assertTrue(flag);
+	}
+	
+}

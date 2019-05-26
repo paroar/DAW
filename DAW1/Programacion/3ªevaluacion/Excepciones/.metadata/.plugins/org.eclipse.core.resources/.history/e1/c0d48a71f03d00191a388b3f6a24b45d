@@ -1,0 +1,26 @@
+
+public class Prueba {
+
+	public static void main(String[] args) {
+		Punto p1= new Punto(1,2);
+		Punto p2= new Punto(1,2);
+		Punto p3= null;
+		double dist=0;
+	
+		boolean repetir=false;
+	
+		while(repetir) {
+			try {
+				dist=p3.distacioOtroPunto(p3);
+				System.out.println(dist);
+			}catch(MiPunteroNuloException e){
+				System.out.println(e.getMessage());
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+				p3=new Punto(5,2);
+				repetir=true;
+			}		
+		}
+	}
+	
+}

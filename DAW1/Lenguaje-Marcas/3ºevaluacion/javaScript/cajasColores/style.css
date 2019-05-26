@@ -1,0 +1,26 @@
+.box{
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	transition-delay: transform(2000);
+	transform: scale();
+}
+
+#red{
+	z-index: 0;
+	background-color: red;
+}
+
+#green{
+	z-index: 0;
+	background-color: green;
+	top: 50px;
+	left: 50px;
+}
+
+#blue{
+	z-index: 0;
+	background-color: blue;
+	top: 100px;
+	left: 100px;
+}

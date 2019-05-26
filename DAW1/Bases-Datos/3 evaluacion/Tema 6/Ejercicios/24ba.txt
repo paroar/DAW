@@ -1,0 +1,17 @@
+declare
+
+v_nom a.emp.nom%type;
+v_apes a.emp.apes%type;
+v_flag boolean;
+
+begin
+
+ proc24('025100',v_nom,v_apes,v_flag);
+
+ if(v_flag)
+ then
+  dbms_output.put_line('Nombre:'||v_nom||' '||v_apes);
+ else
+  dbms_output.put_line('No existe');
+ end if;
+end;

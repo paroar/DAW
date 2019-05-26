@@ -1,0 +1,69 @@
+
+/*
+ *@author Pablet
+ * 
+ * */
+
+public class Hora implements Comparable{
+
+	private int hora;
+	private int min;
+	private int sec;
+	
+	/*
+	 *Constructor de la clase Hora
+	 *@param int hora
+	 *@param int minuto
+	 *@param int segundo
+	 * */
+	public Hora(int hora, int min, int sec) {
+		super();
+		this.hora = hora;
+		this.min = min;
+		this.sec = sec;
+	}
+	
+	/*
+	 *Este método comprueba que el formato de la fecha es correcto 
+	 * */
+	public boolean horaCorrecta() {
+		if((this.hora<24 && this.hora >= 0) && (this.min<60 && this.min >= 0) && (this.sec<60 && this.sec >= 0)) {
+			return true;
+		}else{
+			return false;
+		}	
+	}
+	
+	
+	/*
+	 *Este método suma 1 sec a la hora y la actualiza
+	 * */
+	public Hora nuevaHora() {
+		this.sec +=1;
+		if(this.sec == 60) {
+			this.sec = 0;
+			this.min += 1;
+		}
+		if(this.min == 60) {
+			this.min = 0;
+			this.hora +=1;
+		}
+		if(this.hora == 24) {
+			this.hora = 0;
+		}
+		return this;
+	}
+	
+
+	@Override
+	public int compareTo(Object arg0) {
+		Hora h = (Hora)arg0;
+		if(this.hora == h.hora && this.min == h.min && this.sec == h.sec) {
+			return 0;
+		}else {
+			return 1;
+		}
+	}
+
+	
+}

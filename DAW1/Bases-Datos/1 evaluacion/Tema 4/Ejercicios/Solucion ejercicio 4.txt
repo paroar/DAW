@@ -1,0 +1,53 @@
+Solución ejercicio nº 4
+=======================
+
+1.
+
+select emp.nom,apes,dep.nom from a.dep,a.emp
+where num=num_dp
+and sal*(1-irpf/100)>1600
+and irpf<22;
+
+2.
+
+select distinct nom,lug from a.cur,a.ses
+where codcur=codcur_cr
+and hor>6;
+
+3.
+
+select distinct nom,apes from a.emp,a.ast
+where cod=cod_em
+and cer='S'
+and fal<2;
+
+4.
+
+select distinct nom,apes from a.emp,a.ast
+where cod=cod_em
+and cer='N'
+and fal=0;
+
+5.
+
+select distinct emp from a.pro,a.ses
+where codpro=codpro_pr
+and hor>5;
+
+6.
+
+select distinct lug from a.cur,a.ast
+where codcur=codcur_cr
+and cod_em='451001';
+
+7.
+
+select distinct nom from a.cur,a.ast
+where codcur=codcur_cr
+and fal>5;
+
+8.
+
+select nom,ffin-fini from a.cur,a.ast
+where codcur=codcur_cr
+and cod_em='002369';

@@ -1,0 +1,45 @@
+﻿
+- muestre los nombres de los usuarios del sistema que comiencen por la letra "a"
+
+cat /etc/passwd |grep ^a | cut -d: -f1
+
+- muestre los nombres de los usuarios del sistema que no contengan vocales
+
+cat /etc/passwd | cut -d -f1 | grep -v [aeiou]
+cat /etc/passwd | cut -f1 -d: | grep “^[^aeiou]*$”
+cat /etc/passwd | cut -f1 -d: | grep -x “[^aeiou]*”
+
+- muestre los nombres de los usuarios del sistema de m�s de 5 caracteres
+
+cat /etc/passwd | cut -d -f1 | grep -E “.{6}” o {6,}
+
+
+- muestre los nombres de los usuarios del sistema que comiencen y terminen por la misma letra
+
+cut /etc/passwd -d: -f1 |grep -E '^(.).*\1$'"
+
+Ejemplo:
+
+echo elefante | grep -E “^(.).*\1$”
+(.) guardar el carácter .* cualquier 
+ 
+- muestre los nombres de los usuarios del sistema cuyo UID sea distinto del GID (IDENTIFICADOR DE USUARIO Y DE GRUPO)
+
+cut /etc/passwd -d: -f1,3,4 | grep -Ev '.*:(.*):\1$' | cut -d: -f1 PABLO
+cut /etc/passwd -d: -f1,3,4 | grep -Ev "^[^:]*:([^:]*):\1" | cut -f1 -d: PROFE
+
+- muestre una lista que contenga el nombredeusuario:nombredelgrupo
+
+cat /etc/passwd 
+/etc/group hay grupos con y sin usuarios 120:saned o 124: o con 3 usuarios 
+
+el nombre del grupo está en /etc/group
+*Me quedo con el nombre de usuario y de grupo: cut -f1,4 -d: /etc/passwd
+*Va a ser un comando largo con tuberías dentro (lo meto en comando bash -c, que puede tener tuberías): cut -f1,4 -d: /etc/passwd | xargs -I{} bash -c “echo {}”
+*Cortar el nombre de usuario: cut -f1,4 -d: /etc/passwd | xargs -I{} bash -c “(echo {}” | cut -f1 -d: | tr -d ‘\n’ ‘:’ ; cat /etc/group | grep ‘^[^:]*:[^:]*:$(echo {} @ cut -f2 -d:):’”
+
+
+
+- muestre el nombre del grupo: y separado por comas los usuarios 
+- muestre el nombre del grupo que tiene m�s usarios 
+- muestre el usario que pertenece a m�s grupos 

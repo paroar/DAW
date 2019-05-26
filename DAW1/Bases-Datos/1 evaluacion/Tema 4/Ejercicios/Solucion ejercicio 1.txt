@@ -1,0 +1,104 @@
+Solución ejercicio nº 1
+=======================
+
+1.
+
+SELECT NOM, APES, EMP FROM PRO;
+
+2.
+
+SELECT NOM, APES, SAL, SAL-SAL*IRPF/100 AS SALARIO_NETO FROM EMP;
+
+3. 
+
+SALECT NOM, FFIN, LUG FROM CUR;
+
+4.
+
+SELECT NOM, FFIN-FINI AS DIAS_TRASNCURRIDOS FROM CUR;
+
+5.
+
+SELECT FEC, IMP FROM GAS;
+
+6.
+
+SELECT NOM,APES,SAL-SAL*(IRPF+2)/100 FROM EMP;
+
+7.
+
+SELECT FEC,PRE*HOR FROM HEX;
+
+8.
+
+SELECT DISTINCT EMP FROM PRO;
+
+9.
+
+SELECT DISTINCT LUG FROM CUR;
+
+
+10.
+
+SELECT NOM,APES,1.05*SAL-1.05*SAL*(IRPF-3)/100 FROM EMP;
+
+
+
+
+
+(SAL+SAL*5/100)-(SAL+SAL*5/100)*(IRPF-3)/100
+
+(SAL+SAL*5/100)*(1-(IRPF-3)/100)
+
+1.05*SAL*(1-(IRPF-3)/100)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

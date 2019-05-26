@@ -1,0 +1,76 @@
+COMANDO UPDATE
+==============
+
+UPDATE EMP
+SET SAL=SAL*1.02;
+COMMIT;
+
+update emp
+set sal=sal*0.98,irpf=irpf+2;
+commit;
+
+update emp
+set sal=null
+where cod='136900';
+commit;
+
+update emp
+set sal=sal*1.02
+where cod='136900';
+commit;
+
+update emp
+set sal=sal*0.98,irpf=irpf+2
+where sal<1200 and irpf>18;
+commit;
+
+Incrementar un 3% el salario de los empleados que han asistido a cursos obteniendo
+más de tres certificados.
+
+update emp
+set sal=sal*1.03
+where cod in
+(
+ select cod_em from ast
+ where cer='S'
+ group by cod_em
+ having count(cer)>3
+);
+commit;
+
+Reducir el irpf en dos puntos a los empleados cuyo salario bruto sea inferior a la
+media de su departamento y tengan una media de faltas de asistencia inferior a la
+media de todos los empleados.
+
+update emp
+set irpf=irpf-2
+where cod in
+(
+select cod from emp,ast
+where sal<(select avg(sal) from emp e
+           where e.num_dp=emp.num_dp
+          )
+group by cod
+having avg(fal)<(select avg(fal) from ast)
+);
+commit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

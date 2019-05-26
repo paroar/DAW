@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<catalogo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Documento2.xsd">
+<libro categoria="noficcion" enstock="false" revisor="">
+        <titulo>Los hombres que no amaban a las mujeres</titulo>
+        <autor>Stieg Larsson</autor>
+        <fecha>2000</fecha>
+</libro>
+
+<libro categoria="noficcion" enstock="false" revisor="">
+        <titulo>Java a través del tiempo</titulo>
+        <autor>Pepe</autor>
+        <fecha>2000</fecha>
+</libro>
+
+</catalogo>

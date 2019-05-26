@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:nsd="https://structorizer.fisch.lu" version="3.28-08" preRepeat="until " postFor="to" preReturn="return" postForIn="in" preWhile="while " output="OUTPUT" input="INPUT" preFor="for" preExit="exit" preLeave="leave" ignoreCase="true" preForIn="foreach" stepFor="by" author="gerubg" created="2018-10-12" changedby="gerubg" changed="2018-10-12" origin="Structorizer 3.28-08" text="&#34;Ejercicio7&#34;" comment="&#34;&#34;" color="ffffff" type="program" style="nice">
+	<children>
+		<instruction text="&#34;output &#34;&#34;introduce el número de elementos que quieres sumar: &#34;&#34;&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;input n&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;contador&#60;-n&#34;,&#34;suma&#60;-0.0&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+		<while text="&#34;while (contador&#62;0)&#34;" comment="&#34;&#34;" color="ffffff" disabled="0">
+			<qWhile>
+				<instruction text="&#34;subContador&#60;-contador&#34;,&#34;factorial&#60;-1.0&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+				<while text="&#34;while (subContador&#62;0)&#34;" comment="&#34;&#34;" color="ffffff" disabled="0">
+					<qWhile>
+						<instruction text="&#34;factorial&#60;-factorial*subContador&#34;,&#34;subContador&#60;-subContador-1&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+					</qWhile>
+				</while>
+				<instruction text="&#34;suma&#60;-suma+1/factorial&#34;,&#34;contador&#60;-contador-1&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qWhile>
+		</while>
+		<instruction text="&#34;output &#34;&#34;La suma de &#34;&#34;+n+&#34;&#34; términos es: &#34;&#34;+suma&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+	</children>
+</root>

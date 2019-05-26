@@ -1,0 +1,13 @@
+import java.util.Comparator;
+
+public class CompararPorAsignatura {
+
+	public int compare(Object o1, Object o2) {
+		Asignatura a1=(Asignatura)o1;
+		Asignatura a2=(Asignatura)o2;
+			
+		return a1.getNombre().compareTo(a2.getNombre());
+	}
+
+}
+

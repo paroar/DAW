@@ -1,0 +1,37 @@
+- Nombre de los empleados que han asistido a cursos y tienen horas extras en el año 1999.
+
+select distinct nom,apes from emp,ast,hex
+where (cod=ast.cod_em and cod=hex.cod_em)
+and fec between '01/01/1999' and '31/12/1999';
+
+- Nombre de los tipos de gastos generados en asistencias de más de 15 faltas.
+
+select distinct den from tgas,gas,ast
+where (codgas=codgas_tg and cod_em=cod_em_as
+and codcur_cr=codcur_cr_as)
+and fal>15;
+
+- Nombre de las empresas cuyos profesores han impartido cursos fuera de Madrid capital.
+
+select distinct emp from pro,ses,cur
+where (codpro=codpro_pr and codcur=codcur_cr)
+and lug<>'Madrid';
+
+
+- Nombre de los departamentos que tienen algún empleado que ha asistido a cursos con gastos superiores a 30 euros.
+
+select distinct dep.nom from dep,emp,gas
+where (num=num_dp and cod=cod_em_as)
+and imp>30;
+
+- Nombre de los cursos que han originado gastos.
+
+select distinct nom from cur,gas
+where (codcur=codcur_cr_as);
+
+- Nombre de los cursos impartidos por los profesores de la empresa AB Formación.
+
+select distinct cur.nom from pro,ses,cur
+where (codpro=codpro_pr and codcur=codcur_cr)
+and emp like 'AB Formaci_n';
+

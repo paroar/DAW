@@ -1,0 +1,77 @@
+Solución ejercicio nº 2
+=======================
+
+1.
+
+select nom from a.cur
+where lug<>'Madrid';
+
+2.
+
+select nom,dur from a.cur
+where fini between '01/01/1998' and '31/12/1998';
+
+3.
+
+select nom,lug from a.cur
+where ffin between '01/01/1999' and '31/03/1999';
+
+4.
+
+select distinct lug from a.cur
+where dur between 20 and 40;
+
+5.
+
+select nom from a.cur
+where ffin-fini between 20 and 40;
+
+6.
+
+select nom,lug from a.cur
+where dur>60
+and fini between '01/04/1998' and '30/04/1998';
+
+7.
+
+select apes,nom,sal*(1-irpf/100),irpf*sal/100 from a.emp
+where sal<1500;
+
+8.
+
+select nom,apes from a.emp
+where num_dp in ('100','300','500');
+
+9.
+
+select distinct codpro_pr from a.ses
+where hor>10;
+
+10.
+
+select distinct cod_em from a.hex
+where fec between '01/01/2000' and '31/12/2000';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,115 @@
+1.
+
+select nom,apes,count(codcur_cr) from a.emp,a.ast
+where
+ (
+  cod=cod_em
+ )
+group by nom,apes;
+
+----------------------
+
+select nom,apes,count(codcur_cr) from a.emp left join a.ast on cod=cod_em
+group by nom,apes;
+
+----------------------
+
+select nom,apes,count(codcur_cr) from a.ast right join a.emp on cod=cod_em
+group by nom,apes;
+
+2.
+
+select nom,apes,sum(hor) from a.emp,a.hex
+where
+ (
+  cod=cod_em
+ )
+group by nom,apes;
+
+
+----------------------
+
+select nom,apes,sum(hor) from a.emp left join a.hex on cod=cod_em
+group by nom,apes;
+
+----------------------
+
+select nom,apes,sum(hor) from a.hex right join a.emp on cod=cod_em
+group by nom,apes;
+
+3.
+
+select den,sum(imp) from a.tgas,a.gas
+where
+ (
+  codgas=codgas_tg
+ )
+group by den;
+
+----------------------
+
+select den,sum(imp) from a.tgas left join a.gas on codgas=codgas_tg
+group by den;
+
+----------------------
+
+select den,sum(imp) from a.gas right join a.tgas on codgas=codgas_tg
+group by den;
+
+4.
+
+select dep.nom,sum(imp) from (a.dep left join a.emp on num=num_dp)
+left join a.gas on cod=cod_em_as
+group by dep.nom;
+
+----------------------
+
+select dep.nom,sum(imp) from a.gas right outer join (a.emp right outer join a.dep on num=num_dp) on cod=cod_em_as
+group by dep.nom;
+
+----------------------
+
+select dep.nom,sum(imp) from a.dep left outer join (a.gas right outer join a.emp on cod=cod_em_as)
+on num=num_dp
+group by dep.nom;
+
+5.
+
+select dep.nom,sum(fal) from (a.dep left join a.emp on num=num_dp)
+left join a.ast on cod=cod_em
+group by dep.nom;
+
+6.
+
+select dep.nom,count(distinct codcur_cr) from (a.dep left join a.emp on num=num_dp)
+left join a.ast on cod=cod_em
+group by dep.nom;
+
+7.
+
+Total de gastos por cursos.
+
+select nom,sum(imp) from a.cur left join a.gas on codcur=codcur_cr_as
+group by nom;
+
+8.
+
+Número de cursos realizados por los empleados que no pertenecen al departamento Financiero.
+
+select emp.nom,apes,count(codcur_cr) from (a.dep right join a.emp on num=num_dp) left join a.ast on cod=cod_em
+where
+(
+ dep.nom<>'Financiero'
+ or
+ dep.nom is null
+)
+group by emp.nom,apes;
+
+9.
+
+Nombre de los departamentos con menos de 5 empleados y menos de 500 euros de gastos totales.
+
+select dep.nom from (a.dep left join a.emp on num_dp=num)
+left join a.gas on cod=cod_em_as
+group by dep.nom
+having count(distinct cod)<5 and (sum(imp)<500 or sum(imp) is null);

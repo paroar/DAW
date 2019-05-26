@@ -1,0 +1,46 @@
+create table dep
+(
+num char(3) constraint dep_pk primary key,
+nom char(20)
+);
+
+insert into dep
+select * from a.dep;
+
+insert into dep (nom,num)
+select nom,num from a.dep;
+
+insert into dep (num)
+select num from a.dep;
+
+insert into dep (num,nom)
+select * from a.dep;
+
+create table empleado2
+(
+cod char(6) constraint empleado2_pk primary key,
+apes char(30),
+nom char(20),
+salneto number(9,2),
+nomdep char(20)
+);
+
+insert into empleado2
+select cod,apes,emp.nom,sal*(1-irpf/100),dep.nom from a.dep,a.emp
+where (num=num_dp);
+
+insert into empleado2 (apes,nom,cod)
+select apes,emp.nom,cod from a.dep,a.emp
+where (num=num_dp);
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+Escribe un procedimiento almacenado que reciba como parámetro de entrada el código de empleado
+y el número de certificados y devuelva el número de empleados con un número de certificados inferior al suyo.
+
+--------------------------------------------------------------------------------------------
+
+create or replace procedure proc26
+
+(
+ p_cod in a.emp.cod%type,
+ p_codcur in number,
+ p_cur out number
+)
+
+is
+
+begin
+
+ select count(distinct cod_em) into p_cur from a.ast 
+ where 
+
+ cod_em in(select cod_em from a.ast where cer='S' group by cod_em having count(cer)<p_codcur);
+
+ exception
+  when no_data_found
+  then
+   p_cur:=0;
+
+end proc26;
+
+--------------------------------------------------------------------------
+
+create or replace procedure proc26
+
+(
+ p_cod in emp.cod%type,
+ p_codcur in number,
+ p_cur out number
+)
+
+is
+
+begin
+
+ select count(distinct cod_em) into p_cur from ast 
+ where 
+ cod_em in(select cod_em from ast where cer='S' and cod_em<>p_cod group by cod_em having count(cer)<p_codcur);
+
+end proc26;

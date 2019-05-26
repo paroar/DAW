@@ -1,0 +1,13 @@
+#!/bin/bash
+
+name=$1
+abc_num=$(echo {a..z} | tr -d ' ' | grep -o . | nl -s: | tr -d ' ')
+
+chars_name=$(echo $name | tr [A-Z] [a-z] | grep -o .)
+echo $chars_name
+sum=0
+for i in $chars_name; do
+    num=$(echo -e "$abc_num" | grep -E "$i" | cut -d: -f1)
+    sum=$(($sum+$num))
+done
+echo $sum

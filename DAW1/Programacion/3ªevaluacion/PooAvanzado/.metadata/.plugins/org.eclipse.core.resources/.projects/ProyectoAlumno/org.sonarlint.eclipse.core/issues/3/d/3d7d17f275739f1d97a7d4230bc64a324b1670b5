@@ -1,0 +1,60 @@
+
+‹squid:S00117+"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷œ»Îıÿÿÿÿ8çŸüü-H™RMINORZ
+CODE_SMELL
+‹squid:S00117Q"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷œ»Îıÿÿÿÿ8çŸüü-HšRMINORZ
+CODE_SMELL
+ksquid:S2259t"?A "NullPointerException" could be thrown; "q" is nullable here.(õ…åC8çŸüü-H›RMAJORZBUG
+l
+squid:S106T"9Replace this use of System.out or System.err by a logger.(ÖÚƒ8çŸüü-HœRMAJORZ
+CODE_SMELL
+Osquid:S3626k"Remove this redundant jump.(ûÁİ…8çŸüü-HRMINORZ
+CODE_SMELL
+l
+squid:S106@"9Replace this use of System.out or System.err by a logger.(ÖÚƒ8çŸüü-HRMAJORZ
+CODE_SMELL
+l
+squid:S106u"9Replace this use of System.out or System.err by a logger.(ù£°¶8çŸüü-HŸRMAJORZ
+CODE_SMELL
+l
+squid:S106c"9Replace this use of System.out or System.err by a logger.(ÖÚƒ8çŸüü-H RMAJORZ
+CODE_SMELL
+Osquid:S3626U"Remove this redundant jump.(ûÁİ…8çŸüü-H¡RMINORZ
+CODE_SMELL
+’squid:S1488‰"]Immediately return this expression instead of assigning it to the temporary variable "media".(ü„ÂÖ8çŸüü-H¢RMINORZ
+CODE_SMELL
+l
+squid:S106L"9Replace this use of System.out or System.err by a logger.(ÖÚƒ8çŸüü-H£RMAJORZ
+CODE_SMELL
+Osquid:S3626A"Remove this redundant jump.(ûÁİ…8çŸüü-H¤RMINORZ
+CODE_SMELL
+™squid:S1192@"bDefine a constant instead of duplicating this literal "Error: Â¡La asignatura no existe!" 4 times.(ÖÚƒ8çŸüü-H¥RCRITICALZ
+CODE_SMELL
+k
+squid:S106I"9Replace this use of System.out or System.err by a logger.(ÒÒÀ[8çŸüü-H¦RMAJORZ
+CODE_SMELL
+‹squid:S00117="QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷œ»Îıÿÿÿÿ8çŸüü-H§RMINORZ
+CODE_SMELL
+”squid:S11925"XDefine a constant instead of duplicating this literal "Error: Â¡La asignatura " 3 times.(‰æ•½ûÿÿÿÿ8çŸüü-H¨RCRITICALZ
+CODE_SMELL
+Gsquid:S1220""Move this file to a named package.H©RMINORZ
+CODE_SMELL
+msquid:S1854>"9Remove this useless assignment to local variable "nuevo".(óœ8çŸüü-HªRMAJORZ
+CODE_SMELL
+k
+squid:S106`"9Replace this use of System.out or System.err by a logger.(ÒÒÀ[8çŸüü-H«RMAJORZ
+CODE_SMELL
+q
+squid:S106j"9Replace this use of System.out or System.err by a logger.(Ö‚ƒ„ûÿÿÿÿ8çŸüü-H¬RMAJORZ
+CODE_SMELL
+jsquid:S3518‰"9Make sure "num" can't be zero before doing this division.(ü„ÂÖ8çŸüü-H­RCRITICALZBUG
+…squid:S00117h"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×™D8çŸüü-H®RMINORZ
+CODE_SMELL
+q
+squid:S1065"9Replace this use of System.out or System.err by a logger.(‰æ•½ûÿÿÿÿ8çŸüü-H¯RMAJORZ
+CODE_SMELL
+^squid:S1481>"*Remove this unused "nuevo" local variable.(óœ8çŸüü-H°RMINORZ
+CODE_SMELL
+qsquid:S2259_"?A "NullPointerException" could be thrown; "q" is nullable here.(Âí§£üÿÿÿÿ8çŸüü-H±RMAJORZBUG
+q
+squid:S106x"9Replace this use of System.out or System.err by a logger.(Ö‚ƒ„ûÿÿÿÿ8çŸüü-H²RMAJORZ
+CODE_SMELL

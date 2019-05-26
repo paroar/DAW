@@ -1,0 +1,40 @@
+package ejercicio1;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class CuentaTest {
+	
+	private String nombre;
+	private String cuenta;
+	private double saldo;
+	private double tipoIn;
+
+	public CuentaTest (String nom, String cue, double sal, double tipo)
+    {
+        nombre =nom;
+        cuenta=cue;
+        saldo=sal;
+        tipoIn=tipo;
+    }
+	
+	@Test
+	public void testIngresar() {
+		Cuenta c = new Cuenta(this.nombre,this.nombre,this.saldo,this.tipoIn);
+		try {
+			c.ingresar(-1000);
+			fail("Fallo");
+		} catch (Exception e) {
+			//PRUEBA saisfactoria;
+		}
+		boolean res;
+		if(c.obtenerSaldo()>0) {
+			res=true;
+		}else {
+			res=false;
+		}
+		assertTrue(res);
+	}
+
+}

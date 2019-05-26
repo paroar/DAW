@@ -1,0 +1,52 @@
+Nombre del Instituto:
+<nombre>IES Zayas</nombre>
+
+/ies/nombre
+
+----------------------------------------------------------------------
+Página web del Instituto:
+http://www.iesabastos.org
+
+//web/text()
+
+----------------------------------------------------------------------
+Nombre de los Ciclos Formativos:
+Administración de Sistemas Informáticos en Red Desarrollo de Aplicaciones Web Sistemas Microinformáticos y Redes
+
+//ies/ciclos/ciclo/nombre/text()
+
+----------------------------------------------------------------------
+Siglas por las que se conocen los Ciclos Formativos:
+id="ASIR" id="DAW" id="SMR"
+
+//@id
+
+----------------------------------------------------------------------
+Años en los que se publicaron los decretos de título de los Ciclos Formativos:
+año="2009" año="2010" año="2008"
+
+//@año
+
+----------------------------------------------------------------------
+Ciclos Formativos de Grado Medio (se trata de obtener el elemento <ciclo> completo):
+<ciclo id="SMR"> <nombre>Sistemas Microinformáticos y Redes</nombre> <grado>Medio</grado> <decretoTitulo año="2008"/> </ciclo>
+
+//ciclo[@id="SMR"]
+
+----------------------------------------------------------------------
+Nombre de los Ciclos Formativos de Grado Superior:
+<nombre>Administración de Sistemas Informáticos en Red</nombre> <nombre>Desarrollo de Aplicaciones Web</nombre>
+
+//grado[.="Superior"]/../nombre
+
+----------------------------------------------------------------------
+Nombre de los Ciclos Formativos anteriores a 2010:
+Administración de Sistemas Informáticos en Red Sistemas Microinformáticos y Redes
+
+//decretoTitulo[@año<2010]/../nombre/text()
+
+----------------------------------------------------------------------
+Nombre de los Ciclos Formativos de 2008 o 2010:
+Desarrollo de Aplicaciones Web Sistemas Microinformáticos y Redes
+
+//decretoTitulo[@año=2010]/../nombre/text()|//decretoTitulo[@año=2008]/../nombre/text()

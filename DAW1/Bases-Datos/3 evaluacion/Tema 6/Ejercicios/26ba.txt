@@ -1,0 +1,21 @@
+declare
+
+v_cod a.emp.cod%type;
+v_codcur number(2);
+v_cur number(2);
+v_flag boolean;
+
+begin
+
+v_cod:='025100';
+proc25(v_cod,v_codcur,v_flag);
+proc26(v_cod,v_codcur,v_cur);
+
+if(v_flag)
+then
+dbms_output.put_line('Empleados con más cursos:'||v_cur);
+else
+dbms_output.put_line('Ese empleado no existe o no tiene cursos');
+end if;
+
+end;

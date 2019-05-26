@@ -1,0 +1,168 @@
+
+public class Alumno implements Comparable{
+	private String nombre;
+	private String apellidos;
+	private String dni;
+	private int edad;
+	private Nodo asignaturas;
+	
+	public Alumno() {
+	}
+	
+	public Alumno(String nombre,String apellidos,String dni,int edad) {
+		this.nombre=nombre;
+		this.apellidos=apellidos;
+		this.dni=dni;
+		this.edad=edad;
+		//Añadir asignaturas
+		//Calcular la media de las asignaturas
+		//Ver cuantas asignaturas en las que está matriculado
+		//Eliminar una asignatura
+		//Poner una nota a una asignaturas
+	}
+	public int compareTo(Object o) {
+		Alumno a=(Alumno)o;
+		
+		int res=this.apellidos.compareTo(a.apellidos);
+		if(res==0)
+			return this.nombre.compareTo(a.nombre);
+		return res;
+		/*if(this.nombre.equals(a.nombre)==true && this.apellidos.equals(a.apellidos)==true && this.dni.equals(a.dni)==true &&
+				this.edad==a.edad) {
+			return 0;
+		}else {
+			return 1;
+		}*/
+	}
+	
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Alumno other = (Alumno) obj;
+		if (apellidos == null) {
+			if (other.apellidos != null)
+				return false;
+		} else if (!apellidos.equals(other.apellidos))
+			return false;
+		if (dni == null) {
+			if (other.dni != null)
+				return false;
+		} else if (!dni.equals(other.dni))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
+	}
+	
+	//Getters and Setters
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public int getEdad() {
+		return edad;
+	}
+
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+
+	public Nodo getAsignaturas() {
+		return asignaturas;
+	}
+
+	public void setAsignaturas(Nodo asignaturas) {
+		this.asignaturas = asignaturas;
+	}
+	
+	
+	//Metodo para cambiar nota
+	
+	public void cambiarNota(String nombre,int nota) {
+		Nodo p=this.asignaturas;
+		int salida=0;
+		while(p!=null || salida==0) {
+			if(p.getInfo().getNombre().equals(nombre)==true) {
+				salida=1;
+			}
+			p=p.getSig();
+		}
+		if(salida==0) {
+			System.out.println("El alumno no está matriculado en esa asignatura");
+		}else {
+			Asignatura b=p.getInfo();
+			b.setNota(nota);
+		}	
+	}
+	
+	//Consultar nota
+	public int consultarNota(String nombre) {
+		Nodo p=this.asignaturas;
+		int salida=0;
+		while(p!=null || salida==0) {
+			if(p.getInfo().getNombre()==nombre) {
+				salida=1;
+			}
+			p=p.getSig();
+		}
+		if(salida==0) {
+			System.out.println("El alumno no está matriculado en esa asignatura");
+			return 0;
+		}else {
+			Asignatura b=p.getInfo();
+			return b.getNota();
+		}
+	}
+	
+	//Añadir asignatura
+	public void addOrdenado(Asignatura a){
+		Nodo nodo,p,q;
+		nodo=new Nodo(a);
+		CompararPorAsignatura comparador=new CompararPorAsignatura();
+		if(this.asignaturas==null || comparador.compare(a.getNombre(), this.asignaturas.getInfo().getNombre())<0){
+			nodo.setSig(this.asignaturas);
+			this.asignaturas=nodo;
+		}else {
+			p=this.asignaturas;
+			q=p.getSig();
+			while(q!=null && comparador.compare(q.getInfo().getNombre(), nodo.getInfo().getNombre())<0) {
+				p=p.getSig();
+				q=q.getSig();
+			}
+			if(q==null) {
+				p.setSig(nodo);
+			}else {
+				nodo.setSig(p.getSig());
+				p.setSig(nodo);
+			}
+		}
+	}
+	
+}

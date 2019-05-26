@@ -1,0 +1,39 @@
+declare
+
+ v_num1 a.dep.num%type;
+ v_num2 a.dep.num%type;
+ v_num3 a.dep.num%type;
+
+begin
+
+ select num into v_num1 from a.dep
+ where nom='Comercial';
+
+ select num into v_num2 from a.dep
+ where nom='RRHH';
+
+ select num into v_num3 from a.dep
+ where nom='RRHH';
+
+
+
+ dbms_output.put_line('Nº de departamento de Ingenieria: '||v_num1);
+ dbms_output.put_line('Nº de departamento de Comercial: '||v_num2);
+ dbms_output.put_line('Nº de departamento de RRHH: '||v_num3);
+
+exception
+ 
+ when no_data_found
+  then
+   dbms_output.put_line('No existe el nº de departamento');
+   if v_num1 is null
+    then
+        dbms_output.put_line('La excepción la ha provocado la primera select');
+    elsif v_num2 is null
+      then
+        dbms_output.put_line('La excepción la ha provocado la segunda select');
+    else
+        dbms_output.put_line('La excepción la ha provocado la tercera select');
+   end if;
+
+end;

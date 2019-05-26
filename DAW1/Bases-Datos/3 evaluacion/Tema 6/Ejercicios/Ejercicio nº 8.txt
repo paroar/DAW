@@ -1,0 +1,109 @@
+Escribe un bloque anónimo que visualice la siguiente información de todos los empleados de la bases de datos:
+
+INFORME DE EMPLEADOS
+
+Departamento:
+Nombre:
+Salario neto:
+Total de cursos realizados:
+Total de faltas de asistencia:
+Total de gastos:
+% de certificados: -- dos dígitos enteros
+
+Si el empleado no pertenece a ningún departamento, en lugar del nombre vamos a visualizar el mensaje Sin asignar.
+
+----------------------------------------------------------------------------------------------
+
+declare
+
+-- Cursores y variables de cursor
+
+ cursor cur_empleado is
+ select nom,apes,sal-sal*irpf/100 as salneto,num_dp,cod from a.emp;
+
+ v_empleado cur_empleado%rowtype;
+
+-- Variables
+
+ v_nom a.dep.nom%type;
+ v_tc number(3,0);
+ v_tfa number(4,0);
+ v_tg number(7,2);
+ V_prc number(5,2);
+ 
+
+-- Constantes
+
+ msg_1 constant char(14):='Sin asignar';
+
+begin
+
+ open cur_empleado;
+
+ fetch cur_empleado into v_empleado;
+ while cur_empleado%found loop
+  
+  if v_empleado.num_dp is null
+   then
+    dbms_output.put_line('Departamento:'||msg_1);
+   else
+    select nom into v_nom from a.dep
+    where num=v_empleado.num_dp;
+    dbms_output.put_line('Departamento:'||v_nom);
+  end if;
+
+-- Total de cursos realizados
+  
+  select count(codcur_cr) into v_tc from a.ast
+  where cod_em=v_empleado.cod;
+
+-- Total de faltas de asistencia, total de gastos y % de certificados. Solo en el caso de haber asistido a cursos
+  
+  if v_tc>0
+   then
+    select sum(fal) into v_tfa from a.ast
+    where cod_em=v_empleado.cod;
+  
+    select sum(imp) into v_tg from a.gas
+    where cod_em_as=v_empleado.cod;
+
+    select count(cer) into v_prc from a.ast
+    where cer='S' and cod_em=v_empleado.cod;
+
+    v_prc:=round((v_prc/v_tc)*100,0);
+
+   else
+    -- Evitar que v_prc sea null
+    v_prc:=0;
+  end if;
+
+  if v_tfa is null
+   then
+    v_tfa:=0;
+  end if;
+
+  if v_tg is null
+   then
+    v_tg:=0;
+  end if;
+    
+-- Visualizar resultados  
+
+  dbms_output.put_line('Nombre:'||v_empleado.nom||' '||v_empleado.apes);
+  dbms_output.put_line('Salario neto:'||round(v_empleado.salneto,2));
+  dbms_output.put_line('Total de cursos realizados:'||v_tc);
+  dbms_output.put_line('Total de faltas de asistencia:'||v_tfa);
+  dbms_output.put_line('Total de gastos:'||v_tg);
+  dbms_output.put_line('% de certificados:'||v_prc);
+
+-- Salto de linea
+
+  dbms_output.put_line(chr(10));  
+  
+  fetch cur_empleado into v_empleado;
+
+ end loop;
+
+ close cur_empleado;
+
+end;

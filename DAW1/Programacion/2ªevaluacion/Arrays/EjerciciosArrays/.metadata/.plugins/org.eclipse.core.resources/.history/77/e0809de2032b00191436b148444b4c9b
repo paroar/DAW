@@ -1,0 +1,14 @@
+import java.util.Scanner;
+
+public class Prueba {
+
+	public static void main(String[] args) {
+		Scanner teclado = new Scanner(System.in);
+		Lista lista = new Lista();
+		for(int i = 0; i < 27; i++) {
+			lista.addEnd(teclado.nextInt());
+		}
+
+	}
+
+}

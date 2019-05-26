@@ -1,0 +1,69 @@
+;$FO BASE
+;$F1 EXPONENTE
+;$F2 CONTADOR
+;$F3 SUBCONTADOR
+;$F4 BASESUMA
+;$FF RESULTADO
+;$FE RADICANDO
+
+LDA #9
+STA $FE
+LDA #1;
+STA $F0	BASE
+STA $F2	CONTADOR
+STA $F4 BASESUMA
+LDA #2  
+STA $F1 EXPONENTE
+STA $F3 SUBCONTADOR
+LDA #0
+STA $FF
+
+	LDA #0
+	STA $FF
+	LDA $F3
+	CMP #1
+	JZ $21
+        JMP $23
+	JMP $45
+
+		LDA $F2
+		CMP #0 
+ 		JZ $35
+			
+			LDA $FF
+			ADD $F4
+			STA $FF
+			LDA $F2
+			DCA
+			STA $F2
+ 			JMP $25
+			
+		LDA $F0
+		DCA
+		STA $F2
+		LDA $FF
+		STA $F4
+		LDA $F3
+		DCA
+		STA $F3
+ 		JMP $1A
+
+	LDA $F0
+	INA
+	STA $F0
+	STA $F2
+	STA $F4
+	LDA $F1
+	STA $F3
+	LDA $FE
+	CMP $FF
+        JZ $5D
+        LDA #0
+	STA $FF
+	JMP $1A
+
+LDA $F0
+DCA
+STA $F0	
+
+HLT

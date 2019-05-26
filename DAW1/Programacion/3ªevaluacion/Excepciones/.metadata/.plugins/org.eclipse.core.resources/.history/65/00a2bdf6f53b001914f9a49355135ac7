@@ -1,0 +1,40 @@
+package ejercicio2;
+
+public class Reloj {
+
+	private int hora;
+	private int minutos;
+	private int segundos;
+	private String formato;
+	
+	public Reloj(int hora, int minutos, int segundos, String formato) {
+		super();
+		this.hora = hora;
+		this.minutos = minutos;
+		this.segundos = segundos;
+		this.formato = formato;
+	}
+
+	public int getHora() {
+		return hora;
+	}
+
+	public int getMinutos() {
+		return minutos;
+	}
+
+	public int getSegundos() {
+		return segundos;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+
+		return null;
+	}
+	
+	
+	
+	
+}

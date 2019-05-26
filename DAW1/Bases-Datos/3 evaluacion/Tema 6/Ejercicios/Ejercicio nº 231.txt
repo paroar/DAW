@@ -1,0 +1,27 @@
+Escribe un procedimiento que reciba como parámetro de entrada el código de empleado y devuelva el nombre completo y un valor booleano que es verdadero en caso de que el empleado exista en la BBDD y falso en caso contrario.
+
+create or replace procedure proc231
+
+(
+ p_
+cod in a.emp.cod%type,
+ p_empleado out a.emp%rowtype,
+ p_flag out boolean
+)
+
+is
+
+begin
+
+ select cod,apes,nom,sal,irpf,num_dp into p_empleado from a.emp
+ where cod=p_cod;
+
+ p_flag:=true;
+
+exception
+
+ when no_data_found
+  then
+   p_flag:=false;
+
+end proc231;

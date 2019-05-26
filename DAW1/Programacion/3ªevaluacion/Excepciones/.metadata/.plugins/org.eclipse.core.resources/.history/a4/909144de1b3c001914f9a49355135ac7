@@ -1,0 +1,12 @@
+package ejercicio3;
+
+import java.util.Scanner;
+
+public class InputData {
+	
+	public static int readInt() {
+		Scanner s = new Scanner(System.in);
+		int n = s.nextInt();
+		return n;
+	}
+}

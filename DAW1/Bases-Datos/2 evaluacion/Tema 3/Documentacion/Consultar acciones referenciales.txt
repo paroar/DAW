@@ -1,0 +1,4 @@
+select table_name,constraint_name,delete_rule from dba_constraints
+where owner='ARUIZ'
+and constraint_type='R'
+order by 1,2;

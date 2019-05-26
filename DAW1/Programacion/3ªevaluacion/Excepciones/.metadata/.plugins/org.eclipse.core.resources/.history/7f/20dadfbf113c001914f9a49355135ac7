@@ -1,0 +1,49 @@
+package ejercicio3;
+
+public class Fecha {
+
+	private int dia;
+	private int mes;
+	private int anyo;
+	
+	public Fecha(int dia, int mes, int anyo) {
+		try {
+			this.dia = dia;
+			this.mes = mes;
+			this.anyo = anyo;
+			this.validarFecha();
+		}catch(Exception e) {
+			System.out.print(e.getMessage()+" -> ");
+		}
+	}
+
+	public int getDia() {
+		return dia;
+	}
+
+	public int getMes() {
+		return mes;
+	}
+
+	public int getAnyo() {
+		return anyo;
+	}
+
+	@Override
+	public String toString() {
+		return dia + "/" + mes + "/" + anyo;
+	}
+	
+	public Fecha validarFecha(int dia, int mes, int anyo) throws Exception {
+		if(mes > 12 || mes < 1) {
+			throw new Exception("Mes no válido");
+		}else if(dia > 31 || dia < 1) {
+			throw new Exception("Día no válido");
+		}else if(dia > 28 && mes == 12) {
+			throw new Exception("Día no válido");
+		}
+		return new Fecha(dia, mes, anyo);
+	}
+		
+	
+}

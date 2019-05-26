@@ -1,0 +1,78 @@
+import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
+
+public class AccesoAleatorio {
+
+	public static void escribir(RandomAccessFile raf, String name, int age, char sex) {
+		try {
+			raf.seek(raf.length());
+			raf.writeUTF(name);
+			raf.writeInt(age);
+			raf.writeChar(sex);
+		}catch(IOException e) {
+			System.out.println(e);
+		}
+	}
+	
+	public static RandomAccessFile copiar(RandomAccessFile raf) {
+		try {
+			RandomAccessFile newRaf = new RandomAccessFile("D:\\accesoAleatorio.ddr","rw");
+			String name;
+			int age;
+			char sex;
+			raf.seek(0);
+			while(raf.getFilePointer() < raf.length()) {
+				name = raf.readUTF();
+				age = raf.readInt();
+				sex = raf.readChar();
+			}
+		}catch(IOException e){
+			System.out.println(e);
+		}
+		return newRaf;
+	}
+	
+	public static void buscar(RandomAccessFile raf, String inputName) {
+		try {
+			boolean contains = false;
+			String name;
+			int age;
+			char sex;
+			raf.seek(0);
+			while(raf.getFilePointer() < raf.length()) {
+				name = raf.readUTF();
+				if(name.equals(inputName)) {
+					contains = true;
+					age = raf.readInt();
+					sex = raf.readChar();
+					System.out.println(name +"\n"+ age +"\n"+ sex +"\n");
+				}else {
+					raf.skipBytes(6);
+				}
+			}
+			if(!contains) {
+				System.out.println("No hay nadie llamado " + inputName +"\n");
+			}
+		}catch(IOException e){
+			System.out.println(e);
+		}
+	}
+
+	public static void mostrar(RandomAccessFile raf) {
+		try {
+			String name;
+			int age;
+			char sex;
+			raf.seek(0);
+			while(raf.getFilePointer() < raf.length()) {
+				name = raf.readUTF();
+				age = raf.readInt();
+				sex = raf.readChar();
+				System.out.println(name +"\n"+ age +"\n"+ sex +"\n");
+			}	
+		}catch(IOException e){
+			System.out.println(e);
+		}
+	}
+}

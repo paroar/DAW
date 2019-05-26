@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;Instrumentation.java&apos; to &apos;ObjectSizeFetcher.java&apos;&#x0D;&#x0A;- Original project: &apos;Instrumentation&apos;&#x0D;&#x0A;- Original element: &apos;Instrumentation.java&apos;&#x0D;&#x0A;- Renamed element: &apos;ObjectSizeFetcher.java&apos;" description="Rename compilation unit &apos;Instrumentation.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;{Instrumentation.java" name="ObjectSizeFetcher.java" references="false" stamp="1557055311994" version="1.0"/>
+</session>

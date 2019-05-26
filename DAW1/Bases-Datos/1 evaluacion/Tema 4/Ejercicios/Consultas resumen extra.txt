@@ -1,0 +1,100 @@
+- Número de empleados que han asistido a cursos con gastos y sin certificado.
+
+ select count(distinct cod_em) from a.ast,a.gas
+ where 
+ (
+  cod_em=cod_em_as
+  and
+  codcur_cr=codcur_cr_as
+  and
+  cer='N'
+ );
+
+
+- ¿Cuantos profesores han impartido cursos sin que los empleados obtengan certificado?.
+
+ select count(distinct codpro_pr) from a.ses,a.ast
+ where
+ (
+  ast.codcur_cr=ses.codcur_cr
+  and
+  cer='N'
+ );
+
+- ¿Cuantos cursos hay con gastos y con empleados con certificado?.
+
+  select count(distinct codcur_cr) from a.ast,a.gas
+  where
+  (
+   cod_em=cod_em_as
+   and
+   codcur_cr=codcur_cr_as
+   and
+   cer='S'
+  );
+
+- Número de cursos que han originado gastos de entre 20 y 50 euros a todos los departamentos.
+ 
+  select count(distinct codcur_cr_as) from a.gas
+  where imp between 20 and 50;
+
+- Media de gastos, total de gastos, máximo número de faltas y total de faltas de los cursos impartidos por los profesores de Computrade.
+
+  select avg(imp),sum(imp),max(fal),sum(fal) from a.ast a,a.gas,a.ses s,a.pro
+  where
+  (
+   codpro=codpro_pr
+   and
+   s.codcur_cr=codcur_cr_as
+   and
+   cod_em=cod_em_as
+   and
+   a.codcur_cr=codcur_cr_as
+   and
+   emp='Computrade'
+  );
+
+  -- Esta solución no es correcta
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+  

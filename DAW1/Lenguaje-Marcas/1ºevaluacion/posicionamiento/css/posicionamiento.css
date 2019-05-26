@@ -1,0 +1,67 @@
+body{
+    font-family: Arial;
+}
+
+/*ESTILOS GENERALES*/
+nav ul{
+    list-style: none;
+    padding: 0;
+}
+
+nav li{
+    line-height: 3rem;
+    position: relative;
+}
+
+nav li ul{
+    position: absolute;
+    display: none;
+}
+
+nav li:hover >ul{
+    display: block;
+}
+
+nav a{
+    text-decoration: none;
+    display: block;
+    color: #ddd;
+    padding: 0 2.5em;
+    transition: .4s;
+}
+
+nav a:hover{
+    background-color: rgba(0,0,0,.5);
+}
+
+/*nav ul ul ul{
+    display: none;
+}*/
+
+/*PRIMER NIVEL*/
+
+nav>ul{
+    background-color: #333;
+    display: table;
+    width: 100%;
+}
+
+nav>ul>li{
+    float: left;
+}
+
+/*SEGUNDO NIVEL*/
+nav li li{
+    background-color: #222;
+}
+
+nav>ul>li>ul{
+    top:100%;
+}
+
+/*TERCER NIVEL*/
+nav ul ul ul{
+    left:100%;
+    top:0;
+    width: 190px;
+}

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+number=$1
+
+rotate(){
+    local first_char=$(echo $1 | cut -c1)
+    local rest_chars=$(echo $1 | cut -c2-)
+    echo $rest_chars$first_char
+}
+
+first=$(echo $number)
+number=$(rotate $number)
+fixed=
+second=$(for i in $(eval echo {2..${#1}}) ; do
+            echo $fixed$number    
+            fixed+=$(echo $number | cut -c1)
+            number=$(rotate $(echo $number | cut -c2-))
+         done)
+echo $first $second | tr ' ' '\n' | sort | tail -1

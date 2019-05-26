@@ -1,0 +1,23 @@
+Valores de los parámetros NLS establecidos en la base de datos
+==============================================================
+SHOW PARAMETER NLS_
+
+
+Cambio del Pais
+===============
+ALTER SESSION SET NLS_TERRITORY=SPAIN;
+
+
+Cambio del idioma
+=================
+ALTER SESSION SET NLS_LANGUAGE=SPANISH;
+
+
+Cambio del formato de visualizacion de datos de tipo fecha
+==========================================================
+ALTER SESSION SET NLS_DATE_FORMAT=’DD/MM/YYYY’;
+
+
+Valores de los parámetros para la sesión actual
+===============================================
+SELECT * FROM NLS_SESSION_PARAMETERS;

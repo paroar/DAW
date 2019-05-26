@@ -1,0 +1,27 @@
+Escribe un procedimiento almacenado que use como parámetro de entrada el código de empleado y visualice la siguiente información del mismo:
+
+Nombre completo, nombre del departamento, salario neto, immporte de la retención, gastos de formación y número de cursos realizados.
+---------------------------------------------------------------------------------------------------------------------
+
+create or replace procedure proc1521
+
+(
+p_cod in a.emp.cod%type
+)
+
+is
+
+--DECLARACION DE VARIABLE
+
+v_nom char(51);
+v_apes a.emp.apes%type;
+v_dep a.dep.nom%type;
+v_salnetro a.emp.sal%type;
+v_retencion numbre(5,2);
+v_gastos number(6,2);
+v_cursos number(3,0);
+
+
+begin
+
+select...

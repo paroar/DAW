@@ -1,0 +1,25 @@
+#!/bin/bash
+
+content=$1
+evap=$2
+evap2=$(echo 'scale=5; evap/100' | bc)
+treshold=$(($3/100))
+num=0
+
+echo $content $evap2 $treshold
+
+for i in $(seq 10);do
+    echo -E 'scale=3; content*0.9' | bc
+done
+
+exit
+while [ true ] ; do
+    echo 'content-(content*evap)' | bc
+    content=$(echo 'content-(content*evap)' | bc)
+
+    if [ $content -lt $treshold ] ; then
+        echo $num
+        break
+    fi
+    let num++
+done

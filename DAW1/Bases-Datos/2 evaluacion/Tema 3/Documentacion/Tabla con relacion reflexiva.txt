@@ -1,0 +1,30 @@
+create table empleado
+(
+codigo char(6) constraint empleado_pk primary key,
+apellidos varchar(50),
+nombre varchar(30),
+salario number(6,2),
+irpf number(2,0),
+codjef char(6) references empleado(codigo)
+);
+
+-------------------------------------------------
+
+create table empleado
+(
+codigo char(6) constraint empleado_pk primary key,
+apellidos varchar(50),
+nombre varchar(30),
+salario number(6,2),
+irpf number(2,0),
+codjef char(6),
+constraint empleado_fk1 foreign key(codjef)
+references empleado(codigo)
+);
+
+
+
+select distinct table_name from dba_tables
+where tablespace_name='TSPMTDAW1'
+and table_name not like 'BIN%'
+order by 1;

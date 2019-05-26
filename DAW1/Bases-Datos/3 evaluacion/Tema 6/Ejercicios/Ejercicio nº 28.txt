@@ -1,0 +1,49 @@
+Escribe un procedimiento que reciba como parámetro de entrada el código de empleado y el total de gastos y devuelva el número de empleados con un total de gastos inferior al suyo.
+
+create or replace procedure proc28
+(
+ p_cod in a.emp.cod%type,
+ p_gas in number,
+ p_ne out number
+)
+
+is
+
+ -- cursor con gastos por empleado
+
+ cursor c_gas is select sum(imp) as gas from a.gas
+ where cod_em_as<>p_cod
+ group by cod_em_as;
+
+begin
+
+ p_ne:=0;
+
+ for v_gas in c_gas loop
+
+  if v_gas.gas<p_gas
+   then
+    p_ne:=p_ne+1;
+  end if;
+
+ end loop;
+ 
+end proc28; 
+
+-----------------------------------------------------
+
+
+declare
+
+ v_ne number(4,0);
+
+begin
+
+ proc28('025100',176,v_ne);
+ dbms_output.put_line(v_ne);
+
+end;
+
+
+
+

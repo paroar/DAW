@@ -1,0 +1,36 @@
+import java.util.Comparator;
+
+public class MisMetodos {
+	public static void mostrarArrayObjetos(Alumno[] a) {
+		int i=0;
+		while(i<a.length) {
+			System.out.print(a[i].getApellidos()+" "+a[i].getNombre()+" "+a[i].getDni()+" "+
+					a[i].getEdad());
+			System.out.println();
+			i++;
+		}
+	}
+	
+	public static void burbujaOrdenComparator(Alumno[] a,int n,Comparator c) {
+		int i,j;
+		i=0;
+		Alumno aux;
+		boolean repetir=true;
+		while(i<n-1 && repetir==true) {
+			j=0;
+			repetir=false;
+			while(j<n-1) {
+				if(c.compare(a[j+1], a[j])<0) {
+					aux=a[j+1];
+					a[j+1]=a[j];
+					a[j]=aux;
+					repetir=true;
+				}
+				j++;
+			}
+			i++;
+		}
+		
+	}
+
+}

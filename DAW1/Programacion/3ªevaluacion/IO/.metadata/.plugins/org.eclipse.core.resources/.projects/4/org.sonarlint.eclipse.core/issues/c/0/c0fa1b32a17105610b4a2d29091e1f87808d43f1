@@ -1,0 +1,12 @@
+
+jsquid:S1854	"7Remove this useless assignment to local variable "raf".(èú 8öÙ¸Á¦-H•RMAJORZ
+CODE_SMELL
+Gsquid:S1220""Move this file to a named package.H‹RMINORZ
+CODE_SMELL
+tsquid:S1075	"ARefactor your code to get this URI from a customizable parameter.(èú 8şºÁ¦-H RMINORZ
+CODE_SMELL
+[squid:S1481	"(Remove this unused "raf" local variable.(èú 8öÙ¸Á¦-H”RMINORZ
+CODE_SMELL
+|squid:S2095	"NUse try-with-resources or close this "RandomAccessFile" in a "finally" clause.(èú 8ğÈºÁ¦-HœRBLOCKERZBUG
+csquid:S1135"2Complete the task associated to this TODO comment.(» æÿÿÿÿÿHŠRINFOZ
+CODE_SMELL

@@ -1,0 +1,39 @@
+
+wsquid:S2147"DCombine this catch with the one at line 26, which has the same body.(ï­£Ä8¶¶ã¿¦-HkRMINORZ
+CODE_SMELL
+Usquid:S2189""Add an end condition to this loop.(˜ïˆžÿÿÿÿÿ8¶¶ã¿¦-HaRBLOCKERZBUG
+\squid:S00108")Either remove or fill this block of code.(ôÍÏ8¶¶ã¿¦-HhRMAJORZ
+CODE_SMELL
+ƒsquid:S2095
+"PUse try-with-resources or close this "ObjectOutputStream" in a "finally" clause.(²—Žñúÿÿÿÿ8«Œ À¦-HvRBLOCKERZBUG
+|squid:S2095"OUse try-with-resources or close this "ObjectInputStream" in a "finally" clause.(‡ªŽ8œ¯ŸÀ¦-HqRBLOCKERZBUG
+k
+squid:S106"9Replace this use of System.out or System.err by a logger.(ú¥·Þ8¶¶ã¿¦-HdRMAJORZ
+CODE_SMELL
+]squid:S00108")Either remove or fill this block of code.(ï­£Ä8¶¶ã¿¦-HgRMAJORZ
+CODE_SMELL
+k
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÛÁö¨8¶¶ã¿¦-HbRMAJORZ
+CODE_SMELL
+Fsquid:S1220""Move this file to a named package.HYRMINORZ
+CODE_SMELL
+bsquid:S1135"2Complete the task associated to this TODO comment.(» æžÿÿÿÿÿHXRINFOZ
+CODE_SMELL
+j
+squid:S106"9Replace this use of System.out or System.err by a logger.(ëª”<8¶¶ã¿¦-HcRMAJORZ
+CODE_SMELL
+p
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÛÀ÷äÿÿÿÿÿ8¶¶ã¿¦-HfRMAJORZ
+CODE_SMELL
+]squid:S00108")Either remove or fill this block of code.(ýàÑÎ8»ºÇ¿¦-H[RMAJORZ
+CODE_SMELL
+vsquid:S2147"DCombine this catch with the one at line 26, which has the same body.(ôÍÏ8¶¶ã¿¦-HjRMINORZ
+CODE_SMELL
+]squid:S00108")Either remove or fill this block of code.(ï­£Ä8¶¶ã¿¦-HiRMAJORZ
+CODE_SMELL
+k
+squid:S106"9Replace this use of System.out or System.err by a logger.(û¨Èì8¶¶ã¿¦-HeRMAJORZ
+CODE_SMELL
+q
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÞžÒ—üÿÿÿÿ8‹Ó‰Á¦-HˆRMAJORZ
+CODE_SMELL

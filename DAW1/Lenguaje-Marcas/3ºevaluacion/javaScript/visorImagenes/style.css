@@ -1,0 +1,17 @@
+img{
+	border: 1px solid #999;
+	border-radius: 10px;
+	width: 300px;
+	height: 200px;
+}
+
+.wrapper{
+	display: table;
+	margin: 0 auto;
+	margin-top: 15%;
+}
+
+.button-wrapper{
+	display: table;
+	margin: 0 auto;
+}

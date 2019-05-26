@@ -1,0 +1,27 @@
+Número de empleados por departamento que han hecho cursos donde había al menos dos asistentes del departamento Comercial.
+
+
+select dep.nom,count(distinct cod) from a.dep,a.emp,a.ast
+where
+ (
+  num=num_dp
+  and
+  cod=cod_em
+  and
+  dep.nom<>'Comercial'
+  and 
+  codcur_cr in (
+                select codcur_cr from a.ast,a.emp,a.dep
+                where
+                 (
+                  num=num_dp
+                  and
+                  cod=cod_em
+                  and
+                  dep.nom='Comercial'
+                 )
+                group by codcur_cr
+                having count(cod)>=2
+               )
+ )
+group by dep.nom;

@@ -1,0 +1,47 @@
+1. Procedimiento que devuelva el nombre de un profesor dado su nif 
+
+create or replace procedure proc1
+
+(
+p_nif in varchar2,
+p_nom out varchar2
+)
+
+is
+
+begin
+
+	select nombre into p_nom from profesor where nif=p_nif;
+
+	exception
+	when no_data_found
+	then
+
+end proc1;
+
+
+12. procedimiento que nos muestre el código y título de los cursos cuyo precio
+ está por encima del precio medio de su especialidad
+
+create or replace procedure proc12 is
+
+cursor c_curso is select codigo,titulo,especialidad,precio from cursos;
+
+v_precioT number;
+v_nCursos number;
+v_precioMedio number;
+
+begin
+
+
+for v_curso in c_curso loop
+
+	select sum(precio), count(codigo) into v_precioT, v_nCursos from cursos where especialidad=v_curso.especialidad;
+	v_precioMedio := v_precioT/v_nCursos;
+	if precio > v_precioMedio
+	then
+			
+
+
+
+

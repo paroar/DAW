@@ -1,0 +1,81 @@
+Escribe el bloque anónimo del ejercico nº 11 usando dos bucles de cursor for:
+
+Nombre: -- del curso
+Duración:
+Ciudad:
+
+Relación de asistentes:
+Nombre: -- del empleado
+Faltas:
+Certificado: -- Si o No
+Gastos:
+
+======================================================================================================
+
+declare
+
+--CURSOR Y VARIABLES DE CURSOR
+
+	cursor c_cur is 
+		select distinct codcur,nom,dur,lug from a.cur,a.ast where codcur=codcur_cr;
+
+	v_acoplamiento a.ast.codcur_cr%type;
+
+	cursor c_ast is 
+		select cod_em,fal,cer from a.ast where v_acoplamiento=codcur_cr;
+
+--VARIABLES
+	
+	v_nomEmp char(10);
+	v_apesEmp char(25);
+	v_gas number(6,2);
+
+begin
+
+	for v_cur in c_cur loop
+		
+		--NOMBRE,DURACION,LUGAR CURSO
+
+		dbms_output.put_line('=========================================================');
+		dbms_output.put_line('Nombre:'||v_cur.nom);
+		dbms_output.put_line('Duración:'||v_cur.dur);
+		dbms_output.put_line('Ciudad:'||v_cur.lug);
+		dbms_output.put_line('=====================');
+		
+		v_acoplamiento:=v_cur.codcur;
+
+		for v_ast in c_ast loop
+
+			--NOMBRE EMPLEADO
+
+			select nom,apes into v_nomEmp,v_apesEmp from a.emp
+			where cod=v_ast.cod_em;
+
+			--GASTOS EMPLEADO
+
+			select sum(imp) into v_gas from a.gas
+			where cod_em_as=v_ast.cod_em and codcur_cr_as=v_cur.codcur;
+
+			--COMPROBACION SUM NULL
+
+			if v_gas is null
+				then
+				v_gas:=0;
+			end if;
+
+			dbms_output.put_line('Nombre:'||v_nomEmp||' '||v_apesEmp);
+			dbms_output.put_line('Faltas:'||v_ast.fal);
+                        if v_ast.cer='S'
+                         then
+                          dbms_output.put_line('Certificado:Si');
+                         else
+                          dbms_output.put_line('Certificado:No');
+                        end if;
+			dbms_output.put_line('Gastos:'||v_gas);
+			dbms_output.put_line(chr(10));
+
+		end loop;
+
+	end loop;
+
+end;

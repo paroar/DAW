@@ -1,0 +1,138 @@
+Solución ejercicio nº 8
+=======================
+
+1.
+
+select nom,apes from a.emp,a.ast
+where
+ (
+  cod=cod_em
+ )
+group by nom,apes
+having count(codcur_cr)>3;
+
+2.
+
+select dep.nom from a.dep,a.emp
+where
+ (
+  num=num_dp
+ )
+group by dep.nom
+having count(cod)>4;
+
+3.
+
+select emp from a.pro,a.ses
+where
+ (
+  codpro=codpro_pr
+ )
+group by emp
+having count(distinct codcur_cr)>2;
+
+4.
+
+select lug from a.cur,a.ast
+where
+ (
+  codcur=codcur_cr
+ )
+group by lug
+having count(distinct cod_em)>5;
+
+5.
+
+select nom,apes from a.emp,a.ast
+where
+ (
+  cod=cod_em
+  and
+  cer='N'
+ )
+group by nom,apes
+having count(codcur_cr)>2;
+
+6.
+
+select nom from a.cur,a.ast
+where
+ (
+  codcur=codcur_cr
+  and
+  fal<4
+ )
+group by nom
+having count(cod_em)>5;
+
+7.
+
+select lug from a.cur
+where
+ (
+  dur>20
+ )
+group by lug
+having count(codcur)>1;
+
+8.
+
+select nom from a.cur,a.ast
+where
+ (
+  codcur=codcur_cr
+  and
+  cer='S'
+ )
+group by nom
+having count(cer)>4;
+
+9.
+
+select count(distinct cod_em) from a.ast
+where
+ (
+  cer='N'
+ );
+
+10.
+
+select dep.nom from a.dep,a.emp,a.gas
+where
+ (
+  num=num_dp
+  and
+  cod=cod_em_as
+ )
+group by dep.nom
+having sum(imp)>100;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

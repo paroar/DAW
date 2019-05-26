@@ -1,0 +1,79 @@
+Crea un procedimiento almacenado para el bloque anónimo del ejercicio 4.
+
+----------------------------------------------------------------------------------------------
+
+create or replace procedure proc1
+
+is 
+
+-- Cursores y variables de cursor
+
+ cursor cur_empleado is
+ select nom,apes,sal-sal*irpf/100 as salneto,num_dp from a.emp;
+
+ v_empleado cur_empleado%rowtype;
+
+-- Variables
+
+ v_nom a.dep.nom%type;
+
+-- Constantes
+
+ msg_1 constant char(14):='Sin asignar';
+
+begin
+
+ open cur_empleado;
+
+ fetch cur_empleado into v_empleado;
+ while cur_empleado%found loop
+  
+  if v_empleado.num_dp is null
+   then
+    dbms_output.put_line('Departamento:'||msg_1);
+   else
+    select nom into v_nom from a.dep
+    where num=v_empleado.num_dp;
+    dbms_output.put_line('Departamento:'||v_nom);
+  end if;
+  
+  dbms_output.put_line('Nombre:'||v_empleado.nom||' '||v_empleado.apes);
+  dbms_output.put_line('Salario neto:'||v_empleado.salneto);
+
+  dbms_output.put_line(chr(10));  
+  
+  fetch cur_empleado into v_empleado;
+
+ end loop;
+
+ close cur_empleado;
+
+end proc1;
+
+
+------------------------------------------------------------------------
+
+Ejecución del procedimiento
+
+Método 1:
+
+execute proc1;
+
+Método 2:
+
+begin
+
+ dbms_output.put_line('Comienzo del bloque anonimo');  
+
+ proc1; -- llamada al procedimiento para su ejecución
+
+ dbms_output.put_line('Fin del bloque anonimo');  
+
+end;
+
+
+
+
+
+
+

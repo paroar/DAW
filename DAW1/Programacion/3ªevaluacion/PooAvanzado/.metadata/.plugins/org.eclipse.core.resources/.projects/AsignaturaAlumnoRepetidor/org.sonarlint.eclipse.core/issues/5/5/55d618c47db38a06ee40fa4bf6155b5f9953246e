@@ -1,0 +1,8 @@
+
+[squid:S1068"'Remove this unused "com" private field.(ÍÝÿ÷8×­Ä—•-HÖRMAJORZ
+CODE_SMELL
+¸squid:S1186
+"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(–êã“8œöÆ—•-H×RCRITICALZ
+CODE_SMELL
+Gsquid:S1220""Move this file to a named package.HØRMINORZ
+CODE_SMELL

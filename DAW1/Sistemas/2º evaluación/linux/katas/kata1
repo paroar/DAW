@@ -1,0 +1,29 @@
+#!bin/bash
+
+
+comparador(){
+
+mayor1=$(echo $1 | tr ',' '\n' | xargs -I{} bash -c "echo {} | wc -c" | sort -n | tail -1)
+menor1=$(echo $1 | tr ',' '\n' | xargs -I{} bash -c "echo {} | wc -c" | sort -n | head -1)
+mayor2=$(echo $2 | tr ',' '\n' | xargs -I{} bash -c "echo {} | wc -c" | sort -n | tail -1)
+menor2=$(echo $2 | tr ',' '\n' | xargs -I{} bash -c "echo {} | wc -c" | sort -n | head -1)
+
+if [ -z $mayor1 ] || [ -z $mayor2 ]
+then
+    echo -1
+    exit
+else 
+    primer=$(($mayor1-$menor2))
+    segundo=$(($mayor2-$menor1))
+fi
+
+if [ $primer -gt $segundo ]
+then
+    echo $primer
+else
+    echo $segundo
+fi
+exit
+}
+
+comparador $1 $2

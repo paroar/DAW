@@ -1,0 +1,39 @@
+type r_empleado is record
+(
+ nom a.emp.nom%type,
+ apes a.emp.apes%type,
+ irpf number(2,0),
+ dep a.dep.nom%type,
+ gasto a.gas%rowtype,
+ curso c_curso%rowtype
+);
+
+
+v_empleado r_empleado;
+
+
+...
+
+fetch c_curso into v_empleado.curso;
+
+
+select * into v_empleado.gasto from a.gas where id_gas=1;
+
+v_empleado.gasto.id_gas
+
+
+v_empleado.gasto.imp
+
+
+v_empleado.gasto.fec
+
+
+v_empleado.gasto.cod_em_as
+
+
+
+
+
+
+
+

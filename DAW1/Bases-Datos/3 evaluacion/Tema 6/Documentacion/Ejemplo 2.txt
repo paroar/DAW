@@ -1,0 +1,33 @@
+-- Este bloque determina el mayor de tres valores
+-- Tiene en cuenta que el mayor valor este repetido
+-- y que los tres valores sean iguales
+-- Usa la estructura IF-THEN-ELSIF-ELSE
+
+declare
+
+ a integer;
+ b integer;
+ c integer;
+
+begin
+
+ a:=4;
+ b:=5;
+ c:=3;
+
+ if a>b and a>c
+  then
+   dbms_output.put_line('a es el mayor');
+  elsif b>a and b>c
+   then
+    dbms_output.put_line('b es el mayor');
+  elsif c>a and c>b
+   then
+    dbms_output.put_line('c es el mayor');
+  elsif a=b and a=c
+   then
+    dbms_output.put_line('Todos son iguales');
+  else 
+   dbms_output.put_line('Valores duplicados');
+ end if; 
+end;

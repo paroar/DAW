@@ -1,0 +1,14 @@
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class NuevaHoraTest {
+
+	@Test
+	public void testNuevaHora() {
+		Hora h = new Hora(1,2,3);
+		h.nuevaHora();
+		assertEquals(0,h.compareTo(new Hora(1,2,4)));
+	}
+
+}

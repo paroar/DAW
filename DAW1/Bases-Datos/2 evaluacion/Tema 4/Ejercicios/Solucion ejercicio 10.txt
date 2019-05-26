@@ -1,0 +1,214 @@
+1.
+
+select nom,apes from a.emp,a.ast
+where
+ (
+  cod=cod_em
+ )
+group by nom,apes,cod
+having count(codcur_cr)=(select count(cer) from a.ast
+                         where
+                          (
+                           cer='S'
+                           and
+                           cod=cod_em
+                          )
+                         );
+
+------------------------------------------------------
+
+select nom,apes from a.emp
+where
+(
+ select count(codcur_cr) from a.ast
+ where cod=cod_em
+)
+=
+(
+ select count(cer) from a.ast
+ where cod=cod_em and cer='S'
+)
+and
+(
+ select count(codcur_cr) from a.ast
+ where cod=cod_em
+)>0;
+
+2.
+
+select nom,apes from a.emp e
+where
+ (
+  irpf>all(select irpf from a.emp
+           where
+            (
+             e.num_dp=emp.num_dp
+             and
+             emp.sal>e.sal
+            )
+           )
+  and
+  exists (select irpf from a.emp
+           where
+            (
+             e.num_dp=emp.num_dp
+             and
+             emp.sal>e.sal
+            )
+          )
+ );
+
+3.
+
+select codcur_cr from a.ast
+where
+ (
+  cer='S'
+ )
+group by codcur_cr
+having count(cer)<(select count(cer) from a.ast a
+                   where
+                    (
+                     cer='N'
+                     and
+                     ast.codcur_cr=a.codcur_cr
+                    )
+                   );
+
+----------------------------------------------------
+
+select codcur_cr from a.ast
+group by codcur_cr
+having
+(select count(cer) from a.ast a where cer='S' and ast.codcur_cr=a.codcur_cr)
+<
+(select count(cer) from a.ast a where cer='N' and ast.codcur_cr=a.codcur_cr);
+
+4.
+
+select nom,apes from a.emp
+where
+(
+ select count(cod) from a.emp e
+ where emp.num_dp=e.num_dp
+)>5;
+
+5.
+
+select count(distinct num_dp) from a.emp e,a.ast a
+where
+ (
+  cod=cod_em
+  and
+  exists
+   (
+    select num_dp from a.emp,a.ast
+    where
+     (
+      cod=cod_em
+      and
+      e.num_dp=num_dp
+      and
+      a.codcur_cr=codcur_cr
+     )
+     having count(cod)>3
+   )
+ );
+
+----------------------------------------------------
+
+select count(num) from a.dep
+where num in
+(
+ select num_dp from a.emp,a.ast
+ where
+  (
+   cod=cod_em
+  )
+  group by num_dp,codcur_cr
+  having count(cod)>3
+);
+
+6.
+
+select count(cod) from a.emp e
+where sal<(select avg(sal) from a.emp
+           where
+            (
+             e.num_dp=emp.num_dp
+            )
+           );
+
+7.
+
+select count(codpro) from a.pro
+where codpro in
+(
+ select codpro from a.pro p,a.ses
+ where
+  (
+   codpro=codpro_pr
+  )
+ group by codpro,emp
+ having count(codcur_cr)>all
+  (
+   select count(codcur_cr) from a.ses,a.pro
+   where
+    (
+     codpro=codpro_pr
+     and
+     emp=p.emp
+     and
+     codpro<>p.codpro
+    )
+   group by codpro
+  )
+ and
+  (
+   select count(codpro) from a.pro
+   where
+    (
+     emp=p.emp
+    )
+  )>1
+);
+
+
+8.
+
+select dep.nom from a.dep,a.emp
+where
+ (
+  num=num_dp
+ )
+group by dep.nom,num
+having count(cod)=(select count(distinct cod) from a.emp,a.ast
+                   where
+                    (
+                     cod=cod_em
+                     and
+                     num_dp=num
+                    )
+                   );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             
+
+

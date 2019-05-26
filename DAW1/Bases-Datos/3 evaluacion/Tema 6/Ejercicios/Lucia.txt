@@ -1,0 +1,31 @@
+set serveroutput on size 1000000; 
+declare 
+	cursor c_gas is
+		select den,codgas from a.tgas
+		 where codgas in (select codgas_tg from a.gas);
+	v_acoplamiento a.tgas.codgas%type;
+	cursor c_dep is
+		select distinct dep.nom,num as nom from a.dep,a.emp,a.gas                -- asignas la etiqueta nom a num, entonces tienes dos elementos que se llaman igual
+		 where (num = num_dp and cod = cod_em_as and codgas_tg=v_acoplamiento);
+	v_total number(6,4);  --Mal declarado. Tienes solo dos dígitos para la parte entera
+	v_media number(6,4);  --Mal declarado. Tienes solo dos dígitos para la parte entera
+	v_max number(6,2);
+	v_min number(6,2);
+begin
+	for v_gas in c_gas loop
+		dbms_output.put_line ('---------------------------------');
+		dbms_output.put_line ('Tipo de gasto: '||v_gas.den);
+		dbms_output.put_line ('---------------------------------');
+		v_acoplamiento := v_gas.codgas;
+		for v_dep in c_dep loop 
+			select sum(imp),avg(imp),max(imp),min(imp) into v_total,v_media,v_max,v_min from a.gas
+			 where cod_em_as in (select cod from a.emp where (num_dp = v_dep.num and codgas_tg = v_acoplamiento));
+			dbms_output.put_line('Departamento: '||v_dep.nom);
+			dbms_output.put_line('Total de gastos: '||v_total);
+			dbms_output.put_line('Impote medio: '||v_media);
+			dbms_output.put_line('Importe máximo: '||v_max);
+			dbms_output.put_line('Importe mínimo: '||v_min);
+			dbms_output.put_line ('---------------------------------');
+		end loop;
+	end loop;
+end;

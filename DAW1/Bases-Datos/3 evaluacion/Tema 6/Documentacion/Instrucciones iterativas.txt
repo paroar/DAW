@@ -1,0 +1,59 @@
+Instrucción WHILE
+=================
+
+Sintaxis :
+
+WHILE condicion LOOP
+
+ Bloque de instrucciones;
+
+END LOOP;
+
+
+Instrucción LOOP
+================
+
+Sintaxis :
+
+LOOP
+
+ Bloque de instrucciones;
+
+END LOOP;
+
+Condición de salida : EXIT WHEN condicion;
+
+Instrucción FOR
+===============
+
+Sintaxis :
+
+FOR variable_control IN [REVERSE] valor_inicial..valor_final LOOP
+
+ Bloque de instrucciones;
+
+END LOOP;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

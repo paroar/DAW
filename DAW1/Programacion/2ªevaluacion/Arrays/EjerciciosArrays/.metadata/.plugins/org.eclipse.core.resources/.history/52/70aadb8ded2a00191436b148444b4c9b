@@ -1,0 +1,22 @@
+
+public class MisMétodos {
+
+	public static String[] mayorLongitud(String texto) {
+		String[] palabras = texto.split(" ");
+		int n = palabras.length;
+		String maxLongitud = "";
+		int max = 0;
+		int longitud;
+		int i = 0;
+		while(i < n) {
+			longitud = palabras[i].length();
+			if(longitud > max) {
+				maxLongitud = palabras[i];
+			}
+			i++;
+		}
+		String[] salida = new String[3];
+		salida[0] = maxLongitud;
+		
+	}
+}

@@ -1,0 +1,142 @@
+Escribe un bloque anónimo que visualice la siguiente información para todos los departamentos de la empresa:
+
+Nombre:
+Número de empleados: --Si el departamento está vacío, no se visualizan el resto de datos
+Total nómina neta: 
+% empleados que han asistido a cursos:
+Total gastos de formación:
+Total de horas de formación:
+% empleados: --Con respecto al total de la empresa
+Total de certificados obtenidos: 
+
+=============================================================================================================
+
+set serveroutput on size 1000000;
+set timing on;
+
+declare
+
+--CURSORES
+
+cursor c_departamento is
+	select nom,num from a.dep;
+
+v_departamento c_departamento%rowtype;
+
+--VARIABLES
+
+v_temp number(3,0);
+v_tneto number(6,2);
+v_empCur number(3,0);
+v_porEmpCur float;
+v_tgas number(5,2);
+v_thor number(4,0);
+v_tcer number(5,0);
+
+--CONSTANTE
+
+v_tempemp number(3,0);
+
+
+begin
+
+	--TOTAL EMPLEADOS EMPRESA	
+
+	select count(cod) into v_tempemp from a.emp;
+
+	open c_departamento;
+	fetch c_departamento into v_departamento;
+	while c_departamento%found loop
+
+		--NUMERO DE EMPLEADOS DE DEPARTAMENTO
+
+		select count(cod) into v_temp from a.emp
+		where num_dp=v_departamento.num;
+
+		--CONDICIONAL EMPLEADOS
+		
+		if v_temp<>0
+			then
+
+			--TOTAL NOMINA NETA
+
+			select sum(sal-(sal*irpf)/100) into v_tneto from a.emp
+			where num_dp=v_departamento.num;
+
+			--% EMPLEADOS QUE ASISTEN A CURSOS
+
+			select count(distinct cod_em) into v_empCur from a.emp,a.ast
+			where cod=cod_em and num_dp=v_departamento.num;
+			
+			v_porEmpCur:=(v_empCur/v_temp)*100;
+			
+			if v_porEmpCur<>0
+				then
+			
+				--GASTOS CURSOS
+			
+				select sum(imp) into v_tgas from a.emp,a.gas
+				where num_dp=v_departamento.num and cod=cod_em_as;
+
+				--TOTAL HORAS FORMACION
+	
+				select sum(dur) into v_thor from a.emp,a.ast,a.cur
+				where cod_em=cod and codcur_cr=codcur and num_dp=v_departamento.num;
+
+				--TOTAL CERTIFICADOS
+			
+				select count(cer) into v_tcer from a.emp,a.ast
+				where cod_em=cod and num_dp=v_departamento.num and cer='S';
+
+				--COMPROBACIONES SUM NULL
+
+				if v_tneto is null
+					then
+					v_tneto:=0;
+				end if;
+			
+				if v_tgas is null
+					then
+					v_tgas:=0;
+				end if;
+
+				if v_thor is null
+					then
+					v_thor:=0;
+				end if;
+
+				if v_tcer is null
+					then
+					v_tcer:=0;
+				end if;
+			else
+				v_tgas:=0;
+				v_thor:=0;
+				v_tcer:=0;
+			end if;			
+		end if;
+
+		--MENSAJE SALIDA
+
+		if v_temp=0
+			then
+			dbms_output.put_line('Departamento:'||v_departamento.nom);
+			dbms_output.put_line('Número de empleados:'||v_temp);
+			dbms_output.put_line(chr(10));
+		else
+			dbms_output.put_line('Departamento:'||v_departamento.nom);
+			dbms_output.put_line('Número de empleados:'||v_temp);
+			dbms_output.put_line('Total nómina neta:'||v_tneto);
+			dbms_output.put_line('% empleados con cursos:'||round(v_porEmpCur,2));
+			dbms_output.put_line('Total gastos de formación:'||v_tgas);
+			dbms_output.put_line('Total horas de formación:'||v_thor);
+			dbms_output.put_line('% empleados:'||round((v_temp/v_tempemp)*100,0));
+			dbms_output.put_line('Total certificados obtenidos:'||v_tcer);
+			dbms_output.put_line(chr(10));
+		end if;
+
+		fetch c_departamento into v_departamento;
+	end loop;
+	close c_departamento;
+end;
+

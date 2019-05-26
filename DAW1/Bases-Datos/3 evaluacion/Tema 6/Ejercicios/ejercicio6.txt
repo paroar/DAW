@@ -1,0 +1,68 @@
+Escribe un bloque anónimo que visualice la siguiente información de todos los empleados de la bases de datos:
+
+INFORME DE EMPLEADOS
+
+Departamento:
+Nombre:
+Salario neto:
+Total de cursos realizados:
+Faltas de asistencia:
+
+Si el empleado no pertenece a ningún departamento, en lugar del nombre vamos a visualizar el mensaje Sin asignar.
+
+===================================================================================================
+
+declare
+
+--Cursores
+cursor cur_emp is
+	select nom, apes, cod, num_dp, sal-sal*irpf/100 as salNeto from a.emp;
+
+v_emp cur_emp%rowtype;
+
+--Variables
+
+v_nom a.dep.nom%type;
+v_tc number(3,0);
+v_fal number(3,0);
+
+--Constantes
+
+v_msg1 constant char(14):='sin asignar';
+
+begin
+
+	open cur_emp;
+	
+	fetch cur_emp into v_emp;
+	while cur_emp%found loop
+
+		if v_emp.num_dp is null
+			then
+			dbms_output.put_line('Departamento:'||v_msg1);
+		else
+			select nom into v_nom from a.dep
+			where num=v_emp.num_dp;
+			dbms_output.put_line('Departamento:'||v_nom);
+		end if;
+
+		select count(codcur_cr), sum(fal) into v_tc,v_fal from a.ast
+		where cod_em=v_emp.cod;
+
+		if v_fal is null
+			then
+			v_fal:=0;
+		end if;
+		
+		dbms_output.put_line('Nombre:'||v_emp.nom||' '||v_emp.apes);
+		dbms_output.put_line('Salario neto:'||v_emp.salNeto);
+		dbms_output.put_line('Total cursos:'||v_tc);
+		dbms_output.put_line('Total faltas:'||v_fal);
+		dbms_output.put_line(chr(10));
+
+		fetch cur_emp into v_emp;
+	end loop;
+
+	close cur_emp;
+
+end;	

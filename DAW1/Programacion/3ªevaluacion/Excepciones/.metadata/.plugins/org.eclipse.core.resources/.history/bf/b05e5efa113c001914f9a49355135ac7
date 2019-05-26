@@ -1,0 +1,23 @@
+package ejercicio3;
+
+public class Prueba {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Fecha f1 = new Fecha(20,1,2000);
+		System.out.println(f1);
+		Fecha f2 = new Fecha(32,1,2000);
+		System.out.println(f2);
+		Fecha f3 = new Fecha(20,0,2000);
+		System.out.println(f3);
+		Fecha f4 = new Fecha(29,2,2000);
+		System.out.println(f4);
+		Fecha f5 = new Fecha(29,13,2000);
+		System.out.println(f5);
+		Fecha f6 = new Fecha(-20,1,2000);
+		System.out.println(f6);
+		Fecha f7 = new Fecha(20,-1,2000);
+		System.out.println(f7);
+	}
+
+}

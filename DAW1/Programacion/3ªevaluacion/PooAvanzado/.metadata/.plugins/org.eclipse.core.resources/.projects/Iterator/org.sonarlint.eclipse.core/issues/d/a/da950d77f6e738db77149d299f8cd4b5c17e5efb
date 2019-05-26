@@ -1,0 +1,12 @@
+
+Gsquid:S1220""Move this file to a named package.H€RMINORZ
+CODE_SMELL
+q
+squid:S106"9Replace this use of System.out or System.err by a logger.(µÏ…èùÿÿÿÿ8î€·—-HRMAJORZ
+CODE_SMELL
+’squid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ú©ê‰úÿÿÿÿ8óÜ¥·—-H‚RMINORZ
+CODE_SMELL
+csquid:S1135"2Complete the task associated to this TODO comment.(» æÿÿÿÿÿHƒRINFOZ
+CODE_SMELL
+~squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¿şÒ%8ñ˜ ·—-H„RMAJORZ
+CODE_SMELL

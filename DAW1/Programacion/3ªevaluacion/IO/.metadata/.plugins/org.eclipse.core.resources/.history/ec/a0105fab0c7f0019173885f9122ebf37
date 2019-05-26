@@ -1,0 +1,56 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class Prueba {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scanner = new Scanner(System.in);
+		while(true) {
+			System.out.println("\n--------------------\n"
+					+"Elige una opción:\n"
+					+"1. Escribir persona\n"
+					+"2. Buscar persona\n"
+					+"3. Mostrar archivo\n"
+					+"0. Salir\n");
+			int option = scanner.nextInt();
+			switch(option) {
+				case 1: 
+						break;
+				case 2: 
+						break;
+				case 3: 
+						break;
+				case 4: 
+						break;
+				default:
+					System.exit(1);
+			}
+		}
+		
+		
+		Empleado empleado2 = new Empleado("Antonio", "Lopez", 35, 1000, 1);
+		try{
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("D:\\empleados.ddr"));
+			oos.writeObject(empleado1);
+			oos.writeObject(empleado2);
+		} catch (IOException e) {
+		}
+		try{
+			ObjectInputStream ois=new ObjectInputStream(new FileInputStream("D:\\empleados.ddr"));
+            while(true){
+                Empleado aux=(Empleado)ois.readObject();
+                System.out.println(aux.getNombre());
+                System.out.println(aux.getApellido());
+                System.out.println(aux.getEdad());
+                System.out.println(aux.getSalario());
+                System.out.println(aux.getNempleado());
+                System.out.println("");
+            }
+        }catch(ClassNotFoundException e){
+        }catch(EOFException e){
+        }catch(IOException e){
+        }
+	}
+
+}

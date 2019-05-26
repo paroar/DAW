@@ -1,0 +1,47 @@
+Solución ejercicio nº 9
+=======================
+
+1.
+
+select nom,apes from a.emp
+where
+ (
+  sal*(1-irpf/100)<(select avg(sal*(1-irpf/100)) from a.emp)
+ ); 
+
+2.
+
+select nom from a.cur
+where
+ (
+  dur=(select max(dur) from a.cur)
+ );
+
+3.
+
+select nom,apes from a.emp,a.ast
+where
+ (
+  cod=cod_em
+  and
+  fal=(select max(fal) from a.ast)
+ );
+
+4.
+
+select distinct nom from a.cur,a.gas
+where
+ (
+  codcur=codcur_cr_as
+  and
+  imp<(select avg(imp) from a.gas)
+ );
+
+5.
+
+select count(distinct cod_em_as) from a.gas
+where
+ (
+  imp<(select avg(imp) from a.gas)
+ );
+

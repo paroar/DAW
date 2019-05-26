@@ -1,0 +1,7 @@
+create or replace package pkg30
+
+is
+
+	cursor c_emp is select nom,apes,sal*irpf/100 as ret from a.emp;
+
+end pkg30;

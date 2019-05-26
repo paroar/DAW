@@ -1,0 +1,45 @@
+Escribe un procedimiento que reciba como parámetro de entrada el código de empleado y devuelva el número de certifcados obtenidos y un valor booleano que es verdadero en caso de que el empleado haya obtenido certificados y falso en caso contrario.
+
+create or replace procedure proc25
+(
+ p_cod in a.emp.cod%type,
+ p_nc out number,
+ p_flag out boolean
+)
+
+is
+
+begin
+
+ p_flag:=true;
+
+ select count(cer) into p_nc from a.ast
+ where cer='S' and cod_em=p_cod;
+ 
+ if p_nc=0
+  then
+   p_flag:=false;
+ end if; 
+
+end proc25;
+
+-----------------------------------------------------
+
+
+declare
+
+ v_nc number(3,0);
+ v_flag boolean;
+
+begin
+
+ proc25('136900',v_nc,v_flag);
+
+ if v_flag
+  then
+   dbms_output.put_line(v_nc);
+  else
+   dbms_output.put_line('0');
+ end if;
+
+end;

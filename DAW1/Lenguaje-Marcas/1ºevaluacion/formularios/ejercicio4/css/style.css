@@ -1,0 +1,18 @@
+textarea{
+	resize: none;
+	width: 400px;
+	height: 100px;
+}
+
+.precio {
+	width: 50px;
+}
+
+fieldset{
+	width: 450px;
+}
+
+textarea, input[type="text"]{
+	border:1px solid #cccccc;
+	border-radius: 5px;
+}

@@ -1,0 +1,132 @@
+Solución ejercicio nº 9
+=======================
+
+1.
+
+select nom,apes from a.emp
+where
+ (
+  sal*(1-irpf/100)<(select avg(sal*(1-irpf/100)) from a.emp)
+ ); 
+
+2.
+
+select nom from a.cur
+where
+ (
+  dur=(select max(dur) from a.cur)
+ );
+
+3.
+
+select distinct nom,apes from a.emp,a.ast
+where
+ (
+  cod=cod_em
+  and
+  fal=(select max(fal) from a.ast)
+ );
+
+4.
+
+select distinct nom from a.cur,a.gas
+where
+ (
+  codcur=codcur_cr_as
+  and
+  imp<(select avg(imp) from a.gas)
+ );
+
+5.
+
+select count(distinct cod_em_as) from a.gas
+where
+ (
+  imp<(select avg(imp) from a.gas)
+ );
+
+6.
+
+select nom,apes from a.emp
+where cod not in (select cod_em from a.ast);
+
+7.
+
+select dep.nom from a.dep
+where num not in (select num_dp from a.emp,a.gas
+                  where cod=cod_em_as);
+
+8.
+
+select distinct lug from a.cur
+where
+ (
+  dur=(select max(dur) from a.cur)
+ );
+
+9.
+
+select dep.nom,count(cod) from a.dep,a.emp
+where
+ (
+  num=num_dp
+  and
+  irpf<(select avg(irpf) from a.emp)
+ )
+group by dep.nom;
+
+10.
+
+select distinct emp from pro
+where
+ (
+  codpro in (select codpro_pr from a.ses,a.ast where
+                                                    (
+                                                     ses.codcur_cr=ast.codcur_cr
+                                                     and fal=(select max(fal) from a.ast)
+                                                    ))
+ );
+
+10+1449+21=1480
+
+
+select distinct emp from a.pro,a.ses,a.ast
+where
+ (
+  codpro=codpro_pr
+  and
+  ast.codcur_cr=ses.codcur_cr
+  and
+  fal=(select max(fal) from a.ast)
+ );
+
+14490+69=14559
+
+
+PRO=10
+AST=69
+SES=21
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

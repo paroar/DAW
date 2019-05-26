@@ -1,0 +1,62 @@
+Escribe un bloque anónimo que determine que select de tres provoca la excepción no_data_found
+
+Mi solución:
+
+declare
+
+ excepcion integer;
+ v_apes a.emp.apes%type;
+ v_nom a.emp.nom%type;
+
+begin
+
+ excepcion:=1;
+ select apes,nom into v_apes,v_nom from a.emp
+ where cod='141414';
+ excepcion:=2;
+ select apes,nom into v_apes,v_nom from a.emp
+ where cod='141414';
+ excepcion:=3;
+ select apes,nom into v_apes,v_nom from a.emp
+ where cod='0';
+
+
+exception
+
+ when no_data_found
+  then
+   dbms_output.put_line('La select que provova la excepcion es la '||excepcion);
+ when too_many_rows
+  then
+   dbms_output.put_line('Select obtiene más de una fila');
+
+end;
+
+-----------------------------------------------------------------------------------
+Solución de Pilar:
+
+declare
+
+ v_apes a.emp.apes%type;
+ v_nom a.emp.nom%type;
+
+begin
+
+ select apes,nom into v_apes,v_nom from a.emp
+ where cod='141414';
+ select apes,nom into v_apes,v_nom from a.emp
+ where cod='141414';
+ select apes,nom into v_apes,v_nom from a.emp
+ where cod='0';
+
+
+exception
+
+ when no_data_found
+  then
+   dbms_output.put_line('La select que provova la excepcion es la '||excepcion);
+ when too_many_rows
+  then
+   dbms_output.put_line('Select obtiene más de una fila');
+
+end;

@@ -1,0 +1,95 @@
+Escribe un procedimiento almacenado que use como parámetro de entrada el código de empleado y visualice la siguiente información del mismo:
+
+Nombre completo, nombre del departamento, salario neto, importe de la retención, gastos de formación y número de cursos realizados.
+
+
+create or replace procedure proc1521
+
+(
+ p_cod in a.emp.cod%type
+)
+
+is
+
+ -- declaración de variables
+ 
+  v_nombre char(51);
+  v_salneto a.emp.sal%type;
+  v_retencion number(5,2);
+  v_gastos number(6,2);
+  v_cursos number(3,0);
+
+ 
+begin
+
+ select nom||' '||apes,sal*(1-irpf/100),sal*irpf/100
+ into v_nombre,v_salneto,v_retencion
+ from a.emp where cod=p_cod;
+
+ select count(codcur_cr) into v_cursos from a.ast
+ where cod_em=p_cod;
+
+ select sum(imp) into v_gastos from a.gas
+ where cod_em_as=p_cod;
+
+ if v_gastos is null
+  then
+   v_gastos:=0;
+ end if;
+
+ dbms_output.put_line('Nombre:'||v_nombre);
+ dbms_output.put_line('Salario neto:'||v_salneto);
+ dbms_output.put_line('Retención:'||v_retencion);
+ dbms_output.put_line('Gastos:'||v_gastos);
+ dbms_output.put_line('Cursos:'||v_cursos);
+
+end proc1521;
+
+
+----------------------------------------------------
+
+execute proc1521('025100');
+
+
+declare
+
+ v_cod a.emp.cod%type;
+
+begin
+
+ v_cod:='025100';
+ proc1521(v_cod);
+
+ v_cod:='001369';
+ proc1521(v_cod);
+
+ proc1521('014890');
+
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,63 @@
+Escribe un procedimiento que use los procedimientos de los ejercicios 23,25,26,27 y 28 
+para visualizar los datos de todos los empleados de la empresa. Hay que usar los parámetros 
+de tipo booleano a la hora de decidir la información a visualizar.
+
+--------------------------------------------------------------------
+
+create or replace procedure proc29
+
+is
+
+cursor c_emp is select cod from a.emp;
+
+v_cod a.emp.cod%type;
+v_nom a.emp.nom%type;
+v_apes a.emp.apes%type;
+v_flagempleado boolean;
+
+v_cer number(3);
+v_flagcer boolean;
+
+v_nempcer number(3);
+
+v_gas number(7,2);
+v_flaggas boolean;
+
+v_nempgas number(3);
+
+begin
+
+for v_emp in c_emp loop
+	v_cod:=v_emp.cod;
+
+	proc24(v_cod,v_nom,v_apes,v_flagempleado);
+
+		dbms_output.put_line('Nombre:'||v_nom||' '||v_apes);
+		proc25(v_cod,v_cer,v_flagcer);
+		dbms_output.put_line('Certificados:'||v_cer);
+
+		if(v_flagcer)
+		then
+			proc26(v_cod,v_cer,v_nempcer);
+			dbms_output.put_line('Empleados con menos certificados:'||v_nempcer);
+		else
+			dbms_output.put_line('Empleados con menos certificados:0');
+		end if;
+		
+		proc27(v_cod,v_gas,v_flaggas);
+
+		if(v_flaggas)
+		then
+			dbms_output.put_line('Gastos:'||v_gas);
+		proc28(v_cod,v_gas,v_nempgas);
+			dbms_output.put_line('Empleados con menos gastos:'||v_nempgas);
+		else
+			dbms_output.put_line('Gastos:0');
+			dbms_output.put_line('Empleados con menos gastos:0');
+		end if;
+  		dbms_output.put_line(chr(10));
+		dbms_output.put_line(chr(10));
+
+end loop;
+
+end proc29;

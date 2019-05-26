@@ -1,0 +1,13 @@
+
+public class Mediana {
+	
+	public static double obtenerMediana(double[] array) {
+		int[] repetidos = new int[array.length];
+		int minDif = array.length;
+		boolean contador= false;
+		int i = 0;
+		while(i < array.length) {
+			
+		}
+	}
+}

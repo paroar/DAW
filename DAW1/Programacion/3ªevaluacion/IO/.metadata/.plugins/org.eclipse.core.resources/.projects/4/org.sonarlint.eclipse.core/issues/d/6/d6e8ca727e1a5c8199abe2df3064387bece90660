@@ -1,0 +1,10 @@
+
+Fsquid:S1220""Move this file to a named package.HNRMINORZ
+CODE_SMELL
+’squid:S1488Õ"_Immediately return this expression instead of assigning it to the temporary variable "mensaje".(°¾ÏO8İ‡€¿¦-HRRMINORZ
+CODE_SMELL
+squid:S1210Æ"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.( Åí§8Úã°¿¦-HVRMINORZ
+CODE_SMELL
+‡squid:S1201½"UEither override Object.equals(Object), or rename the method to prevent any confusion.(ààõÂúÿÿÿÿ8İ‡€¿¦-HPRMAJORZBUG
+zsquid:S1126¿"AReplace this if-then-else statement by a single return statement.(£ÕË÷ùÿÿÿÿ8İ‡€¿¦-HQRMINORZ
+CODE_SMELL

@@ -1,0 +1,34 @@
+Nombre de los módulos que se imparten en el Instituto:
+Aplicaciones web Gestión de bases de datos Lenguajes de marcas y sistemas de gestión de información Implantación de aplicaciones web
+
+//modulo/nombre/text()
+
+-----------------------------------------------------
+Nombre de los módulos del ciclo ASIR:
+Gestión de bases de datos Lenguajes de marcas y sistemas de gestión de información Implantación de aplicaciones web
+
+//ciclo[.="ASIR"]/../nombre/text()
+
+-----------------------------------------------------
+Nombre de los módulos que se imparten en el segundo curso de cualquier ciclo:
+Aplicaciones web Implantación de aplicaciones web
+
+//curso[.=2]/../nombre/text()
+
+-----------------------------------------------------
+Nombre de los módulos de menos de 5 horas semanales:
+Aplicaciones web Lenguajes de marcas y sistemas de gestión de información
+
+//horasSemanales[.<5]/../nombre/text()
+
+-----------------------------------------------------
+Nombre de los módulos que se imparten en el primer curso de ASIR:
+Gestión de bases de datos Lenguajes de marcas y sistemas de gestión de información
+
+//ciclo[.="ASIR"]/../curso[.=1]/../nombre/text()
+
+-----------------------------------------------------
+Horas semanales de los módulos de más de 3 horas semanales:
+4 5 5
+
+//horasSemanales[.>3]/text()

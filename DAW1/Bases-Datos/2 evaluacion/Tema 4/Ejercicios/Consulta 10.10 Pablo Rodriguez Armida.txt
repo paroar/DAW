@@ -1,0 +1,68 @@
+//Nombre de los departamentos cuyos empleados no han coincidido en cursos con los empleados del departamento Financiero.
+
+Nombre de los departamentos en los que los empleados no han coincidido con empleados del departamento Financiero en todos los cursos que han hecho.
+
+select distinct dep.nom from a.dep, a.emp, a.ast
+where
+ (
+  num=num_dp
+  and
+  cod=cod_em
+  and
+  codcur_cr in (select distinct codcur_cr from a.dep, a.emp, a.ast
+		where
+		 (
+  		  num=num_dp
+  		  and
+  		  cod=cod_em
+  		  and
+  		  codcur_cr not in (select distinct codcur_cr from a.dep, a.emp, a.ast
+                        	    where
+                           	     (
+		            	      num=num_dp
+                           	      and
+                           	      cod=cod_em
+                            	      and
+                            	      dep.nom='Financiero'
+                          	     )
+ 		    		   )
+ 		 )
+ 	       )
+ )
+group by dep.nom, cod
+having count(codcur_cr) = (select count(codcur_cr) from a.dep, a.emp e, a.ast
+			   where
+                            (
+         		     num=num_dp
+  			     and
+                             cod=cod_em
+			     and
+                             e.cod=cod
+                            )                            
+                          )
+;
+
+-------------------------------------------------------------------------------------------------------------
+
+
+//Código de cursos a los que no han asistido empleados del departamento Financiero
+
+select distinct codcur_cr from a.dep, a.emp, a.ast
+where
+ (
+  num=num_dp
+  and
+  cod=cod_em
+  and
+  codcur_cr not in (select distinct codcur_cr from a.dep, a.emp, a.ast
+                    where
+                     (
+		      num=num_dp
+                      and
+                      cod=cod_em
+                      and
+                      dep.nom='Financiero'
+                     )
+ 		   )
+ )
+;

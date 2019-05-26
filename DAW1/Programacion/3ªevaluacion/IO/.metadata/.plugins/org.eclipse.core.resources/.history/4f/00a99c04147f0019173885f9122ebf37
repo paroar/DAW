@@ -1,0 +1,48 @@
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Scanner;
+
+public class MisMetodos {
+
+	public static void escribirPersona() {
+		Scanner scanner = new Scanner(System.in);
+		ObjectOutputStream oos;
+		ObjectInputStream ois;
+		try {
+			System.out.println("Nombre: Apellido: Edad: Salario: Id:");
+			oos = new ObjectOutputStream(new FileOutputStream("D:\\Empleados\\empleados.ddr"));
+			Empleado empleado = new Empleado(scanner.nextLine(), scanner.nextLine(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt());
+			oos.writeUnshared(empleado);
+			oos.flush();
+			oos.close();
+		} catch (FileNotFoundException e) {
+
+		} catch (Exception e) {
+
+		}
+	}
+	
+	public static void mostrarArchivo() {
+		ObjectInputStream ois;
+		try {
+			ois = new ObjectInputStream(new FileInputStream("D:\\empleados.ddr"));
+			Object aux = ois.readObject();
+	        while(aux != null){
+		        System.out.println(aux);
+		        aux = ois.readObject();
+	        }
+		} catch (FileNotFoundException e) {
+
+		} catch (IOException e) {
+
+		} catch (Exception e) {
+			
+		}
+
+	}
+}

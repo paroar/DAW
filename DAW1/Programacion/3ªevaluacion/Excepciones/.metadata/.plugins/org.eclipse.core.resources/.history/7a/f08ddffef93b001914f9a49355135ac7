@@ -1,0 +1,58 @@
+package ejercicio2;
+
+public class Reloj {
+
+	private int hora;
+	private int minutos;
+	private int segundos;
+	private int formato;
+	private boolean amPm;
+	
+	public Reloj(int hora, int minutos, int segundos, int formato) {
+		super();
+		this.hora = hora;
+		this.minutos = minutos;
+		this.segundos = segundos;
+		this.formato = formato;
+	}
+	
+	public void validarHora(Object o) throws Exception {
+		Reloj r = (Reloj)o;
+		if(this.hora > 24) {
+			throw new Exception();
+		}else if(this.minutos > 60) {
+			throw new Exception();
+		}else if(this.segundos > 60) {
+			throw new Exception();
+		}
+	}
+	
+	public void ponHora(Object o) {
+		Reloj r = (Reloj)o;
+		if(this.formato == 12 && this.hora > 12) {
+			this.hora = this.hora - 12;
+		}
+	}
+
+	public int getHora() {
+		return hora;
+	}
+
+	public int getMinutos() {
+		return minutos;
+	}
+
+	public int getSegundos() {
+		return segundos;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return hora + ":" + minutos + ":" + segundos;
+	}
+	
+	
+	
+	
+}

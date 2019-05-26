@@ -1,0 +1,119 @@
+1.Nombre y apellidos de los empleados que tienen un salario neto inferior al salario neto medio de la
+empresa.
+
+select nom, apes from emp
+where
+(
+sal-(sal*irpf)/100<(select avg(sal-(sal*irpf)/100) from emp)
+)
+;
+------------------------------------------------------------------------------------------------------------
+2.Nombre de los cursos con el máximo número de horas de duración.
+
+select nom from cur
+where
+(
+dur = (select max(dur) from cur)
+)
+;
+------------------------------------------------------------------------------------------------------------
+3.Nombre y apellidos de los empleados con el mayor número de faltas.
+
+select ?distinct? nom, apes from emp, ast
+where
+(
+cod = cod_em
+and
+fal = (select max(fal) from ast)
+)
+; 
+------------------------------------------------------------------------------------------------------------
+4.Nombre de los cursos con algún gasto por debajo de la media.
+
+select distinct nom from cur, gas
+where
+(
+codcur = codcur_cr_as
+and
+imp<(select avg(imp) from gas)
+)
+;
+------------------------------------------------------------------------------------------------------------
+5.Número de empleados con algún gasto inferior al gasto medio.
+
+select count(distinct cod_em_as) from gas
+where
+(
+imp<(select avg(imp) from gas)
+)
+;
+------------------------------------------------------------------------------------------------------------
+6.Nombre y apellidos de los empleados que no han asistido a cursos.
+
+select nom,apes from emp
+where 
+(
+cod not in (select cod_em from ast)
+)
+;
+------------------------------------------------------------------------------------------------------------
+7.Nombre de los departamentos que no tienen gastos.
+
+select nom from dep
+where
+(
+num not in(select distinct num from dep, emp, gas
+		where
+		(
+		num = num_dp
+		and
+		cod = cod_em_as
+		) 
+	)
+)
+;
+------------------------------------------------------------------------------------------------------------
+8.Nombre de las ciudades donde se han impartido los cursos de más duración.
+
+select distinct lug from cur
+where
+(
+dur in (select max(dur) from cur)
+)
+;
+------------------------------------------------------------------------------------------------------------
+9.Número de empleados por departamento cuyo IRPF es inferior al IRPF medio de la empresa.
+
+select dep.nom, count(cod) from dep, emp
+where
+(
+num=num_dp
+and
+irpf<(select avg(irpf) from emp)
+)
+group by dep.nom
+;
+
+select dep.nom, count(cod) from dep, emp
+where
+(
+num=num_dp
+)
+group by dep.nom
+having irpf<(select avg(irpf) from emp)
+;
+------------------------------------------------------------------------------------------------------------
+10.Nombre de las empresas de formación cuyos profesores han dado cursos a los empleados con
+mayor número de faltas.
+
+select distinct emp from pro, ses, ast
+where
+(
+codpro = codpro_pr
+and
+ses.codcur_cr = ast.codcur_cr
+and
+fal = (select max(fal) from ast)
+)
+;
+------------------------------------------------------------------------------------------------------------

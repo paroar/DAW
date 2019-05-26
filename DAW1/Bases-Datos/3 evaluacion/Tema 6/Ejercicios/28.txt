@@ -1,0 +1,28 @@
+Escribe un procedimiento que reciba como parámetro de entrada el código de empleado y 
+devuelva el total de gastos y el nº de empleados con gastos inferiores.
+---------------------------------------------------------------------------------------------------
+
+create or replace procedure proc28
+
+(
+p_cod in a.emp.cod%type,
+p_gas out number,
+p_emp out number
+)
+
+is
+
+begin
+
+select sum(imp) into p_gas from a.gas
+where cod_em_as=p_cod;
+
+select count(distinct cod_em_as) into p_emp from a.gas
+where cod_em_as in
+(
+select cod_em_as from a.gas
+group by cod_em_as
+having sum(imp)<p_gas
+);
+
+end proc28;

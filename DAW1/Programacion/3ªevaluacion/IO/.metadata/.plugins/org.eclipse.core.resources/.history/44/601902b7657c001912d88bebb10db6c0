@@ -1,0 +1,74 @@
+//CLASE CUENTA:
+
+public class Cuenta {
+
+    /*Atributos de la clase cuenta*/
+    private String nombre;
+    private String cuenta;
+    private double saldo;
+    private double tipoIn;
+
+    /* Constructor sin argumentos */
+    public Cuenta ()
+    {
+    }
+    /*Constructor que recibe como parámetros todas las propiedades de la clase Cuenta*/
+    public Cuenta (String nom, String cue, double sal, double tipo)
+    {
+        nombre =nom;
+        cuenta=cue;
+        saldo=sal;
+        tipoIn=tipo;
+    }
+   /*Método que permite asignar el nombre del titular a la cuenta
+    public void asignarNombre(String nom)
+    {
+        nombre=nom;
+    }
+    /*Método que devuelve el nombre del titular*/
+    public String obtenerNombre()
+    {
+        return nombre;
+    }
+
+    /*Método que devuelve el saldo disponible de la cuenta*/
+     public double obtenerSaldo()
+    {
+        return saldo;
+    }
+    /*Método que devuelve el tipo de interés de la cuenta*/
+     public double tipoIn()
+     {
+    	 return tipoIn;
+     }
+    /* PARA PROBAR CON JUNIT:
+     * Método que permite ingresar cantidades en la cuenta, modificando el saldo
+     * en cada ingreso. */
+
+    public void ingresar(double cantidad) throws Exception
+    {
+        if (cantidad<0)
+            throw new Exception("No se puede ingresar una cantidad negativa");
+        saldo = saldo + cantidad;
+    }
+
+
+
+    /* 	PARA PROBAR CON JUNIT:
+     * Método que va a retirar cantidades la cuenta, modificando el saldo*/
+
+    public void retirar (double cantidad) throws Exception
+    {
+        if (cantidad < 0)
+            throw new Exception ("No se puede retirar una cantidad negativa");
+        if (obtenerSaldo()< cantidad)
+            throw new Exception ("No hay suficiente saldo");
+        saldo = saldo - cantidad;
+    }
+
+    /*Método que devuelve el número de cuenta*/
+    public String obtenerCuenta ()
+    {
+        return cuenta;
+    }
+}

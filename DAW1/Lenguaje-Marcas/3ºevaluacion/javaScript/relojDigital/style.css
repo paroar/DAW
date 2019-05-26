@@ -1,0 +1,18 @@
+.clock-wrapper {
+    padding:5px;
+    margin:0 auto;
+    width: 300px;
+    margin-top:10%;
+    transition: border 15s;
+    border: 10px solid #d4af37;
+    border-radius: 5px;
+    background-color: ;
+}
+
+#clock{
+    background-color:#333;
+    font-family: calibri;
+    font-size:60px;
+    color:#fff;
+    text-align: center;
+}

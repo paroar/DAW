@@ -1,0 +1,32 @@
+
+public class NodoGrupo {
+	private Alumno alumno;
+	private NodoGrupo sig;
+	
+	public NodoGrupo() {
+		this.sig=null;
+	}
+		
+	public NodoGrupo(Alumno alumno) {
+		this.sig=null;
+		this.alumno=alumno;
+	}
+
+	public Alumno getAlumno() {
+		return alumno;
+	}
+
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
+	}
+
+	public NodoGrupo getSig() {
+		return sig;
+	}
+
+	public void setSig(NodoGrupo sig) {
+		this.sig = sig;
+	}
+	
+	
+}

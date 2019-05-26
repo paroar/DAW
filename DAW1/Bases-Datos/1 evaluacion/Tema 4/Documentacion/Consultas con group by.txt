@@ -1,0 +1,17 @@
+select dep.nom,sum(sal) from a.dep,a.emp
+where num=num_dp;
+
+select dep.nom,sum(sal) from a.dep,a.emp
+where num=num_dp
+and num='100';
+
+select dep.nom,sum(sal) from a.dep,a.emp
+where num=num_dp
+and num='100'
+group by dep.nom;
+
+select dep.nom,sum(sal) from a.dep,a.emp
+where num=num_dp
+and num='100'
+group by dep.nom,num;
+

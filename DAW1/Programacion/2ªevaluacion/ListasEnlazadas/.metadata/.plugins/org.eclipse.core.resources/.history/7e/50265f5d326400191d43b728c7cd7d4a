@@ -1,0 +1,84 @@
+
+public class Lista {
+
+	private Nodo comienzo;
+	
+	public Lista() {
+		this.comienzo = null;
+	}
+	
+	public void addBegin(int dato) {
+		Nodo nuevo = new Nodo(dato);
+		nuevo.setSig(this.comienzo);
+		this.comienzo = nuevo;
+		/*
+		if(this.comienzo == null) {
+			this.comienzo = nuevo;
+		}else {
+			nuevo.setSig(this.comienzo);
+			this.comienzo = nuevo;
+		}*/
+	}
+	
+	public void addEnd(int dato) {
+		Nodo nuevo = new Nodo(dato);
+		if(this.comienzo == null) {
+			this.comienzo = nuevo;
+		}else {
+			Nodo p = this.comienzo;
+			while(p.getSig() != null) {
+				p = p.getSig();
+			}
+			p.setSig(nuevo);
+		}
+	}
+	
+	public String mostrarLista() {
+		String salida = "";
+		if(this.comienzo == null) {
+			return salida;
+		}
+		Nodo p = this.comienzo;
+		while(p.getSig() != null) {
+			salida += p.getDato() + "-->";
+			p = p.getSig();
+		}
+		salida += p.getDato();
+		return salida;
+	}
+
+	public int maxDistance(int dato) {
+		Nodo p = this.comienzo;
+		while(p != null && p.getDato() != dato) {
+			p = p.getSig();
+		}
+		if(p == null) {
+			return -1;
+		}else {
+			int distance = -1;
+			while(p != null) {
+				int newDistance = Lista.distanceBetweenInfo(p.getSig(), dato) + 1;
+				for(int i = 0 ; p != null && i < newDistance + 1; i++) {			//advance to the next Node
+					p = p.getSig();													//where you found the data
+				}																	//newDistance+1
+				if(newDistance > distance) {
+					distance = newDistance;
+				}
+			}
+			return distance;
+		}
+	}
+	
+	public static int distanceBetweenInfo(Nodo p, int dato) {
+		int distance = 0;
+		while(p != null && p.getDato() != dato) {
+			p = p.getSig();
+			distance++;
+		}
+		if(p == null) {
+			return -1;
+		}else {
+			return distance;
+		}
+	}
+}

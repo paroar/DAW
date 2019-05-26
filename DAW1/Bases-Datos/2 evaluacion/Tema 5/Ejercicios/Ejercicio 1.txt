@@ -1,0 +1,80 @@
+Crea las tabla DEP,EMP,AST y CUR con todas las restricciones excepto las FKs.
+
+create table dep
+(
+num char(3) constraint dep_k primary key,
+nom char(20)
+);
+
+create table emp
+(
+cod char(6) constraint emp_k primary key,
+apes char(30),
+nom char(20),
+sal number(9,2),
+irpf number(2,0),
+num_dp char(3)
+);
+
+create table ast
+(
+cod_em char(6),
+codcur_cr char(4),
+fal number(2,0),
+cer char(1) constraint ast_ck1 check (cer in ('S','N')),
+constraint ast_k primary key(cod_em,codcur_cr)
+);
+
+create table cur
+(
+codcur char(4) constraint cur_k primary key,
+nom char(25),
+dur number(3,0),
+lug char(15),
+fini date,
+ffin date
+);
+
+Crea la FK de EMP con la acción referencial ON DELETE SET NULL
+
+alter table emp
+add constraint emp_fk1 foreign key (num_dp)
+references dep(num) on delete set null;
+
+Crea la FK de AST correspondiente a CUR con la acción referencial ON DELETE SET NULL
+
+alter table ast
+add constraint ast_fk1 foreign key(codcur_cr)
+references cur(codcur) on delete set null;
+
+Crea la FK de AST correspondiente a EMP con la acción referencial ON DELETE CASCADE
+
+alter table ast
+add constraint ast_fk2 foreign key(cod_em)
+references emp(cod) on delete cascade;
+
+Inserta filas en las tablas anteriores mediante el comando de inserción multifila
+usando las tablas A.DEP,A.EMP,A.AST,A.CUR.
+
+insert into dep
+select * from a.dep;
+commit;
+
+insert into emp
+select * from a.emp;
+commit;
+
+insert into cur
+select * from a.cur;
+commit;
+
+insert into ast
+select * from a.ast;
+commit;
+
+
+
+
+
+
+

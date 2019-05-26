@@ -1,0 +1,23 @@
+
+j
+squid:S106"9Replace this use of System.out or System.err by a logger.(¨¶ÑÍþÿÿÿÿHïRMAJORZ
+CODE_SMELL
+j
+squid:S106"9Replace this use of System.out or System.err by a logger.(¿¸ÚÀþÿÿÿÿHðRMAJORZ
+CODE_SMELL
+j
+squid:S106$"9Replace this use of System.out or System.err by a logger.(ìŽ£êýÿÿÿÿHñRMAJORZ
+CODE_SMELL
+j
+squid:S106'"9Replace this use of System.out or System.err by a logger.(¨¶ÑÍþÿÿÿÿHòRMAJORZ
+CODE_SMELL
+j
+squid:S1065"9Replace this use of System.out or System.err by a logger.(¿¸ÚÀþÿÿÿÿHóRMAJORZ
+CODE_SMELL
+j
+squid:S1068"9Replace this use of System.out or System.err by a logger.(¨¶ÑÍþÿÿÿÿHôRMAJORZ
+CODE_SMELL
+Gsquid:S1220""Move this file to a named package.HõRMINORZ
+CODE_SMELL
+gsquid:S1118":Add a private constructor to hide the implicit public one.(€ÅáÜHöRMAJORZ
+CODE_SMELL

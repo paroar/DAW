@@ -1,0 +1,252 @@
+select a from t1,t2
+where a=b
+and c in (select d from t2 where t1.a=d)
+and b>(select count(e) from t3 where f=t1.b);
+
+create table pedido
+(
+num number(10) primary key,
+fecha date
+);
+
+create table lpedido
+(
+num number(10),
+cod char(10),
+cant number(4),
+constraint lpedido_k primary key(num,cod),
+constraint lpedido_fk1 foreign key(num)
+references pedido(num),
+constraint lpedido_fk2 foreign key(cod)
+references articulo(cod)
+);
+
+create table articulo
+(
+cod char(10) primary key,
+nom varchar(150),
+pre number(6,2),
+iva nu,ber(2)
+);
+
+create table devolucion
+(
+num number(10) primary key,
+fecha date,
+motivo varchar(500),
+numped number(10),
+cod char(10),
+constraint devolucion_fk1 foreign key(numped,cod)
+references lpedido(num,cod)
+);
+
+alter table devolucion
+modify motivo varchar(500) not null;
+
+alter table articulo
+add constraint articulo_ck1 check (pre>0 and pre>=10);
+
+alter table articulo
+add constraint articulo_ck2 check (iva in (4,10,21));
+
+alter table lpedido
+add constraint lpedido_ck1 check (cant<=1000);
+
+
+alter table lpedido drop constraint lpedido_fk1;
+
+alter table lpedido
+add constraint lpedido_fk1 foreign key(num)
+references pedido(num)
+on delete cascade;
+
+alter table devolucion drop constraint devolucion_fk1;
+
+alter table devolucion
+add constraint foreign key(numped,cod)
+references lpedido(num,cod)
+on delete cascade;
+
+select dep.nom from dep,emp
+where num=num_dp
+group by dep.nom,num
+having count(cod)=
+(
+select count(distinct cod_em_as) from gas,emp
+where cod=cod_em_as
+and
+num_dp=num
+);
+
+select nom,apes from emp,ast
+where cod=cod_em
+group by nom,apes,cod,num_dp
+having count(codcur_cr)>all
+(
+select count(codcur_cr) from emp e,ast
+where cod=cod_em
+and
+e.num_dp=emp.num_dp
+and
+emp.cod<>e.cod
+group by nom,apes,cod
+)
+and
+(
+select count(cod) from emp e,ast
+where cod=cod_em
+and
+num_dp=emp.num_dp
+)>1;
+
+
+update emp
+set sal=sal+sal*0.02
+where
+cod in
+(
+select cod from emp,gas
+where cod=cod_em_as
+group by cod,num_dp
+having sum(imp)>all
+(
+select sum(imp) from emp e,gas
+where cod=cod_em_as
+and
+e.num_dp=emp.num_dp
+and
+e.cod<>emp.cod
+group by cod
+)
+and
+(
+select count(cod) from emp e,gas
+where cod=cod_em_as
+and
+num_dp=emp.num_dp
+)>1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

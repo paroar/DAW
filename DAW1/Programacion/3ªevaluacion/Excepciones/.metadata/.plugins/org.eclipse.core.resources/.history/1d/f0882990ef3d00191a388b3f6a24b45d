@@ -1,0 +1,40 @@
+
+import java.util.Comparator;
+
+public class PruebaComparador {
+
+	public static void main(String[] args) {
+		
+		Alumno nombre=new Alumno("aaaa","bbbb","00003",3);
+		Alumno apellido=new Alumno("bbbb","aaaa","00002",2);
+		Alumno dni=new Alumno("cccc","cccc","00001",5);
+		Alumno edad=new Alumno("dddd","dddd","00005",1);
+		Alumno mezcla=new Alumno("eeee","dddd","00006",5);
+		
+		Alumno[] grupo= {nombre,apellido,dni,edad,mezcla};
+		
+		System.out.println("Sin ordenar");
+		MisMetodos.mostrarArrayObjetos(grupo);
+		
+		Comparator comparar=new CompararPorDni();
+		MisMetodos.burbujaOrdenComparator(grupo, grupo.length, comparar);
+		
+		
+		System.out.println("Ordenado por dni");
+		MisMetodos.mostrarArrayObjetos(grupo);
+		
+		Comparator comparar2=new CompararPorApellidos();
+		MisMetodos.burbujaOrdenComparator(grupo, grupo.length, comparar2);
+		
+		System.out.println("Ordenado por apellidos");
+		MisMetodos.mostrarArrayObjetos(grupo);
+		
+		Comparator comparar3=new CompararPorNombre();
+		MisMetodos.burbujaOrdenComparator(grupo, grupo.length, comparar3);
+		
+		System.out.println("Ordenado por nombre");
+		MisMetodos.mostrarArrayObjetos(grupo);
+		
+	}
+
+}

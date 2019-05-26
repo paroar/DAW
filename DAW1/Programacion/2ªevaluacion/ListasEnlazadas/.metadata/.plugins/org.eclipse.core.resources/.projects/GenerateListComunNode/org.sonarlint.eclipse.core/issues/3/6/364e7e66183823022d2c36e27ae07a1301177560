@@ -1,0 +1,13 @@
+
+ssquid:S1126M"AReplace this if-then-else statement by a single return statement.(Ê¨á´þÿÿÿÿHòRMINORZ
+CODE_SMELL
+Osquid:S3626^"Remove this redundant jump.(ûÁÝ…8Ñ»ã½‹-HóRMINORZ
+CODE_SMELL
+Gsquid:S1220""Move this file to a named package.HôRMINORZ
+CODE_SMELL
+ssquid:S1126<"AReplace this if-then-else statement by a single return statement.(¹…ÔïøÿÿÿÿHõRMINORZ
+CODE_SMELL
+Osquid:S1643"Use a StringBuilder instead.(š½«‰úÿÿÿÿHöRMINORZ
+CODE_SMELL
+nsquid:S1854j"5Remove this useless assignment to local variable "q".(á¼ˆùÿÿÿÿ8ø´¾‹-H÷RMAJORZ
+CODE_SMELL

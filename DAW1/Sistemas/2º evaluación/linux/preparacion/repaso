@@ -1,0 +1,82 @@
+#!/bin/bash
+
+ls listar dos formas de rutas(relativa/absoluta)
+ls /usr/ ruta absoluta
+ls ../../usr/ ruta relativa
+
+Todo directorio tiene en su interior 2 subdirectorios ./..
+. enlace simbólico a mí mismo
+
+~ directorio trabajo
+
+#
+mkdir crea directorios
+touch por defecto crea un archivo si no existe
+
+#
+expansión de parámetros 
+{1..3} = 1 2 3
+{1..3}/{a..c} = 1/a 1/b 1/c 2/a 2/b 2/c 3/a 3/b 3/c
+
+
+#
+rm borrar archivo
+cp copiar archivo (origen) (destino)
+
+#
+reenvío/redirección temporal fichero
+cut -c <(echo -e "Hola\nAdios")
+ls no recibe
+tuberías
+cat files | ls *files es un archivo con las direcciones
+sustitución de comandos
+ls -l $(cat files) 
+cat files | xargs ls -l
+echo -e "/etc/passwd\n/etc/group" | xargs ls -l
+
+#
+cat > kk puede crear ficheros
+
+#
+read nombre_variable
+
+#
+chmod cambiar permisos
+notación simbólica ugo +-= rwx
+octal 644
+chmod u+x list.sh puedes usarlo sin poner bash delante, pero necesita ./
+$PATH rutas de ejecutables
+ln -s enlace simbolico 
+el enlace blando apunta a una referencia(enlace) dura
+ln -s list.sh /home/surtich/bin/list
+
+#
+redirecciones
+ls > kk sobreescribe
+ls >> kk añade
+0 entrada
+1 salida estándar
+2 salida con error
+ls -l 1> kk
+ls -l 2> kk
+2> /dev/null
+
+#
+Errores
+como termina comando $? 0=exito !=0 error
+
+exit 1
+comandos dependen de si el anterior comando tiene exito o no ejemplo if
+
+if ls $1 1>/dev/null 2>&1 sdsdsds ; then 
+    echo ok
+else
+    echo ko
+fi
+
+if no usa condiciones, usa comandos, test es el usa condiciones no if
+
+ls ___ && echo ok || echo ko
+
+
+

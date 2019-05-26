@@ -1,0 +1,44 @@
+
+public class Hora {
+
+	private int hora;
+	private int min;
+	private int sec;
+	
+	public Hora(int hora, int min, int sec) {
+		super();
+		this.hora = hora;
+		this.min = min;
+		this.sec = sec;
+	}
+	
+	public boolean horaCorrecta() {
+		if((this.hora<24 && this.hora >= 0) && (this.min<60 && this.min >= 0) && (this.sec<60 && this.sec >= 0)) {
+			return true;
+		}else{
+			return false;
+		}	
+	}
+	
+	public Hora nuevaHora() {
+		this.sec +=1;
+		if(this.sec == 60) {
+			this.sec = 0;
+			this.min += 1;
+		}
+		if(this.min == 60) {
+			this.min = 0;
+			this.hora +=1;
+		}
+		if(this.hora == 24) {
+			this.hora = 0;
+		}
+		return this;
+	}
+	
+	public String toString() {
+		return ''+this.hora+' '+this.min+' '+this.sec;
+	}
+
+	
+}

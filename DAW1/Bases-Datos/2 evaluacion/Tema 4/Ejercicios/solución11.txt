@@ -1,0 +1,116 @@
+1.Número de cursos realizados de cada empleado.
+
+select nom, apes, count(codcur_cr) from a.ast left join a.emp
+on cod = cod_em
+group by nom, apes
+
+select nom, apes, count(codcur_cr) from a.emp left join a.ast
+on cod = cod_em
+group by nom, apes
+---------------------------------------------------------------------------------------------------------
+2.Total de horas extras por empleado.
+
+select nom, apes, sum(hor) from a.emp left join a.hex
+on cod = cod_em
+group by nom, apes
+
+select nom, apes, sum(hor) from a.hex right join a.emp
+on cod = cod_em
+group by nom, apes
+---------------------------------------------------------------------------------------------------------
+3.Total de gastos de cada tipo.
+
+select den, sum(imp) from a.tgas left join a.gas
+on codgas_tg = codgas
+group by den
+
+select den, sum(imp) from a.gas right join a.tgas
+on codgas_tg = codgas
+group by den
+---------------------------------------------------------------------------------------------------------
+4.Total de gastos por departamento.
+
+select dep.nom, sum(imp) from a.dep left join(
+						select * from a.emp, a.gas
+						where
+						(
+						 cod = cod_em_as
+						)
+					     )
+on num = num_dp
+group by dep.nom
+
+select dep.nom, sum(imp) from (	select * from a.emp, a.gas
+				where
+				(
+				 cod = cod_em
+				 and
+				)
+			      )
+right join a.dep
+on num = num_dp
+group by dep.nom
+---------------------------------------------------------------------------------------------------------
+5.Total de faltas por departamento.
+
+select dep.nom, sum(fal) from a.dep left join (
+						select * from a.emp, a.ast
+						where
+						(
+						 cod = cod_em_as
+						)
+					      )
+on num = num_dp
+group by dep.nom
+
+select dep.nom, sum(fal) from (
+				select * from a.emp, a.ast
+				where
+				(
+				 cod = cod_em
+				)
+			      )
+right join a.dep
+on num = num_dp
+group by dep.nom
+---------------------------------------------------------------------------------------------------------
+6.Número de cursos impartidos en cada departamento
+
+select dep.nom, count(distinct codcur_cr) from a.dep left join(
+								select * from a.emp, a.ast
+								where
+								(
+								 cod = cod_em
+								)
+							      )
+on num = num_dp
+group by dep.nom
+
+7.
+---------------------------------------------------------------------------------------------------------
+8. Número de cursos realizados de cada empleado que no sean del departamento financiero
+
+select s.nom, s.apes, count(s.codcur_cr) from (
+						select * from a.dep right join a.emp
+						on num = num_dp 
+						where
+						dep.nom <> 'Comercial'
+						or
+						dep.nom is null
+					    ) as e
+left join a.ast
+on e.cod = cod_em
+as s
+group by s.nom, s.apes
+---------------------------------------------------------------------------------------------------------
+9. Total de gastos de los departamentos con menos de 5 empleados y menos de 500€ de gastos totales
+
+select dep.nom from (a.dep left join a.emp on num = num_dp) left join a.gas 
+on cod = cod_em_as
+group by dep.nom
+having count(distinct cod)<5 and (sum(imp) < 500 or sum(imp) is null)
+
+
+
+
+

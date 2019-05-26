@@ -1,0 +1,13 @@
+
+psquid:UselessImportCheck"/Remove this unused import 'java.util.Iterator'.(¥ÍòÕ8ö¨Æ–•-HÍRMINORZ
+CODE_SMELL
+Hsquid:S1643"Use a StringBuilder instead.(€­rHéRMINORZ
+CODE_SMELL
+Nsquid:S1220""Move this file to a named package.8ö–•-H™RMINORZ
+CODE_SMELL
+Fsquid:S1700"Rename field "graduacion"(¥é€ŞHëRMAJORZ
+CODE_SMELL
+\squid:S1172"(Remove this unused method parameter "c".(ÛÑè§8ú†Î–•-H×RMAJORZ
+CODE_SMELL
+nsquid:UselessImportCheck".Remove this unused import 'java.util.TreeSet'.(½îB8ú†Î–•-HØRMINORZ
+CODE_SMELL

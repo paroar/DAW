@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="catalogo">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="libro" maxOccurs="unbounded"/>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="titulo"/>
+              <xs:element name="autor"/>
+              <xs:element name="fecha"/>
+            </xs:sequence>
+            <xs:attribute name="categoria" type="xs:string"/>
+            <xs:attribute name="enstock" type="xs:string"/>
+            <xs:attribute name="revisor" type="xs:string"/>
+          </xs:complexType>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

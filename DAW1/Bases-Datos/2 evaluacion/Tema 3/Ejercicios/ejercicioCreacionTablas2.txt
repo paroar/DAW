@@ -1,0 +1,110 @@
+create table oficina2
+(
+numof number(3,0),
+ciudad varchar(30),
+constraint oficina2_pk primary key (numof)
+);
+
+create table vehiculo
+(
+mat char(7),
+marca varchar(30),
+modelo varchar(30),
+constraint vehiculo_pk primary key (mat) 
+);
+
+create table cliente2
+(
+dni char(10),
+apes varchar(30),
+nom varchar(20),
+constraint cliente2_pk primary key (dni)
+);
+
+create table alquiler
+(
+mat char(7),
+dni char(10),
+fecha date,
+constraint alquiler_pk primary key (mat,dni),
+constraint alquiler_fk1 foreign key (mat) references vehiculo (mat),
+constraint alquiler_fk2 foreign key (dni) references cliente2 (dni)
+);
+
+create table devolucion
+(
+mat char(7),
+dni char(10),
+fecha date,
+numof number(3,0),
+constraint devolucion_pk primary key (mat,dni),
+constraint devolucion_fk1 foreign key (mat,dni) references alquiler (mat,dni),
+constraint devolucion_fk2 foreign key (numof) references oficina2 (numof)
+);
+
+-------------------------------------------------------------------------------------------------
+
+alter table cliente2
+add telefono char(9) constraint cliente2_nn1 not null;
+
+alter table vehiculo
+add combustible char(8)
+add fechacompra date
+add puertas number(1,0);
+
+alter table oficina2
+drop column ciudad;
+
+alter table oficina2
+add direccion varchar(50)
+add poblacion varchar(50)
+add provincia varchar(50)
+add cp char(5);
+
+alter table vehiculo
+add constraint vehiculo_ck1 check (puertas in ('3','5'));
+
+alter table vehiculo
+add constraint vehiculo_ck2 check (combustible in ('Diesel','Sin Plomo'));
+
+alter table incidencia
+modify id integer;
+
+alter table incidencia
+add tipo char(1)
+add mat char(7);
+
+alter table incidencia
+add constraint incidencia_ck5 check (tipo in ('A','R','F'));
+
+alter table incidencia
+add constraint incidencia_fk1 foreign key (mat) references vehiculo (mat);
+
+alter table cliente2
+drop constraint cliente2_nn1;
+
+alter table oficina2
+add constraint oficina_ck1 check (cp>='01000' and cp<='52999');
+
+------------------------------------------------------------------------------------------------
+
+alter table alquiler
+drop constraint alquiler_fk1
+drop constraint alquiler_fk2;
+
+alter table devolucion
+drop constraint devolucion_fk1
+drop constraint devolucion_fk2;
+
+alter table alquiler
+add constraint alquiler_fk1 foreign key (mat) references vehiculo (mat) on delete cascade;
+
+alter table alquiler
+add constraint alquiler_fk2 foreign key (dni) references cliente2 (dni) on delete cascade;
+
+alter table devolucion
+add constraint devolucion_fk1 foreign key (mat,dni) references alquiler (mat,dni) on delete set null;
+
+alter table devolucion
+add constraint devolucion_fk2 foreign key (numof) references oficina2 (numof) on delete set null;
+

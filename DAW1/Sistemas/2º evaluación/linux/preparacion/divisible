@@ -1,0 +1,12 @@
+
+#!/bin/bash
+
+nums=$(echo $* | tr ' ' ':' | cut -d: -f2- | tr ':' ' ')
+
+for i in $nums; do
+mod=$(($i%$1))
+if [ $mod -eq 0 ]; then
+    echo $i
+fi
+done
+

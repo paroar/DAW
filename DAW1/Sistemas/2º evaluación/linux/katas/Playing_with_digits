@@ -1,0 +1,28 @@
+#!/bin/bash
+
+sum_dig_pow(){
+    number=$1
+    exp=$2
+    sum=0
+    result=$(echo $number | grep -o .)
+    for dig in $result ; do
+        sum=$(($sum+$(echo $dig^$exp | bc)))
+        let exp++
+    done
+    echo $sum
+}
+
+dig_pow(){
+    number=$1
+    exp=$2
+    sum_total=$(sum_dig_pow $number $exp)
+    k=$(echo "scale=4;$sum_total/$number" | bc)
+    integer=$(echo $k | tr -d '0' | grep -o "\.$")
+    if [ -z $integer ] ; then
+        echo -1
+    else
+        echo "${k::-5}"
+    fi
+}
+
+dig_pow $1 $2

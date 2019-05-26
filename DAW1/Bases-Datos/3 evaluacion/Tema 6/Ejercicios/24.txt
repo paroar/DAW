@@ -1,0 +1,31 @@
+Escribe un procedimiento almacenado que reciba como parámetro de entrada el código de empleado 
+y devuelva el nombre completo y un booleano que es verdadero en caso de que el empleado exista 
+en la base de datos y falso en caso contrario.
+
+--------------------------------------------------------------------------------------------
+
+create or replace procedure proc24
+
+(
+ p_cod in a.emp.cod%type,
+ p_nom out a.emp.nom%type,
+ p_apes out a.emp.apes%type,
+ p_flag out boolean
+)
+
+is
+
+begin
+
+ select nom,apes into p_nom,p_apes from a.emp
+ where cod=p_cod;
+ 
+ p_flag:=true;
+
+ exception
+  when no_data_found
+  then
+   p_flag:=false;
+
+end proc24;
+

@@ -1,0 +1,23 @@
+img {
+    width: 100px;
+    height: 100px;
+}
+
+.vertical img {
+    float: left;
+    clear: left;
+    margin-top: 15px;
+}
+
+.horizontal {
+    margin-left: 100px;
+}
+
+.horizontal img {
+    margin-left: 70px;
+}
+
+iframe {
+    background: transparent;
+}
+

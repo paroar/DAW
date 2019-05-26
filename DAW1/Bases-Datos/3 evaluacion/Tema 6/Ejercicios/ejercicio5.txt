@@ -1,0 +1,78 @@
+Escribe un bloque anónimo que visualice la siguiente información de todos los empleados de la bases de datos:
+
+INFORME DE EMPLEADOS
+
+Departamento:
+Nombre:
+Salario neto:
+
+Si el empleado no pertenece a ningún departamento, en lugar del nombre vamos a visualizar el mensaje sin asignar.
+
+
+
+====================================================
+
+declare
+
+--cursores y variables de cursor
+
+cursor cur_informe is
+	select dep.nom as dep_nom, emp.nom as emp_nom, sal-(sal*irpf)/100 as sal_neto from a.dep, a.emp
+	where
+	(
+	num=num_dp
+	);
+
+cursor cur_sindep is
+	select num_dp, nom, sal-(sal*irpf)/100 as sal_neto from a.emp
+	where
+	(
+	num_dp is null
+	);
+
+--variables
+
+v_informe cur_informe%rowtype;
+
+v_sindep cur_sindep%rowtype;
+
+begin
+
+	open cur_informe;
+
+	loop
+	
+	fetch cur_informe into v_informe;
+
+	exit when cur_informe%notfound;
+
+	dbms_output.put_line('Departamento:'||v_informe.dep_nom);
+	dbms_output.put_line('Nombre:'||v_informe.emp_nom);
+	dbms_output.put_line('Salario neto:'||v_informe.sal_neto);
+	
+	end loop;
+
+	close cur_informe;
+
+
+
+
+	open cur_sindep;
+	
+	loop
+	
+	fetch cur_sindep into v_sindep;
+
+	exit when cur_sindep%notfound;
+
+	dbms_output.put_line('Departamento:sin asignar');
+	dbms_output.put_line('Nombre:'||v_sindep.nom);
+	dbms_output.put_line('Salario Neto:'||v_sindep.sal_neto);
+	
+	end loop;
+
+	close cur_sindep;
+	
+
+	
+end;

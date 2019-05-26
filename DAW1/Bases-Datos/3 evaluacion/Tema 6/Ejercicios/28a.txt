@@ -1,0 +1,15 @@
+declare
+
+v_cod a.emp.cod%type;
+v_gas number(7,2);
+v_emp number(3);
+
+begin
+
+v_cod:='025100';
+proc28(v_cod,v_gas,v_emp);
+
+dbms_output.put_line('Gastos:'||v_gas);
+dbms_output.put_line('Empleados con menos gastos:'||v_emp);
+
+end; 

@@ -1,0 +1,35 @@
+alter table alquiler
+drop constraint alquiler_fk1;
+
+alter table alquiler
+drop constraint alquiler_fk2;
+
+alter table devolucion
+drop constraint devolucion_fk1;
+
+alter table devolucion
+drop constraint devolucion_fk2;
+
+alter table alquiler
+add constraint alquiler_fk1 foreign key(mat)
+references vehiculo(mat)
+on delete cascade;
+
+alter table alquiler
+add constraint alquiler_fk2 foreign key(dni)
+references cliente(dni)
+on delete cascade;
+
+alter table devolucion
+add constraint devolucion_fk1 foreign key(mat,dni)
+references alquiler(mat,dni)
+on delete set null;
+
+alter table devolucion
+add constraint devolucion_fk2 foreign key(numof)
+references oficina(numof)
+on delete set null;
+
+
+
+

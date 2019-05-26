@@ -1,0 +1,7 @@
+
+public class Array {
+
+	public static void ordenar(int[] a) {
+		
+	}
+}

@@ -1,0 +1,33 @@
+import static org.junit.Assert.*;
+
+import java.util.Collection;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+@RunWith(Parameterized.class)
+public class NuevaHoraTest {
+
+	private int hora;
+	private int min;
+	private int sec;
+	
+	public NuevaHoraTest(int hora, int min, int sec) {
+		
+	}
+	
+	@Test
+	public void testNuevaHora() {
+		Hora h = new Hora(1,2,3);
+		h.nuevaHora();
+		assertEquals(0,h.compareTo(new Hora(1,2,4)));
+	}
+	
+	@Parameters
+	public static Collection<Object[]> horas(){
+		
+	}
+
+}

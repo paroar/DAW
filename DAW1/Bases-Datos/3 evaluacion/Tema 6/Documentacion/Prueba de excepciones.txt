@@ -1,0 +1,122 @@
+-- VALUE_ERROR
+
+declare
+
+ v number(2,0);
+
+begin
+
+ v:=100;
+
+exception
+
+ when value_error
+  then
+   dbms_output.put_line('value_error');
+
+end;
+
+-- INVALID_NUMBER
+
+create table t
+(
+ cod number(3,0),
+ den char(20)
+);
+
+
+begin
+
+ insert into t values ('abc','Papel DIN A4');
+ commit;
+
+exception
+
+ when invalid_number
+  then
+   dbms_output.put_line('invalid_number');
+
+end;
+
+-- ZERO_DIVIDE
+
+declare
+
+ v number(5,2);
+
+begin
+
+ v:=7/0;
+
+exception
+
+ when zero_divide
+  then
+   dbms_output.put_line('zero_divide');
+
+end;
+
+-- CURSOR_ALREADY_OPEN
+
+declare
+
+ cursor c is select * from a.dep;
+
+ v c%rowtype;
+
+begin
+
+ open c;
+
+ fetch c into v;
+
+ open c;
+
+exception
+
+ when cursor_already_open
+  then
+   dbms_output.put_line('cursor_already_open');
+
+end;
+
+-- INVALID_CURSOR
+
+
+declare
+
+ cursor c is select * from a.dep;
+
+ v c%rowtype;
+
+begin
+
+ fetch c into v;
+
+exception
+
+ when invalid_cursor
+  then
+   dbms_output.put_line('invalid_cursor');
+
+end;
+
+-- OTHERS
+
+declare
+
+ v number(2,0);
+
+begin
+
+ v:=100;
+
+exception
+
+ when others
+  then
+   dbms_output.put_line('Excepción comodín');
+
+end;
+
+

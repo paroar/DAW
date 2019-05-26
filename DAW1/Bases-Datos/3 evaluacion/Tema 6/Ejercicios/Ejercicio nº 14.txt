@@ -1,0 +1,12 @@
+Escribe un bloque anónimo que visualice la siguiente información para los empleados que han asistido a cursos:
+
+Nombre: -- del empleado
+Curso: -- nombre del curso
+
+Relación de gastos:
+Tipo: -- de gasto
+Fecha:
+Importe:
+
+======================================================================================================
+

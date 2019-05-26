@@ -1,0 +1,29 @@
+Instrucción condicional simple:
+
+ if condicion
+  then
+   instrucciones;
+ end if;
+
+Instrucción condicional doble:
+
+ if condicion
+  then
+   instrucciones;
+  else
+   instrucciones;
+ end if;
+
+Instrucción if-elsif
+
+ if condicion
+  then
+   instrucciones;
+  elsif condicion
+   then
+    instrucciones
+   elsif condicion
+    then
+     instrucciones
+   ...
+  end if;

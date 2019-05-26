@@ -1,0 +1,45 @@
+Escribe un bloque anónimo que almacene la siguiente información del empleado de código 025100 en una variable de tipo registro:
+
+Nombre completo, nombre del departamento, salario neto, importe de la retención, gastos de formación y número de cursos realizados.
+
+
+declare
+ 
+ type r_empleado is record
+ (
+  nombre char(51),
+  dep a.dep.nom%type,
+  salneto a.emp.sal%type,
+  retencion number(5,2),
+  gastos number(6,2),
+  cursos number(3,0)
+ );
+
+ v_empleado r_empleado;
+
+begin
+
+ select nom||' '||apes,sal*(1-irpf/100),sal*irpf/100
+ into v_empleado.nombre,v_empleado.salneto,v_empleado.retencion
+ from a.emp where cod='025100';
+
+ select count(codcur_cr) into v_empleado.cursos from a.ast
+ where cod_em='025100';
+
+ select sum(imp) into v_empleado.gastos from a.gas
+ where cod_em_as='025100';
+
+ if v_empleado.gastos is null
+  then
+   v_empleado.gastos:=0;
+ end if;
+
+ select nom into v_empleado.dep from a.dep
+ where num=(select num_dp from a.emp where cod='025100');
+
+end;
+
+
+
+
+

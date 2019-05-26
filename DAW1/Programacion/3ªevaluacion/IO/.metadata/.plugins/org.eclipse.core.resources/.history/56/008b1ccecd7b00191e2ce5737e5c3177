@@ -1,0 +1,14 @@
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class HoraCorrectaTest {
+
+	@Test
+	public void testHoraCorrecta() {
+		Hora h = new Hora(1,2,3);
+		boolean flag = h.horaCorrecta();
+		assertTrue(flag);
+	}
+
+}

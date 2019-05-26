@@ -1,0 +1,56 @@
+1.
+
+Nombre de los cursos, ciudades donde se han impartido y fecha de finalización ordenados por ciudad y por nombre de curso descendente.
+
+SELECT NOM,LUG,FFIN FROM A.CUR
+ORDER BY 2,1 DESC;
+
+2. 
+
+Consulta anterior ordenada por fecha de finalizacion descendente y ciudad.
+
+SELECT NOM,LUG,FFIN FROM A.CUR
+ORDER BY 3 DESC,2;
+
+3.
+
+Fechas y horas extras ordenadas por fecha y hora de forma decreciente.
+
+SELECT FEC,HOR FROM A.HEX
+ORDER BY 1,2 DESC;
+
+4.
+
+Códigos de curso, códigos de empleado y faltas de asistencia ordenados por código de curso, código de empleado descendente y faltas de asistencia.
+
+SELECT CODCUR_CR,COD_EM,FAL FROM A.AST
+ORDER BY 1,2 DESC,3;
+
+5.
+
+Número de departamento, apellidos, nombre, importe de la retención de los empleados ordenados por número de departamento descendente y de mayor a menor importe de retención.
+
+SELECT NUM_DP,APES,NOM,IRPF*SAL/100 AS RET FROM A.EMP
+ORDER BY 1 DESC,4 DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+Relación de fechas e importes de los gastos de los empleados que tienen mas de 10 faltas.
+
+select fec,imp from a.gas,a.ast
+where (cod_em=cod_em_as and codcur_cr=codcur_cr_as)
+and fal>10;
+
+Relación de códigos de empleado que tienen gastos y horas extras.
+
+select distinct cod_em from a.gas,a.hex
+where cod_em=cod_em_as;

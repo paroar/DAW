@@ -1,0 +1,146 @@
+create table libro
+(
+isbn char(13) primary key,
+titulo varchar(100),
+genero varchar(30),
+ejemplares number(1,0),
+localizacion char(6),
+fecalta date
+);
+
+create table libro
+(
+isbn char(13),
+titulo varchar(100),
+editorial varchar(50),
+genero varchar(30),
+ejemplares number(1,0),
+localizacion char(6),
+fecalta date,
+constraint libro_pk primary key(isbn)
+);
+
+create table autor
+(
+codigo char(6),
+constraint autor_pk primary key(codigo),
+nombre varchar(30),
+apellidos varchar(50)
+);
+
+create table escribe
+(
+isbn char(13),
+codigo char(6),
+constraint escribe_pk primary key(isbn,codigo),
+constraint escribe_fk1 foreign key(isbn)
+references libro,
+constraint escribe_fk2 foreign key(codigo)
+references autor
+);
+
+create table socio
+(
+dni char(9),
+nombre varchar(20),
+apellidos varchar(30),
+fecnac date,
+fecalta date,
+email varchar(60),
+movil char(9),
+constraint socio_pk primary key(dni)
+);
+
+create table prestamo
+(
+numero number(6,0),
+fentrega date,
+fdevolucion date,
+dni char(9),
+isbn char(13),
+constraint prestamo_fk1 foreign key(dni) 
+references socio,
+constraint prestamo_fk2 foreign key(isbn)
+references libro,
+constraint prestamo_pk primary key(numero)
+);
+
+create table t
+(
+letra char(1) constraint t_ck1 check (letra in ('A','D','F')),
+numero number(2,0) constraint t_ck2 check (numero>10 and numero<20)
+);
+
+create table tt
+(
+atr1 char(2) constraint tt_nn1 not null,
+atr2 number(3,0) not null
+);
+
+create table tt
+(
+atr1 char(2) constraint tt_nn1 not null,
+atr2 number(3,0) constraint tt_un1 unique
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

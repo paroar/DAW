@@ -1,0 +1,54 @@
+#!/bin/bash
+
+read_date(){
+    echo -n "Introduce the year: "
+    read year
+    echo -n "Introduce the month: "
+    read month
+    echo -n "Introduce the day: "
+    read day
+    echo "-----------------------------"
+}
+
+double_digits(){
+    echo -n "Chose if you want double digits on days and months (y/n): "
+    read double
+    
+    if [ $double == "y" ]; then
+        month=$(echo "0$month" | rev | cut -c1,2 | rev)
+        day=$(echo "0$day" | rev | cut -c1,2 | rev)
+    elif [ $double == "n" ]; then
+        month=$(($month+0))
+        day=$(($day+0))
+    else
+        echo "Invalid input"
+        double_digits
+    fi
+    echo "-----------------------------"
+}
+
+date_format(){
+    echo -n "Chose date format 1:(MM/DD/AA) 2:(DD/MM/AA) 3:(AA/MM/DD) (1/2/3): "
+    read format
+
+    case "$format" in
+    "1")
+        output="$month/$day/$year"
+        ;;
+    "2")
+        output="$day/$month/$year"
+        ;;
+    "3")
+        output="$year/$month/$day"
+        ;;
+    *)
+        echo "No valid format, chose one of the above options:"
+        date_format
+        ;;
+    esac
+    echo -e "-----------------------------\n$output"
+}
+
+read_date 
+double_digits 
+date_format

@@ -1,0 +1,55 @@
+body{
+	background-color: hsl(175, 40%, 50%);
+	font-family: sans-serif;
+}
+
+.intro{
+	background-color: hsl(175, 40%, 50%);
+	text-align: center;
+}
+
+nav{
+	text-align: center;
+	margin: 50px;
+}
+
+a{
+	text-decoration: none;
+	font-size: 25px;
+	margin: 20px;
+}
+
+div{
+	background-color: white;
+	margin: 10px;
+	margin-right: 15%; 
+	margin-left: 15%;
+}
+
+.caja1{
+	border: 15px solid hsl(20, 100%, 45%);
+	padding: 20px;
+	overflow: auto;
+}
+
+.caja2{
+	border: 15px solid hsl(35, 100%, 60%);
+	padding: 20px;
+	overflow: auto;
+}
+
+.caja1 img{
+	float: left;
+	margin: 10px;
+	border: 15px solid hsl(35, 100%, 60%);
+	padding: 15px;
+	background-color: hsl(20, 100%, 45%); 
+}
+
+.caja2 img{
+	float: right;
+	margin: 10px;
+	border: 15px solid hsl(20, 100%, 45%);
+	padding: 15px;
+	background-color: hsl(35, 100%, 60%);  
+}

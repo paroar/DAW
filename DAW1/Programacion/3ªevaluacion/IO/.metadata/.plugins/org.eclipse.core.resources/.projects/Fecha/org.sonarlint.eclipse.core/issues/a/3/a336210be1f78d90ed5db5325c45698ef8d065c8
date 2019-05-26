@@ -1,0 +1,20 @@
+
+Lsquid:S1659f" Declare "an" on a separate line.(ò…ázHËRMINORZ
+CODE_SMELL
+Lsquid:S1659?"Declare "m" on a separate line.(¦³Ž×HÌRMINORZ
+CODE_SMELL
+asquid:S10667"/Merge this if statement with the enclosing one.(¬Œ’ëÿÿÿÿÿHÍRMAJORZ
+CODE_SMELL
+Lsquid:S1659?"Declare "a" on a separate line.(¦³Ž×HÎRMINORZ
+CODE_SMELL
+Ksquid:S1659f"Declare "m" on a separate line.(ò…ázHÏRMINORZ
+CODE_SMELL
+Gsquid:S1220""Move this file to a named package.HÐRMINORZ
+CODE_SMELL
+Ksquid:S1659f"Declare "a" on a separate line.(ò…ázHÑRMINORZ
+CODE_SMELL
+osquid:S25837"DChange this condition so that it does not always evaluate to "false"(¬Œ’ëÿÿÿÿÿHÒRMAJORZBUG
+ysquid:S1871\"LThis branch's code block is the same as the block for the branch on line 89.(¤ŠèÒHÓRMAJORZ
+CODE_SMELL
+\squid:S1066p"/Merge this if statement with the enclosing one.(¨ñˆ‚HÔRMAJORZ
+CODE_SMELL

@@ -1,0 +1,8 @@
+
+Fsquid:S1220""Move this file to a named package.HRMINORZ
+CODE_SMELL
+msquid:S1126"AReplace this if-then-else statement by a single return statement.(…áÏÃHRMINORZ
+CODE_SMELL
+Isquid:S2097"Add a type test to this method.(Ý¢êÍýÿÿÿÿHRMINORZBUG
+zsquid:S1206"PThis class overrides "equals()" and should therefore also override "hashCode()".(Ý¢êÍýÿÿÿÿHRMINORZBUG
+dsquid:S2259"?A "NullPointerException" could be thrown; "p" is nullable here.(…áÏÃHRMAJORZBUG

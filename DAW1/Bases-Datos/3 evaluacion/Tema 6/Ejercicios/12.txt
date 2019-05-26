@@ -1,0 +1,96 @@
+Escribe un bloque anónimo que visualice la siguiente información para todos los cursos con asistentes:
+
+Nombre: --del curso
+Duración:
+Ciudad:
+
+Relación de asistentes: --para cada asistente calcular lo siguiente
+Nombre: --del empleado
+Faltas:
+Certificado: --si o no
+Gastos:
+
+======================================================================================================
+set serveroutput on size 1000000;
+set timing on;
+
+declare
+
+--CURSOR Y VARIABLES DE CURSOR
+
+	cursor c_cur is 
+		select distinct codcur,nom,dur,lug from a.cur,a.ast where codcur=codcur_cr;
+
+	v_cur c_cur%rowtype;
+
+	cursor c_ast (p_codcur a.ast.codcur_cr%type) is 
+		select cod_em,fal,cer from a.ast where p_codcur=codcur_cr;
+
+	v_ast c_ast%rowtype;
+
+--VARIABLES
+	
+	v_nomEmp a.emp.nom%type;
+	v_apesEmp a.emp.apes%type;
+	v_gas number(7,2);
+	v_cer char(2);
+
+begin
+
+	open c_cur;
+	fetch c_cur into v_cur;
+	while c_cur%found loop
+		
+		--NOMBRE,DURACION,LUGAR CURSO
+
+		dbms_output.put_line('=========================================================');
+		dbms_output.put_line('Nombre:'||v_cur.nom);
+		dbms_output.put_line('Duración:'||v_cur.dur);
+		dbms_output.put_line('Ciudad:'||v_cur.lug);
+		dbms_output.put_line('=====================');
+
+		--PARAMETRO
+
+		open c_ast(v_cur.codcur);
+		fetch c_ast into v_ast;
+		while c_ast%found loop
+			
+			--NOMBRE EMPLEADO
+
+			select nom,apes into v_nomEmp,v_apesEmp from a.emp
+			where cod=v_ast.cod_em;
+
+			--GASTOS EMPLEADO
+
+			select sum(imp) into v_gas from a.gas
+			where cod_em_as=v_ast.cod_em and codcur_cr_as=v_cur.codcur;
+
+			--TRANSFORMACION CER
+
+			if v_ast.cer='S'
+				then
+				v_cer:='si';
+    			else
+       				v_cer:='no';
+    			end if;
+
+			--COMPROBACION SUM NULL
+
+			if v_gas is null
+				then
+				v_gas:=0;
+			end if;
+
+			dbms_output.put_line('Nombre:'||v_nomEmp||' '||v_apesEmp);
+			dbms_output.put_line('Faltas:'||v_ast.fal);
+			dbms_output.put_line('Certificado:'||v_cer);
+			dbms_output.put_line('Gastos:'||v_gas);
+			dbms_output.put_line(chr(10));
+
+			fetch c_ast into v_ast;
+		end loop;
+		close c_ast;
+		fetch c_cur into v_cur;
+	end loop;
+	close c_cur;
+end;

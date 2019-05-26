@@ -1,0 +1,35 @@
+#Script que dado un nº calcule si es primo o no es primo. 0 es primo, 1 no.
+#!bin/bash
+
+num=$1
+divisor=2
+divisores=0
+
+esPrimo() {
+
+while [ $divisor -le $num ]
+do
+    resto=$(expr $num % $divisor)
+    if [ $resto -eq 0 ] 
+    then
+        let divisores++
+    else
+        let divisor++
+    fi
+done
+
+if [ $divisores -le 2 ]
+then
+    echo 0
+else
+    echo 1
+fi
+
+exit
+}
+
+esPrimo 3
+
+#modificarlo apra que reciba varios numeros y devuelva los que son primos
+#scrip recibe parametro num y muestre tabla de multiplicar
+#recibe serie de num y muestra tablas de multiplicar

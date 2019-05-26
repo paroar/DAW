@@ -1,0 +1,3 @@
+http://172.16.171.169:5560/isqlplus
+
+Cadena de conexión : daw1

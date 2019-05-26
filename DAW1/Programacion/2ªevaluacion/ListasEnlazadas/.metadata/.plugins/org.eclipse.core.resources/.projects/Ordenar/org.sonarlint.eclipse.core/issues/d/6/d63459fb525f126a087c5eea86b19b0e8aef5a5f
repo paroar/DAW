@@ -1,0 +1,5 @@
+
+Gsquid:S1220""Move this file to a named package.H‘RMINORZ
+CODE_SMELL
+fsquid:S1118":Add a private constructor to hide the implicit public one.(‰ÿ§<H’RMAJORZ
+CODE_SMELL

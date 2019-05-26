@@ -1,0 +1,94 @@
+Escribe un bloque anónimo que visualice la siguiente información para los tipos de gastos orgininados por los departamentos:
+
+Tipo de gasto: 
+
+Departamento: 
+Total de gasto:
+Importe medio:
+Importe máximo:
+Importe mínimo:
+
+======================================================================================================
+
+declare
+
+ -- Cursores y variables de cursor
+
+ cursor c_tgas is select codgas,den from a.tgas
+ where codgas in (select codgas_tg from a.gas); -- solo los que han originado gastos
+
+ v_tgas c_tgas%rowtype;
+
+ cursor c_dep is select distinct num_dp from a.emp
+ where cod in (select cod_em_as from a.gas);    -- solo los que han originado gastos
+
+ v_dep c_dep%rowtype;
+
+ -- Variables
+
+ v_tot number(7,2);
+ v_med number(6,2);
+ v_min number(6,2);
+ v_max number(6,2);
+ v_nom a.dep.nom%type;
+
+begin
+
+ open c_tgas;
+ 
+ loop
+
+  fetch c_tgas into v_tgas;
+  exit when c_tgas%notfound;
+  dbms_output.put_line('Tipo de gasto:'||v_tgas.den);
+  dbms_output.put_line(chr(10));
+
+  open c_dep;  
+
+  loop
+
+   fetch c_dep into v_dep;
+   exit when c_dep%notfound;
+   
+   -- comprobar si el departamento v_dep.num_dp tiene gastos del tipo v_tgas.codgas
+   
+   select sum(imp) into v_tot from a.emp,a.gas
+   where cod=cod_em_as
+   and
+   num_dp=v_dep.num_dp
+   and
+   codgas_tg=v_tgas.codgas;
+
+   if v_tot is not null
+    then
+     select nom into v_nom from a.dep where num=v_dep.num_dp;
+     dbms_output.put_line('Departamento:'||v_nom);
+
+     -- calcular el resto de datos
+
+     select avg(imp),min(imp),max(imp) into v_med,v_min,v_max from a.emp,a.gas
+     where cod=cod_em_as
+     and
+     num_dp=v_dep.num_dp
+     and
+     codgas_tg=v_tgas.codgas;
+
+     -- visualizar datos
+
+     dbms_output.put_line('Total de gasto:'||v_tot);
+     dbms_output.put_line('Importe medio:'||v_med);
+     dbms_output.put_line('Importe máximo:'||v_max);
+     dbms_output.put_line('Importe mínimo:'||v_min);
+     dbms_output.put_line(chr(10));
+
+   end if;
+
+  end loop;
+
+  close c_dep;
+
+ end loop;
+ 
+ close c_tgas;
+
+end;

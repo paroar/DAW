@@ -1,0 +1,25 @@
+table, td, th{
+	border:2px solid red;
+	border-collapse: collapse;
+	padding: 5px 20px;
+}
+
+thead{
+	background-color: yellow;
+}
+
+tbody > tr > th{
+	background-color: lightblue;
+}
+
+tbody > tr > td{
+	background-color: burlywood;
+}
+
+.last {
+	background-color: lightgreen;
+}
+
+tfoot{
+	background-color: cyan;
+}

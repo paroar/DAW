@@ -1,0 +1,132 @@
+- Nombre de los departamentos en los cuales más de dos empleados tienen más de tres gastos.
+
+select dep.nom from a.dep,a.emp,a.gas
+where
+ (
+  num=num_dp
+  and
+  cod=cod_em_as
+ )
+group by dep.nom,cod
+having count(distinct cod);
+
+-- Aplazada
+
+- Nombre de los departamentos en los cuales los empleados tienen más de tres gastos.
+
+select distinct dep.nom from a.dep,a.emp,a.gas
+where
+ (
+  num=num_dp
+  and
+  cod=cod_em_as
+ )
+group by dep.nom,cod
+having count(id_gas)>3;
+
+- Nombre y apellidos de los empleados que han recibido formación de empresas que tienen más de tres profesores.
+
+-- Aplazada
+
+- Nombre de los departamentos que tienen más de cinco gastos en cursos de más de treinta horas de duración.
+
+ select distinct dep.nom from a.dep,a.emp,a.cur,a.gas
+ where
+  (
+   num=num_dp
+   and
+   codcur=codcur_cr_as
+   and
+   cod=cod_em_as
+   and
+   dur>30
+  ) 
+  group by dep.nom,codcur
+  having count(imp)>5;
+
+- Nombre de las empresas que formaron a diez o más empleados sin obteber certificado.
+
+  select emp from a.pro,a.ses s,a.ast a
+  where
+   (
+    codpro=codpro_pr
+    and
+    s.codcur_cr=a.codcur_cr
+    and
+    cer='N'
+   )
+   group by emp
+   having count(distinct cod_em)>=10;
+
+- Nombre de los cursos que han generado un total de gasto entre doscientos y cuatrocientos euros.
+
+  select cur.nom from a.cur,a.gas
+  where
+   (
+    codcur=codcur_cr_as
+   )
+   group by cur.nom
+   having sum(imp) between 200 and 400;
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

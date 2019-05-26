@@ -1,0 +1,7 @@
+
+public class MiPunteroNulo extends Exception{
+	
+	public MiPunteroNulo(String s) {
+		super(s);
+	}
+}

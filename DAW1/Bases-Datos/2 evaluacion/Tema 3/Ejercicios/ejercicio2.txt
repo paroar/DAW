@@ -1,0 +1,48 @@
+create table incidencia
+(
+id integer,
+descripcion varchar(200),
+departamento varchar(3),
+fecha date,
+causa varchar(30),
+archivada char(1),
+solucionada char(1),
+importe float,
+constraint incidencia_pk primary key (id)
+);
+
+
+alter table incidencia
+modify descripcion varchar(200) constraint incidencia_nn1 not null;
+
+alter table incidencia
+modify departamento char(3) default '100';
+
+alter table incidencia
+modify fecha date constraint incidencia_nn2 not null;
+
+alter table incidencia
+modify causa varchar(30) default 'Error de uso'  constraint incidencia_nn3 not null;
+
+alter table incidencia
+modify archivada char(1) default 'N';
+
+alter table incidencia
+modify solucionada char(1) default 'N';
+
+alter table incidencia
+modify importe float default 1 constraint incidencia_nn4 not null;
+
+
+
+alter table incidencia
+add constraint incidencia_ck1 check (departamento in ('100','200','300','400'));
+
+alter table incidencia
+add constraint incidencia_ck2 check (archivada in ('S','N'));
+
+alter table incidencia
+add constraint incidencia_ck3 check (solucionada in ('S','N'));
+
+alter table incidencia
+add constraint incidencia_ck4 check (importe>0);

@@ -1,0 +1,26 @@
+declare
+
+v a.emp.sal%type;
+
+cursor c1 is select dep.nom,emp.nom,apes from a.dep,a.emp
+where num=num_dp
+and sal>v;
+
+begin
+...
+
+v:=1546.25;
+
+open c1;
+
+-- Proceso el cursor
+
+close c1;
+
+v:=1023.25;
+
+open c1;
+
+...
+
+end;

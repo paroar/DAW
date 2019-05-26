@@ -1,0 +1,41 @@
+Crea un procedimiento almacenado para el bloque anónimo del ejercicio 3.
+
+INFORME DE GASTOS
+
+Tipo de gasto:
+Fecha:
+Importe:
+
+----------------------------------------------------------------------------------------------
+
+create or replace procedure proc320
+
+is
+
+ cursor cur_gastos is 
+ select den,fec,imp from a.gas,a.tgas
+ where codgas=codgas_tg;
+
+ v_gastos cur_gastos%rowtype;
+
+begin
+
+ open cur_gastos;
+
+ loop
+
+  fetch cur_gastos into v_gastos;
+
+  exit when cur_gastos%notfound;
+  
+  dbms_output.put_line('Tipo de gasto:'||v_gastos.den);
+  dbms_output.put_line('Fecha:'||v_gastos.fec);
+  dbms_output.put_line('Importe:'||v_gastos.imp);
+    
+ end loop;
+
+ dbms_output.put_line('Filas leidas:'||cur_gastos%rowcount);
+
+ close cur_gastos;
+
+end proc320;

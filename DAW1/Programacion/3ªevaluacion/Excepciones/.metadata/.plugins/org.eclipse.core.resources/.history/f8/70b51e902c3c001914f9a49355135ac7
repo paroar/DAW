@@ -1,0 +1,7 @@
+
+public class Mostrar {
+
+	public static String array() {
+		String s = "";
+	}
+}

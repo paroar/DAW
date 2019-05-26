@@ -1,0 +1,18 @@
+declare
+
+v_cod a.emp.cod%type;
+v_gas number(7,2);
+v_flag boolean;
+
+begin
+
+v_cod:='025100';
+proc27(v_cod,v_gas,v_flag);
+
+if(v_flag)
+then
+dbms_output.put_line('Gastos:'||v_gas);
+else
+dbms_output.put_line('No tiene gastos');
+end if;
+end;

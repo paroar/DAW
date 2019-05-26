@@ -1,0 +1,194 @@
+Solución ejercicio nº 7	
+=======================
+
+1.
+
+select dep.nom,count(cod) from a.dep,a.emp
+where
+ (
+  num=num_dp
+  and
+  irpf>21
+ )
+group by dep.nom;
+
+2.
+
+select dep.nom,sum(irpf*sal/100) from a.dep,a.emp
+where
+ (
+  num=num_dp
+ )
+group by dep.nom;
+
+3.
+
+select nom,apes,sum(fal) from a.emp,a.ast
+where
+ (
+  cod=cod_em
+ )
+group by nom,apes;
+
+4.
+
+select lug,count(codcur) from a.cur
+where
+ (
+  dur>30
+ )
+group by lug;
+
+5.
+
+select emp,count(codpro) from a.pro
+group by emp;
+
+6. -- Aplazada
+
+select nom,apes,count(cer) from a.emp,a.ast,a.gas
+where
+ (
+  cod=cod_em
+  and
+  cod_em=cod_em_as
+  and
+  codcur_cr=codcur_cr_as
+  and
+  cer='S'
+  and
+  imp>30
+ )
+group by nom,apes;
+
+7.
+
+select nom,count(cod_em) from a.cur,a.ast
+where
+ (
+  codcur=codcur_cr
+  and
+  fal>5
+ )
+group by nom,codcur;
+
+8.
+
+select nom,apes,count(distinct cod_em) from a.pro,a.ses s a.ast a
+where
+ (
+  codpro=codpro_pr
+  and
+  s.codcur_cr=a.codcur_cr
+ )
+group by nom,apes;
+
+9.
+
+select dep.nom,den,sum(imp) from a.dep,a.emp,a.gas,a.tgas
+where
+ (
+  num=num_dp
+  and
+  cod=cod_em_as
+  and
+  codgas=codgas_tg
+ )
+group dep.nom,den;
+
+10.
+
+select nom,apes,'Tiene:',cer,count(codcur_cr) from a.emp,a.ast
+where
+ (
+  cod=cod_em
+ )
+group by nom,apes,cer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 4 elements to &apos;SentinelSearchList/src&apos;&#x0D;&#x0A;- Original project: &apos;GenerateListComunNode&apos;&#x0D;&#x0A;- Destination element: &apos;SentinelSearchList/src&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     List.java&#x0D;&#x0A;     Test.java&#x0D;&#x0A;     InputData.java&#x0D;&#x0A;     Node.java" description="Copy compilation units" destination="=SentinelSearchList/src" element1="/src&lt;{List.java" element2="/src&lt;{Test.java" element3="/src&lt;{InputData.java" element4="/src&lt;{Node.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1549224428763" units="4" version="1.0"/>
+</session>

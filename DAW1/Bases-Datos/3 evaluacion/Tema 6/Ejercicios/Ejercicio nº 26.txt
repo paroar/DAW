@@ -1,0 +1,48 @@
+Escribe un procedimiento que reciba como parámetro de entrada el código de empleado y el número de certificados que ha obtenido y devuelva el número de empleados con un número de certificados inferior al suyo.
+
+create or replace procedure proc26
+(
+ p_cod in a.emp.cod%type,
+ p_nc in number,
+ p_ne out number
+)
+
+is
+
+ -- cursor con certificados por empleado
+
+ cursor c_cer is select count(cer) as nc from a.ast
+ where cer='S' and cod_em<>p_cod
+ group by cod_em;
+
+begin
+
+ p_ne:=0;
+
+ for v_cer in c_cer loop
+
+  if v_cer.nc<p_nc
+   then
+    p_ne:=p_ne+1;
+  end if;
+
+ end loop;
+ 
+end proc26; 
+
+-----------------------------------------------------
+
+
+declare
+
+ v_ne number(4,0);
+
+begin
+
+ proc26('025100',5,v_ne);
+ dbms_output.put_line(v_ne);
+
+end;
+
+
+

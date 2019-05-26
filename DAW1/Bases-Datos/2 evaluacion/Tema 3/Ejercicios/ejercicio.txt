@@ -1,0 +1,79 @@
+create table repventa
+(
+num_empl char(3),
+nombre varchar(30),
+edad number(2,0),
+oficina_rep char(2),
+título varchar(20),
+contrato date,
+director char(3),
+cuota number(5,0),
+ventas number(5,0),
+constraint repventa_pk1 primary key (num_empl)
+);
+
+create table oficina
+(
+oficina char(2),
+ciudad varchar(20),
+region char(7),
+dir char(3),
+objetivo number(5,0),
+ventas number(5,0),
+constraint oficina_pk1 primary key (oficina)
+);
+
+create table producto
+(
+id_fab char(3),
+id_producto varchar(6),
+descripcion varchar(20),
+precio number(4,0),
+existencias number(3,0),
+constraint pedido_pk1 primary key (id_fab,id_producto)
+);
+
+create table pedido
+(
+num_pedido char(6),
+fecha_pedido date,
+clie char(4),
+rep char(3),
+fab char(3),
+producto varchar(6),
+cant number(2,0),
+importe number(5,0),
+constraint pedido_pk1 primary key (num_pedido)
+);
+
+create table cliente
+(
+num_clie char(4),
+empresa varchar(20),
+rep_clie char(3),
+limite_credito number(5,0),
+constraint cliente_pk1 primary key (num_clie)
+);
+
+-------------------------------------------------------------------------------------------
+alter table repventa
+add 	constraint repventa_fk1 foreign key (oficina_rep) references oficina (oficina),
+	constraint repventa_fk2 foreign key (director) references repventa (num_empl)
+;
+
+alter table oficina
+add 	constraint oficina_fk1 foreign key (dir) references repventa (num_empl)
+;
+
+alter table pedido
+add 	constraint pedido_fk1 foreign key (fab,producto) references producto (id_fab,id_producto),
+	constraint pedido_fk2 foreign key (rep) references repventa (num_empl),
+	constraint pedido_fk3 foreign key (clie) references cliente (num_clie)
+;
+
+alter table cliente
+add 	constraint cliente_fk1 foreign key (rep_clie) references repventa (num_empl)
+;
+
+
+

@@ -1,0 +1,59 @@
+Nombre de las empresas con el mayor número de certificados.
+
+
+select emp from a.ast a,a.ses s,a.pro p
+where
+ (
+  codpro=codpro_pr
+  and
+  s.codcur_cr=a.codcur_cr
+  and
+  cer='S'
+ )
+group by emp
+having count(cer)>all (
+                       select count(cer) from a.ast a,a.ses s,a.pro
+                       where
+                        (
+                         codpro=codpro_pr
+                         and
+                         s.codcur_cr=a.codcur_cr
+                         and
+                         cer='S'
+                         and
+                         pro.emp<>p.emp
+                        )
+                       group by emp
+                      );
+
+----------------------------------------------------------------------
+
+Solución de Pablo Rodríguez Armida
+
+select emp from a.ast a,a.ses s,a.pro p
+where
+ (
+  codpro=codpro_pr
+  and
+  s.codcur_cr=a.codcur_cr
+  and
+  cer='S'
+ )
+group by emp
+having count(cer)>=all (
+                       select count(cer) from a.ast a,a.ses s,a.pro
+                       where
+                        (
+                         codpro=codpro_pr
+                         and
+                         s.codcur_cr=a.codcur_cr
+                         and
+                         cer='S'
+                        )
+                       group by emp
+                      );
+
+
+
+
+

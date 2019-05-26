@@ -1,0 +1,210 @@
+1.Nombre y apellidos de los empleados que han obtenido certificado en todos los cursos a los que han asistido.
+
+
+select distinct nom, apes from a.emp e, a.ast a
+where
+(
+	e.cod=a.cod_em
+	and
+	a.cer='S'
+	and
+	a.cer = all(select ast.cer from a.ast
+				where
+				(
+					ast.cod_em=e.cod
+				)
+				)
+);
+
+-----------------------------------------------------------------------------------------------------------
+
+2.Nombre y apellidos de los empleados cuyo porcentaje de retención es superior al de los empleados de su departamento que tienen un salario superior al suyo.
+
+
+select nom, apes from a.emp e
+where
+(
+e.irpf>all(select irpf from a.emp
+		where
+		(
+			emp.sal>e.sal
+			and
+			e.num_dp=emp.num_dp
+		)
+		)
+and
+exists(select irpf from a.emp
+		where
+		(
+			emp.sal>e.sal
+			and
+			e.num_dp=emp.num_dp
+		)
+		)		
+);
+
+-----------------------------------------------------------------------------------------------------------
+
+3.Código de los cursos con menos certificados que no certificados.
+
+
+select codcur_cr from a.ast a
+where
+(
+	a.cer='S'
+)
+group by codcur_cr
+having count(cer)>(select count(cer) from a.ast
+					where
+					(
+						ast.cer='N'
+						and
+						a.codcur_cr=ast.codcur_cr
+					)
+					)
+;
+
+-----------------------------------------------------------------------------------------------------------
+
+4.Nombre y apellidos de los empleados cuyo departamento tiene más de cinco empleados.
+
+
+select distinct nom, apes, num_dp from a.emp e
+where
+(
+	(select count(cod) from a.emp
+		where
+		(
+			emp.num_dp=e.num_dp
+		)
+	)>5
+);
+
+-----------------------------------------------------------------------------------------------------------
+
+5.Número de departamentos con más de tres asistentes por curso.
+
+
+select count(distinct num_dp) from a.emp e, a.ast a
+where
+(
+	a.codcur_cr in (select distinct codcur_cr from a.emp, a.ast
+					where
+					(
+						e.num_dp=emp.num_dp
+					)
+					group by codcur_cr
+					having count(cod_em)>3
+					)
+);
+
+-----------------------------------------------------------------------------------------------------------
+
+6.Número de empleados con un salario inferior a la media de su departamento.
+
+
+select count( cod) from a.emp e
+where
+(
+e.sal<(select avg(sal) from a.emp
+		where
+		(
+			e.num_dp=emp.num_dp
+		)
+		)
+);
+
+-----------------------------------------------------------------------------------------------------------
+
+7.Número de profesores que han impartido más sesiones que todos sus compañeros.
+
+
+select codpro from a.pro p, a.ses s
+where
+(
+	p.codpro=s.codpro_pr
+)
+group by p.codpro, p.emp
+having count(codcur_cr)>all(select count(codcur_cr) from a.ses, a.pro
+							where
+							(
+								ses.codpro_pr=pro.codpro
+								and
+								p.emp=pro.emp
+								and
+								p.codpro<>pro.codpro
+							)
+							group by pro.codpro
+							)
+
+							and
+							exists(select count(codcur_cr) from a.ses, a.pro
+							where
+							(
+								ses.codpro_pr=pro.codpro
+								and
+								p.emp=pro.emp
+								and
+								p.codpro<>pro.codpro
+							)
+							group by pro.codpro)
+;
+
+-----------------------------------------------------------------------------------------------------------
+
+8.Nombre de los departamentos en los que han asistido a cursos todos sus empleados.
+
+
+select distinct d.nom from a.dep d
+where
+(
+	(select count(distinct cod) from a.emp
+	where
+	(
+		d.num=emp.num_dp
+	)
+	)
+	=
+	(select count(distinct cod_em) from a.emp, a.ast
+	where
+	(
+		emp.cod=ast.cod_em
+		and
+		d.num=emp.num_dp
+	)
+	)
+
+);
+
+
+
+7. de clase
+select count(codpro) from a.pro
+where codpro in
+(
+select codpro from a.pro p, a.ses s
+where
+(
+	p.codpro=s.codpro_pr
+)
+group by p.codpro, p.emp
+having count(codcur_cr)>all(select count(codcur_cr) from a.ses, a.pro
+							where
+							(
+								ses.codpro_pr=pro.codpro
+								and
+								p.emp=pro.emp
+								and
+								p.codpro<>pro.codpro
+							)
+							group by pro.codpro
+							)
+							and
+							(
+							select count(codpro) from a.pro
+							where
+							(
+								pro.emp=p.emp
+							)
+							)>1
+)

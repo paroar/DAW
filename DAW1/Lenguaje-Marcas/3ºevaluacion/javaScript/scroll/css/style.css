@@ -1,0 +1,11 @@
+#myDIV {
+  height: 1250px;
+  width: 1250px;
+  overflow: auto;
+}
+
+#content {
+  height: 5800px;
+  width: 2000px;
+  background-color: coral;
+}

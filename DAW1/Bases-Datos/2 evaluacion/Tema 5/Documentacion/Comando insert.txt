@@ -1,0 +1,75 @@
+insert into producto values
+('REI','2A45C','V Stago Trinquete',79,210);
+
+insert into repventa values
+('106','Jose Maldonado',52,'VP Ventas','14/06/1998',null,25000,32958,null);
+
+insert into oficina values
+('22','Toledo','Centro',null,27500,34432);
+
+insert into cliente values
+('2101','Exclusivas Soriano S.A.',65000,'106');
+
+insert into producto values
+('FEA','114','Bancada Motor',243,15);
+
+insert into pedido values
+('112989','03/01/2000','2101','106','FEA','114',6,1458);
+
+----------------------------------------------------------------------------
+
+insert into repventa values
+('107','Natalia Martin',49,'Rep. Ventas','14/11/1998','108',27500,34432,'22')
+
+insert into cliente values
+('2124','Domingo S.L.',40000,'107');
+
+insert into pedido values
+('113062','24/02/2000','2124','107','FEA','114',10,2430);
+
+----------------------------------------------------------------------------
+
+insert into producto values
+('REI','2A44R','Bisagra Dcha.',4500,12);
+
+insert into repventa values
+('101','Daniel Gutierrez',45,'Rep. Ventas','20/10/1996','104',27500,26628,'12')
+
+insert into oficina values
+('12','Barcelona','Este','104',70000,29328);
+
+insert into repventa values
+('104','Carlos Martinez',33,'Dir. Ventas','19/05/1997','106',17500,0,'12')
+
+insert into cliente values
+('2113','Importaciones Martin S.L.',20000,'104');
+
+insert into pedido values
+('113042','02/02/2000','2113','101','REI','2A44R',5,22500);
+
+-------------------------------------------------------------------------
+
+insert into producto (id_producto,id_fab) values
+('4100Y','ACI');
+
+insert into incidencia (fecha,descripcion,id) values
+('30/01/2019','Aaaaaaa',1);
+
+insert into producto values
+('ACI','4100Y',null,null,null);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

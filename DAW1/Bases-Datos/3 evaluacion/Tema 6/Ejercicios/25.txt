@@ -1,0 +1,30 @@
+Escribe un procedimiento almacenado que reciba como parámetro de entrada el código de empleado 
+y devuelva el número de certificados obtenidos y un booleano que es verdadero en caso de que el 
+empleado haya hecho cursos y falso en caso contrario.
+
+--------------------------------------------------------------------------------------------
+
+create or replace procedure proc25
+
+(
+ p_cod in a.emp.cod%type,
+ p_cur out number,
+ p_flag out boolean
+)
+
+is
+
+begin
+
+ select count(codcur_cr) into p_cur from a.ast
+ where cod_em=p_cod and cer='S';
+ 
+if p_cur=0
+then
+ p_flag:=false;
+else
+ p_flag:=true;
+end if;
+
+end proc25;
+

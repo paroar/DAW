@@ -1,0 +1,88 @@
+table{
+	margin: 30px;
+}
+
+table, th, td, tr.españa {
+	border: 1px solid black;
+}
+
+tr.españa  {
+	font-weight: bold;
+}
+
+.tabla2 th {
+	padding: 15px;
+}
+
+/*CUATRO TABLAS*/
+.cuatro table{
+	float: left;
+}
+
+.original th{
+	padding: 0px 15px;
+}
+
+.collapse {
+	border-collapse: collapse;	
+}
+
+.collapse th{
+	padding: 0px 15px;
+}
+
+.spacing1{
+	border-spacing: 0;
+	clear: left;
+}
+
+.spacing1 th{
+	padding: 0px 15px;
+}
+
+.spacing2{
+	border-spacing: 5px 2px;
+}
+
+.spacing2 th{
+	padding: 0px 15px;
+}
+
+/*COLORES1*/
+.colores1{
+	border-collapse: collapse;
+	clear: left;
+}
+
+.colores1 th{
+	background-color: yellow;
+	color: red;
+	padding: 15px 30px; 
+}
+
+.colores1 td{
+	background-color: dodgerblue;
+	color: blue;
+}
+
+/*COLORES2*/
+.colores2{
+	border:none;
+	empty-cells: hide;
+	border-spacing: 10px 10px;
+}
+
+.colores2 table{
+	empty-cells: hide;
+}
+
+.colores2 th{
+	background-color: yellow;
+	color: red;
+	padding: 15px 30px; 
+}
+
+.colores2 td{
+	background-color: dodgerblue;
+	color: blue;
+}

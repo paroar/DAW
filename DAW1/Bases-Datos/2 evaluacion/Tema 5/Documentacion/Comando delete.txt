@@ -1,0 +1,4 @@
+delete from dep;
+
+delete from emp
+where num_dp is null;

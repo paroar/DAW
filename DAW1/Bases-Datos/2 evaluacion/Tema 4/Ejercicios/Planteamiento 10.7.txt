@@ -1,0 +1,151 @@
+
+select ...
+>all
+ (
+  select count(codcur_cr) from a.ses,a.pro
+  where
+   (
+    codpro=codpro_pr
+    and
+    emp=RE1
+    and
+    codpro<>RE2
+   )
+  group by codpro
+ )
+------------------------------------------------------
+select codpro,count(codcur_cr) from a.pro,a.ses
+where
+ (
+  codpro=codpro_pr
+ )
+group by codpro;
+------------------------------------------------------
+select codpro,emp,count(codcur_cr) from a.pro,a.ses
+where
+ (
+  codpro=codpro_pr
+ )
+group by codpro,emp;
+
+------------------------------------------------------
+
+select codpro from a.pro p,a.ses
+where
+ (
+  codpro=codpro_pr
+ )
+group by codpro,emp
+having count(codcur_cr)>all
+ (
+  select count(codcur_cr) from a.ses,a.pro
+  where
+   (
+    codpro=codpro_pr
+    and
+    emp=p.emp
+    and
+    codpro<>p.codpro
+   )
+  group by codpro
+ )
+and
+ (
+  Condicion
+ );
+
+Condicion:
+
+select count(codpro) from a.pro
+where
+ (
+  emp=p.emp
+ )>1
+
+------------------------------------------------------
+
+select codpro from a.pro p,a.ses
+where
+ (
+  codpro=codpro_pr
+ )
+group by codpro,emp
+having count(codcur_cr)>all
+ (
+  select count(codcur_cr) from a.ses,a.pro
+  where
+   (
+    codpro=codpro_pr
+    and
+    emp=p.emp
+    and
+    codpro<>p.codpro
+   )
+  group by codpro
+ )
+and
+ (
+select count(codpro) from a.pro
+where
+ (
+  emp=p.emp
+ )
+)>1;
+
+------------------------------------------------------
+
+select count(codpro) from a.pro
+where codpro in
+(
+select codpro from a.pro p,a.ses
+where
+ (
+  codpro=codpro_pr
+ )
+group by codpro,emp
+having count(codcur_cr)>all
+ (
+  select count(codcur_cr) from a.ses,a.pro
+  where
+   (
+    codpro=codpro_pr
+    and
+    emp=p.emp
+    and
+    codpro<>p.codpro
+   )
+  group by codpro
+ )
+and
+ (
+select count(codpro) from a.pro
+where
+ (
+  emp=p.emp
+ )
+)>1
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

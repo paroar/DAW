@@ -1,0 +1,15 @@
+
+k
+squid:S106"9Replace this use of System.out or System.err by a logger.(™­í–8©³Çµ -H0RMAJORZ
+CODE_SMELL
+~squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(”›ØÛ8©³Çµ -H1RMAJORZ
+CODE_SMELL
+k
+squid:S106"9Replace this use of System.out or System.err by a logger.(ª¥„˜8©³Çµ -H2RMAJORZ
+CODE_SMELL
+vsquid:S2095"HUse try-with-resources or close this "FileReader" in a "finally" clause.(‡Þ…í8©³Çµ -H3RBLOCKERZBUG
+squid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Ò°ÁØýÿÿÿÿH4RMINORZ
+CODE_SMELL
+Fsquid:S1220""Move this file to a named package.H5RMINORZ
+CODE_SMELL
+vsquid:S2095"HUse try-with-resources or close this "FileWriter" in a "finally" clause.(äùË8©³Çµ -H6RBLOCKERZBUG

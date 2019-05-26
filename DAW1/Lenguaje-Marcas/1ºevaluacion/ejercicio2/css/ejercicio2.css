@@ -1,0 +1,41 @@
+
+@font-face {
+  font-family: 'Asman';
+  src: url('../fonts/Asman.woff');
+}
+
+body{
+	font-family: georgia, cambria, serif;
+	font-size: 16px;
+	color: #00F;
+	background-color: #CFC;
+
+}
+
+h1{
+	color:#F00;
+	font-family: Asman,Verdana, Calibri, Sans-serif;
+	font-size: 32px;
+}
+
+h2{
+	color: #A00;
+	font-family: Verdana, Calibri, Sans-serif;
+	font-size: 24px;
+
+}
+
+.verde{
+	color: #060;
+}
+
+.bold{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.acronim{
+	background-color: #000;
+	color: #FFF;
+	font-style: italic;
+}

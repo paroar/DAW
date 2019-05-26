@@ -1,0 +1,13 @@
+#!bin/bash
+
+#get all ppids
+ppids=$(ps -e -o ppid --no-headers | sort -n |tr -d ' ' | uniq | tr '\n' ' ')
+
+for ppid in $ppids 
+do 
+
+pids=$(ps -e -o pid,ppid --no-headers | sort -k1n -k2n | uniq | tr -s ' ' ':' | grep ":.*:$ppid" | cut -f2 -d: | tr '\n' ',')
+
+echo -e "$ppid:$pids"     
+
+done

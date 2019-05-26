@@ -1,0 +1,37 @@
+Escribe un bloque anónimo que visualice la siguiente información:
+
+INFORME DE GASTOS
+
+Tipo de gasto:
+Fecha:
+Importe:
+
+================================================
+
+declare
+
+cursor cur_informe is
+	select den, fec, imp from a.gas, a.tgas
+	where
+	(
+	codgas_tg=codgas
+	);
+v_informe cur_informe%rowtype;
+
+begin
+
+	open cur_informe;
+
+	loop
+	
+	fetch cur_informe into v_informe;
+
+	exit when cur_informe%notfound;
+
+	dbms_output.put_line('Tipo de gasto:'||v_informe.den);
+	dbms_output.put_line('Fecha:'||v_informe.fec);
+	dbms_output.put_line('Importe:'||v_informe.imp);
+	
+	end loop;
+	close cur_informe;
+end;

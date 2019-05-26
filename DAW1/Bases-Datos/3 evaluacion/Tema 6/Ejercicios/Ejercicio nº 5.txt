@@ -1,0 +1,66 @@
+Escribe un bloque anónimo que visualice la siguiente información de todos los empleados de la bases de datos:
+
+INFORME DE EMPLEADOS
+
+Departamento:
+Nombre:
+Salario neto:
+Total de cursos realizados:
+
+Si el empleado no pertenece a ningún departamento, en lugar del nombre vamos a visualizar el mensaje Sin asignar.
+
+----------------------------------------------------------------------------------------------
+
+declare
+
+-- Cursores y variables de cursor
+
+ cursor cur_empleado is
+ select nom,apes,sal-sal*irpf/100 as salneto,num_dp,cod from a.emp;
+
+ v_empleado cur_empleado%rowtype;
+
+-- Variables
+
+ v_nom a.dep.nom%type;
+ v_tc number(3,0);
+ 
+
+-- Constantes
+
+ msg_1 constant char(14):='Sin asignar';
+
+begin
+
+ open cur_empleado;
+
+ fetch cur_empleado into v_empleado;
+ while cur_empleado%found loop
+  
+  if v_empleado.num_dp is null
+   then
+    dbms_output.put_line('Departamento:'||msg_1);
+   else
+    select nom into v_nom from a.dep
+    where num=v_empleado.num_dp;
+    dbms_output.put_line('Departamento:'||v_nom);
+  end if;
+
+-- Total de cursos realizados
+  
+  select count(codcur_cr) into v_tc from a.ast
+  where cod_em=v_empleado.cod;
+  
+  dbms_output.put_line('Nombre:'||v_empleado.nom||' '||v_empleado.apes);
+  dbms_output.put_line('Salario neto:'||v_empleado.salneto);
+  dbms_output.put_line('Total de cursos realizados:'||v_tc);
+
+  dbms_output.put_line(chr(10));  
+  
+  fetch cur_empleado into v_empleado;
+
+ end loop;
+
+ close cur_empleado;
+
+end;

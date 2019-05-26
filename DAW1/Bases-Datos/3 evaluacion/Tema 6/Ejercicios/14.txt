@@ -1,0 +1,82 @@
+Escribe un bloque anónimo que visualice la siguiente información para los empleados que han asistido a cursos con gastos:
+
+Nombre: -- del empleado
+Curso: -- nombre del curso
+
+Relación de gastos:
+Tipo: -- de gasto
+Fecha:
+Importe:
+
+======================================================================================================
+set serveroutput on size 1000000;
+set timing on;
+
+declare
+
+--CURSORES Y VARIABLES DE ACOPLAMIENTO
+
+	cursor c_empGas is select distinct cod_em_as from a.gas;
+
+	v_acoplamientoCod a.gas.cod_em_as%type;
+
+	cursor c_curGas is select distinct codcur_cr_as from a.gas 
+				where v_acoplamientoCod=cod_em_as;
+
+	v_acoplamientoCodcur a.gas.codcur_cr_as%type;
+
+	cursor c_tipoGas is select den,fec,imp from a.gas,a.tgas
+				where codgas_tg=codgas and v_acoplamientoCodcur=codcur_cr_as and v_acoplamientoCod=cod_em_as;
+
+--VARIABLES
+
+	v_nomEmp a.emp.nom%type;
+	v_apesEmp a.emp.apes%type;
+
+	v_nomCur a.cur.nom%type;
+
+begin
+
+	for v_empGas in c_empGas loop
+
+		--NOMBRE EMPLEADO
+
+		select nom,apes into v_nomEmp,v_apesEmp from a.emp 
+		where cod=v_empGas.cod_em_as;
+
+		--MOSTRAR NOMBRE EMPLEADO
+
+		dbms_output.put_line('=========================================================');
+		dbms_output.put_line('Nombre:'||v_nomEmp||' '||v_apesEmp);
+		dbms_output.put_line(chr(10));
+
+		v_acoplamientoCod:=v_empGas.cod_em_as;
+		for v_curGas in c_curGas loop
+
+			--NOMBRE CURSO
+
+			select nom into v_nomCur from a.cur
+			where codcur=v_curGas.codcur_cr_as;
+
+			--MOSTRAR NOMBRE CURSO
+				
+			dbms_output.put_line('------------------------');
+			dbms_output.put_line('Curso:'||v_nomCur);
+			dbms_output.put_line(chr(10));
+			
+			v_acoplamientoCodcur:=v_curGas.codcur_cr_as;
+			for v_tipoGas in c_tipoGas loop
+
+				--MOSTRAR TIPO GASTO, FECHA E IMPORTE
+
+				dbms_output.put_line('Tipo:'||v_tipoGas.den);
+				dbms_output.put_line('Fecha:'||v_tipoGas.fec);
+				dbms_output.put_line('Importe:'||v_tipoGas.imp);
+				dbms_output.put_line(chr(10));
+
+			end loop;
+		end loop;
+	end loop;
+end;			
+
+			

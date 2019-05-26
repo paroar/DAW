@@ -1,0 +1,97 @@
+create table dep
+(
+num char(3),
+nom varchar(20),
+constraint dep_pk primary key (num)
+);
+
+create table emp
+(
+cod char(6),
+apes varchar(30),
+nom varchar(20),
+sal number(9,2),
+irpf number(2,0),
+num_dp char(3),
+constraint emp_pk primary key (cod),
+constraint emp_fk1 foreign key (num_dp)
+references dep
+);
+
+create table hex
+(
+hor number(2,0),
+pre number(5,2),
+fec date,
+cod_em char(6),
+constraint hex_fk1 foreign key (cod_em)
+references emp
+);
+
+create table pro
+(
+codpro char(4),
+apes varchar(30),
+nom varchar(20),
+emp varchar(30),
+constraint pro_pk primary key (codpro)
+);
+
+create table cur
+(
+codcur char(4),
+nom varchar(25),
+dur number(3,0),
+lug varchar(15),
+fini date,
+ffin date,
+constraint cur_pk primary key (codcur)
+);
+
+create table ast
+(
+cod_em char(6),
+codcur_cr char(4),
+fal number(2,0),
+cer char(1),
+constraint ast_pk primary key (cod_em, codcur_cr),
+constraint ast_fk1 foreign key (cod_em)
+references emp,
+constraint ast_fk2 foreign key (codcur_cr)
+references cur
+);
+
+create table ses
+(
+codcur_cr char(4),
+codpro_pr char(4),
+hor number(3,0),
+pre number(6,2),
+constraint ses_pk primary key (codcur_cr, codpro_pr),
+constraint ses_fk1 foreign key (codcur_cr)
+references cur,
+constraint ses_fk2 foreign key (codpro_pr)
+references pro
+);
+
+create table tgas
+(
+codgas char(3),
+den varchar(20),
+constraint tgas_pk primary key (codgas)
+);
+
+create table gas
+(
+id_gas number(10,0),
+codgas_tg char(3),
+cod_em_as char(6),
+codcur_cr_as char(4),
+fec date,
+imp number(6,2),
+constraint gas_pk primary key (id_gas),
+constraint gas_fk1 foreign key (codgas_tg)
+references tgas,
+constraint tgas_fk2 foreign key (cod_em_as,codcur_cr_as)
+references ast(cod_em,codcur_cr)
+);

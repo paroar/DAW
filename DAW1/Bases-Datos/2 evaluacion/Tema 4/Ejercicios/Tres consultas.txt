@@ -1,0 +1,15 @@
+-Nombre y apellidos de los empleados que no tienen gastos.
+
+ select nom,apes from a.emp
+ where cod not in (select cod_em_as from a.gas);
+
+-Nombre y apellidos de los empleados que han asistido a cursos sin originar gastos.
+
+ select nom,apes from a.emp
+ where cod not in (select cod_em_as from a.gas)
+ and cod in (select cod_em from a.ast);
+
+-Nombre y apellidos de los empleados que no han asistido a cursos.
+
+ select nom,apes from a.emp
+ where cod not in (select cod_em from a.ast);

@@ -1,0 +1,37 @@
+import static org.junit.Assert.*;
+
+import java.util.Arrays;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+@RunWith(Parameterized.class)
+public class HoraCorrectaTest {
+	
+	private int hora;
+	private int min;
+	private int sec;
+	
+	public HoraCorrectaTest(int hora, int min, int sec) {
+		this.hora = hora;
+		this.min = min;
+		this.sec = sec;
+	}
+	
+	
+	@Parameters
+	public static Collection<Object[]> horas(){
+		Collection c = Arrays.asList(new Object[][] {{-1,-1,-1},{0,0,0},{1,1,1},{23,59,59},{24,60,60}});
+		return c;
+	}
+
+	@Test
+	public void testHoraCorrecta() {
+		Hora h = new Hora(this.hora, this.min, this.sec);
+		boolean flag = h.horaCorrecta();
+		assertTrue(flag);
+	}
+	
+}

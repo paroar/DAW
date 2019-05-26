@@ -1,0 +1,32 @@
+import java.io.*;
+
+public class Prueba {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Empleado empleado1 = new Empleado("Fernando", "Ureña", 23, 800, 2);
+		Empleado empleado2 = new Empleado("Antonio", "Lopez", 35, 1000, 1);
+		try{
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("D:\\empleados.ddr"));
+			oos.writeObject(empleado1);
+			oos.writeObject(empleado2);
+		} catch (IOException e) {
+		}
+		try{
+			ObjectInputStream ois=new ObjectInputStream(new FileInputStream("D:\\empleados.ddr"));
+            while(true){
+                Empleado aux=(Empleado)ois.readObject();
+                System.out.println(aux.getNombre());
+                System.out.println(aux.getApellido());
+                System.out.println(aux.getEdad());
+                System.out.println(aux.getSalario());
+                System.out.println(aux.getNempleado());
+                System.out.println("");
+            }
+        }catch(ClassNotFoundException e){
+        }catch(EOFException e){
+        }catch(IOException e){
+        }
+	}
+
+}

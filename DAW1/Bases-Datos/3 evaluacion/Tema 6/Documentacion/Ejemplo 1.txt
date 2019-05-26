@@ -1,0 +1,31 @@
+set serveroutput on;
+
+declare
+
+ v_nom a.emp.nom%type;
+ v_apes a.emp.apes%type;
+ v_salneto number(6,2);
+ v_ret number(5,2);
+ 
+begin
+
+ select nom,apes,sal*(1-irpf/100),irpf*sal/100 into v_nom,v_apes,v_salneto,v_ret from a.emp
+ where cod='141414';
+ 
+ dbms_output.put_line('Nombre:'||v_nom||' '||v_apes);
+ dbms_output.put_line('Salario neto:'||v_salneto);
+ dbms_output.put_line('Retención:'||v_ret);
+
+exception
+
+ when no_data_found
+  then
+    dbms_output.put_line('El empleado no existe');
+
+ when too_many_rows
+  then
+    dbms_output.put_line('Select obtiene más de una fila');
+
+end;
+
+

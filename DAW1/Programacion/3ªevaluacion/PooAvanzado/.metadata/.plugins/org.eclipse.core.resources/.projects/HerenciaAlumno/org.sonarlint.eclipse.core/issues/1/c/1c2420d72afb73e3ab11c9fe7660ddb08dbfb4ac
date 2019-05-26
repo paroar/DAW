@@ -1,0 +1,17 @@
+
+Gsquid:S1220""Move this file to a named package.H“RMINORZ
+CODE_SMELL
+jsquid:S1135"2Complete the task associated to this TODO comment.(» æÿÿÿÿÿ8ü†²€™-H”RINFOZ
+CODE_SMELL
+\squid:S1068"(Remove this unused "anyo" private field.(·ï¾ß8’ª€™-H•RMAJORZ
+CODE_SMELL
+squid:S1210"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(‡ÕÔÏ8ü†²€™-H–RMINORZ
+CODE_SMELL
+isquid:S1854"5Remove this useless assignment to local variable "f".(›Îó‡8ü†²€™-H—RMAJORZ
+CODE_SMELL
+[squid:S1068"'Remove this unused "dia" private field.(¦Û“Î8’ª€™-H˜RMAJORZ
+CODE_SMELL
+Zsquid:S1481"&Remove this unused "f" local variable.(›Îó‡8ü†²€™-H™RMINORZ
+CODE_SMELL
+`squid:S1068"'Remove this unused "mes" private field.(“Âşèøÿÿÿÿ8’ª€™-HšRMAJORZ
+CODE_SMELL

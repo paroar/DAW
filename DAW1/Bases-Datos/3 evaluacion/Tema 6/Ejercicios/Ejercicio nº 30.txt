@@ -1,0 +1,50 @@
+-- Cabera
+
+create or replace package pkg30
+
+is
+
+ cursor c_emp is select nom,apes,sal*irpf/100 as ret from a.emp;
+
+end pkg30;
+
+-- Cuerpo
+
+create or replace package body pkg30
+
+as
+
+end pkg30;
+
+-----------------------------------------
+
+declare
+
+begin
+
+ for v_emp in pkg30.c_emp loop
+
+  dbms_output.put_line('Nombre:'||v_emp.nom||' '||v_emp.apes);
+  dbms_output.put_line('Retención:'||v_emp.ret);
+  dbms_output.put_line('-------------------------');
+ 
+ end loop;
+
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

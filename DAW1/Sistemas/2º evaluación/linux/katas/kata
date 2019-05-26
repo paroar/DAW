@@ -1,0 +1,19 @@
+#! /bin/bash
+
+
+arg1=$(echo $1 | tr [:upper:] [:lower:])
+allChars=$(echo $arg1 | grep -o . | tr '\n' ' ')
+firstChar=$(echo ${arg1:0:1})
+times=','
+range=$((${#1}-1))
+restChars=$(echo ; for i in $(seq $range) ; do eval echo ${arg1:$i:1}{$times} | tr -d ' ' ; times+=, ; done)
+sumChars=$firstChar$restChars
+linedChars=$(for i in $sumChars ; do echo ${i^} ; done | tr '\n' '-')
+echo ${linedChars:0:-1}
+
+
+exit
+arg1=$(echo $1 | tr [:upper:] [:lower:])
+kk=$(for i in $(seq ${#1}) ; do (for j in $(seq $i); do echo $arg1 | cut -c$i | tr '\n' ' ' | tr -d ' ' ; done ) ; echo ; done)
+kkk=$(for i in $kk ; do echo -E "${i^}" ; done | tr '\n' '-')
+echo ${kkk::-1}

@@ -1,0 +1,24 @@
+#!bin/bash
+
+array=( 1 2 3 4 )
+echo ${array[2]}
+
+
+exit
+
+ppids=$*
+
+get_pids() {
+    ppid=$1
+    ps -e -o pid,ppid --no-headers | tr -s ' ' ':' | grep -E "^:.+:$ppid$" | cut -f2 -d:
+}
+
+format_pids() {
+    ppid=$1
+    pids=$(get_pids $ppid)
+    echo $ppid:$pids | tr ' ' ','
+}
+
+for ppid in $ppids ; do
+    format_pids $ppid
+done

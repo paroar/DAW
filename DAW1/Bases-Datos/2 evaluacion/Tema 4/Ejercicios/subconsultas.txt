@@ -1,0 +1,28 @@
+1.
+
+Select nom, apes from emp
+where
+(
+cod not in(select cod_em_as from gas)
+);
+
+
+2.Nom, apes empleados que han asistido a cursos sin originar gastos
+
+**select distinct emp.nom, apes from emp, ast, cur
+where
+(
+cod=cod_em
+and
+codcur=codcur_cr
+and
+codcur not in(select distinct codcur_cr_as from gas)
+);
+
+select nom, apes from emp
+where
+(
+cod not in (select cod_em_as from gas)
+and
+cod in (select cod_em from ast)
+);

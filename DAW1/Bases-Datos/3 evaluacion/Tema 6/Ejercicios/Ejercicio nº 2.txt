@@ -1,0 +1,49 @@
+Escribe un bloque anónimo que determine que select de tres provoca la excepción no_data_found.
+
+declare
+
+ v_nom a.emp.nom%type;
+ v_apes a.emp.apes%type;
+
+ v_flag number(1,0);
+
+begin
+
+
+-- Primera select
+
+ v_flag:=0;
+
+ select nom,apes into v_nom,v_apes from a.emp
+ where cod='141414';
+
+-- Segunda select
+
+ v_flag:=1;
+
+ select nom,apes into v_nom,v_apes from a.emp
+ where cod='11414';
+
+-- Tercera select
+
+ v_flag:=2;
+ 
+ select nom,apes into v_nom,v_apes from a.emp
+ where cod='0';
+
+
+exception
+
+ when no_data_found
+  then
+   if v_flag=0
+    then
+     dbms_output.put_line('Error en primera select');
+   elsif v_flag=1
+    then
+     dbms_output.put_line('Error en segunda select');
+    else
+     dbms_output.put_line('Error en tercera select');
+  end if; 
+
+end;

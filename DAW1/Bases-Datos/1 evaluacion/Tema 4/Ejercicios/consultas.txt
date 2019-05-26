@@ -1,0 +1,105 @@
+1. select nom, apes, emp from pro;
+
+2. select nom, apes, sal, sal-(sal*irpf/100) from emp;
+
+3. select nom, ffin, lug from cur;
+
+4. select nom, ffin-fini as diasTranscurridos from cur;
+
+5. select fec, imp from gas;
+
+6. select nom, apes, sal-(sal*(irpf+2)/100) from emp;
+
+7. select fec, hor*pre as importeHorasExtra;
+
+8. select distinct emp from pro;
+
+9. select distinct lug from cur;
+
+10. select nom, apes, sal*1.05-(1.05*sal*(irpf-3)/100) as salarioNeto from emp;
+
+-----------------------------------------------------------------------------------------------
+
+11. select distinct nom from cur where lug <> 'Madrid';
+
+12. select nom, dur from cur where fini >= '01/01/1998';
+
+13. select nom, lug from cur where ffin between '01/01/1999' and '31/03/1999';
+
+14. select distinct lug from cur where dur between 20 and 40;
+
+15. select distinct nom from cur where ffin-fini between 20 and 40;
+
+16. select nom, lug from cur where dur>60 and fini between 01/04/1998 and 30/04/1998;
+
+17. select apes, nom, sal-(sal*irpf/100) as salarioNeto, sal*irpf/100 as retencion from emp where sal<1500;
+
+18. select emp.nom, emp.apes from emp join dep on emp.num_dp=dep.num where emp.sal in (100,300,500);
+
+19. select distinct codpro from pro join ses on pro.codpro=ses.codpro_pr where ses.hor>10;
+
+20. select emp.cod from emp join hex on emp.cod=hex.cod_em where hex.fec between 01/01/2000 and 31/12/2000 
+
+
+
+
+
+
+
+
+NUM 	NOM
+100 	Ingenieria
+200 	Producción
+300 	Comercial
+400 	Financiero
+500 	Recursos Humanos 
+
+
+
+
+
+COD 	APES 			NOM 		NUM_DP
+025100 	Piriz Sanz 		Eugenio 	100
+125030 	Sanchez Carvajal 	Virginia 	300
+784569 	Flores Muñoz 		Angel 		500
+002369 	Folgado Martinez 	Eva 		400
+021369 	Yuste Ramos 		Gema 		100
+695877 	Soria Portero 		Juan 		200
+451001 	Rodríguez Millán 	Juan Pedro 	500
+014890 	Parra Cárdenas 		Emilia 		400
+141414 	Verdu Perez 		Pedro 		100
+998877 	Aguilar Campo 		Arturo 		500
+589634 	Val Sanz 		Ana Maria 	200
+697458 	Sanchez Tello 		Amanda 		400
+880001 	Ramirez Tellez 		Victoria 	500
+001369 	Ruiz Saiz 		Isidro 		200
+998211 	Gomez Nieto 		Isabel 		100
+980004 	Pérez Ruiz 		Tomas 		100
+694722 	López de Hoyos 		Azucena 	300
+463323 	Robledo Pérez 		Carla 		500
+140014 	Aguilar Rejo 		Ismael 		500 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

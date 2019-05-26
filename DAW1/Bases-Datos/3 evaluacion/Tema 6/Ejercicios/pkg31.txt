@@ -1,0 +1,43 @@
+create or replace package pkg31
+
+is
+
+TYPE r_personales IS RECORD
+(
+ nomApes char(70)
+);
+
+TYPE r_salariales IS RECORD
+(
+ salBruto number(7,2),
+ salNeto number(7,2),
+ retencion number(7,2)
+);
+
+TYPE r_formacionales IS RECORD
+(
+ percenCer number(3,0),
+ percenNoCer number(3,0),
+ horasFormacion number(5),
+ percenHorasEmp number(3,0),
+ percenHorasDep number(3,0)
+);
+
+Type r_empleado IS RECORD
+(
+ personales r_personales,
+ salariales r_salariales,
+ formacionales r_formacionales 
+);
+
+v_empleado r_empleado;
+v_tcer number(3);
+v_cerS number(3);
+v_horEmp number(4);
+v_horDep number(4);
+v_codDep a.dep.num%type;
+v_tcerDep number(4);
+v_tcerEmp number(4);
+
+end pkg31;
+

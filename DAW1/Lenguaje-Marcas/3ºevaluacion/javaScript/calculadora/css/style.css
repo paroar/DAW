@@ -1,0 +1,67 @@
+body{
+	font-family: sans-serif;
+}
+
+.wraper{
+	width: 360px;
+	height: 390px;
+	background-color: #f1f1f1;
+	margin: auto;
+	border: 4px solid #142739;
+	border-radius: 15px;
+}
+
+#screen{
+	position: relative;
+	height: 80px;
+	width: 325px;
+	background-color: #e6f2ff;
+	top: 7%;
+	left: 4%;
+	border: 2px solid #8c8c8c;
+	border-radius: 3px;
+	font-size: 230%;
+	overflow: hidden;
+}
+
+button{
+	margin: 5px;
+	padding: 0;
+	width: 55px;
+	height: 50px;
+	border: 2px solid #8c8c8c;
+	border-radius: 20px;
+	font-size: 1.2em;   
+	background-color: ;
+}
+
+button:active{
+	-webkit-transform:translateY(1px);
+	transform: translateY(1px);
+}
+
+.buttons{
+	position: relative;
+	height: 240px;
+	padding: 12px;
+	top: 10%;
+}
+
+.numbers{
+	width: 60%;
+	float: left;
+
+}
+
+.numbers button{
+	float: left;
+}
+
+.operations{
+	width: 40%;
+	float: right;
+}
+
+.operations button{
+	float: right;
+}

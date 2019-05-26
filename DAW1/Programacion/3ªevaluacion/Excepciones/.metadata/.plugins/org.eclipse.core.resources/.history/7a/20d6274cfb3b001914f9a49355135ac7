@@ -1,0 +1,16 @@
+package ejercicio2;
+
+public class Prueba {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Reloj r1 = new Reloj(24,12,56,24);
+		Reloj r2 = new Reloj(13,12,56,12);
+		Reloj r3 = new Reloj(03,13,23,12);
+		
+		System.out.println(r1);
+		System.out.println(r2);
+		System.out.println(r3);
+	}
+
+}

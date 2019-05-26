@@ -1,0 +1,29 @@
+Escribe un procedimiento que reciba como parámetro de entrada el código de empleado y 
+devuelva el total de gastos y un valor booleano que es verdadero en caso de que el empleado 
+tenga gastos y falso en caso contrario.
+
+---------------------------------------------------------------------------------------------------
+
+create or replace procedure proc27
+
+(
+p_cod in a.emp.cod%type,
+p_gas out number,
+p_flag out boolean
+)
+
+is
+
+begin
+
+p_flag:=true;
+
+select sum(imp) into p_gas from a.gas
+where cod_em_as=p_cod;
+
+if (p_gas is null)
+then
+p_flag:=false;
+end if;
+
+end proc27;

@@ -1,0 +1,197 @@
+
+1.nombre y apellidos de los empleados que han obtenido certificado en todos los cursos a los que
+han asistido.
+
+
+select nom, apes from emp, ast
+where	
+	cod=cod_em
+group by nom, apes
+having count(codcur_cr)=(select count(cer) from ast
+							where
+								cer='s'
+								and
+								cod=cod_em)
+;
+
+
+
+
+
+//select distinct nom, apes from emp, ast
+where
+(
+ cod_em = cod
+ and
+ cer = all (select cer from ast a
+			where
+			(
+			 a.cod_em = cod_em
+			 cer = 's'
+			)
+		)
+);
+---------------------------------------------------------------------------------------------------
+2.nombre y apellidos de los empleados cuyo porcentaje de retención es superior al de los empleados
+de su departamento que tienen un salario superior al suyo.
+
+select nom, apes from a.emp
+where	
+	(
+	 irpf > all (select irpf from a.emp e
+				where
+					(
+					e.num_dp=emp.num_dp
+					and
+					e.sal > emp.sal
+					)
+				)	
+	);
+
+//select nom,apes from a.emp e
+where
+ (
+  irpf>all(select irpf from a.emp
+           where
+            (
+             e.num_dp=emp.num_dp
+             and
+             emp.sal>e.sal
+            )
+           )
+  and
+  exists (select irpf from a.emp
+           where
+            (
+             e.num_dp=emp.num_dp
+             and
+             emp.sal>e.sal
+            )
+          )
+ );
+---------------------------------------------------------------------------------------------------
+3.código de los cursos con menos certificados que no certificados.
+
+
+select codcur_cr from a.ast
+where
+(
+(select count(cer) from a.ast a
+	where
+	(
+	cer='s'
+	and
+	codcur_cr=a.codcur_cr
+	)
+)
+
+<
+
+(select count(cer) from a.ast b
+	where
+	(
+	cer='s'
+	and
+	codcur_cr=b.codcur_cr
+	)
+)
+);
+---------------------------------------------------------------------------------------------------
+4.nombre y apellidos de los empleados cuyo departamento tiene más de cinco empleados.
+
+
+select nom, apes from a.emp 
+where
+(
+num_dp = (select num_dp from a.emp
+		group by num_dp
+		having count(cod)>5)
+);
+---------------------------------------------------------------------------------------------------
+
+
+5.número de departamentos con más de tres asistentes por curso.
+
+select count(distinct num_dp) from a.emp
+where
+(
+num_dp in (select distinct e.num_dp from a.emp e, a.ast a
+			where
+			(
+			e.cod = a.cod_em
+			and
+			num_dp = e.num_dp
+			)
+			group by e.num_dp, a.codcur_cr
+			having count(cod)>3
+         )
+);
+
+---------------------------------------------------------------------------------------------------
+6.número de empleados con un salario inferior a la media de su departamento.
+
+select count(cod) from a.emp e
+where
+(
+sal<(select avg(sal) from a.emp
+	where
+	(
+	emp.num_dp=e.num_dp
+	)
+	)
+);
+---------------------------------------------------------------------------------------------------
+7.número de profesores que han impartido más sesiones que todos sus compañeros.
+
+select codpro from a.pro p, a.ses s
+where
+(
+p.codpro=s.codpro_pr
+)
+group by p.codpro, p.emp
+having count(s.codcur_cr)>all(select count(ses.codcur_cr) from a.ses, a.pro
+							where
+							(
+							ses.codpro_pr=pro.codpro
+							and
+    						p.codpro<>pro.codpro
+    						and
+    						p.emp=pro.emp
+							)
+							group by pro.codpro
+							)
+
+							and	
+							exists(select count(ses.codcur_cr) from a.ses, a.pro
+									where
+									(
+									ses.codpro_pr=pro.codpro
+									and
+    								p.codpro<>pro.codpro
+    								and
+    								p.emp=pro.emp
+									)
+									group by pro.codpro
+									)		
+;
+
+/*select emp, codpro from a.ses, a.pro
+where codpro=codpro_pr
+
+order by emp, codpro_pr*/
+
+---------------------------------------------------------------------------------------------------
+8.nombre de los departamentos en los que han asistido a cursos todos sus empleados.
+
+select distinct dep.nom from a.dep, a.emp
+where
+(
+num=num_dp
+and
+cod in(select cod_em from a.ast, a.emp e 
+		where 
+		cod_em=cod 
+		and 
+		e.num_dp=num
+		)
+);

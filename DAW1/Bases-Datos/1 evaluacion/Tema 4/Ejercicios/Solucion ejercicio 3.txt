@@ -1,0 +1,53 @@
+Solución ejercicio nº 3
+=======================
+
+1.
+
+select nom from a.cur
+where dur in (10,20,40,60,80,100);
+
+2.
+
+select nom,apes from a.emp
+where apes like '% B%';
+
+3.
+
+select nom,apes from a.emp
+where nom like '_____%';
+
+4.
+
+select nom,apes,sal,sal*1.1 from a.emp
+where irpf not in (12,14,16,18,20);
+
+5.
+
+select nom,apes from a.emp
+where irpf is null;
+
+6.
+
+select nom from a.cur
+where ffin-fini between 30 and 60;
+
+7.
+
+select distinct fec from a.hex
+where hor>4 and hor<7;
+
+8.
+
+select nom,apes from a.emp
+where irpf*sal/100<200
+and sal-sal*irpf/100 between 1000 and 1500;
+
+9.
+
+select imp from a.gas
+where fec between '01/04/1998' and '30/04/1998';
+
+10.
+
+select distinct codcur_cr from a.ses
+where hor>10 and hor<20;

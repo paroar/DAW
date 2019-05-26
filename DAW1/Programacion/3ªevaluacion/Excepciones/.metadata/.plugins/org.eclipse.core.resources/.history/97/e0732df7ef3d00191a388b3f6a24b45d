@@ -1,0 +1,68 @@
+import ejercicio5.ParException;
+
+public class Punto {
+		private int posX;
+		private int posY;
+		
+		public Punto(){
+			
+		}
+		public Punto(int posX, int posY){
+			this.posX = posX;
+			this.posY = posY;
+		}
+		public int getPosX() {
+			return posX;
+		}
+		public void setPosX(int posX) {
+			this.posX = posX;
+		}
+		public int getPosY() {
+			return posY;
+		}
+		public void setPosY(int posY) {
+			this.posY = posY;
+		}
+		public double distanciaOrigen(){
+			
+			double resultado = Math.sqrt(Math.pow(0 - this.posX, 2) + Math.pow(0 - this.posY, 2));
+			
+			return resultado;
+		}
+		public double distacioOtroPunto(Punto other) throws Exception{
+			
+			if(other==null) {
+				throw new MiPunteroNuloException();
+			}
+
+			double resultado = Math.sqrt(Math.pow(other.posX - this.posX, 2) + Math.pow(other.posY - this.posY, 2));
+			return resultado;
+		}
+		public boolean sonIguales(Punto other){
+			boolean sonIguales;// = this.posX == other.posX && this.posY == other.posY;
+			if(this.posX == other.posX && this.posY == other.posY)
+				sonIguales=true;
+			else
+				 sonIguales=false;
+				
+			return sonIguales;
+		}
+		public String toString(){
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			return  this.posX +"," + this.posY ;
+		}
+	}
+

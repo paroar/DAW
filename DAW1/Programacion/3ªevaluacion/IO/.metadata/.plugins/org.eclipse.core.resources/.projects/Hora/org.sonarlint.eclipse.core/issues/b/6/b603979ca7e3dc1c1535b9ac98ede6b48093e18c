@@ -1,0 +1,9 @@
+
+Gsquid:S1700	"Rename field "hora"(Šä¶8Œ­É­-Hº	RMAJORZ
+CODE_SMELL
+zsquid:S1126"AReplace this if-then-else statement by a single return statement.(ˆÚè•ıÿÿÿÿ8Œ­É­-H·	RMINORZ
+CODE_SMELL
+Gsquid:S1220""Move this file to a named package.H¹	RMINORZ
+CODE_SMELL
+’squid:S1210="YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(°†¥Úøÿÿÿÿ8Â¶Ê­-H¸	RMINORZ
+CODE_SMELL

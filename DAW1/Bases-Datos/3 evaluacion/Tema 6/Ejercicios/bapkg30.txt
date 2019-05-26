@@ -1,0 +1,18 @@
+declare
+
+v_emp pkg30.c_emp%rowtype;
+
+begin
+
+	open pkg30.c_emp;
+	fetch pkg30.c_emp into v_emp;
+	while pkg30.c_emp%found loop
+		
+		dbms_output.put_line('Nombre:'||v_emp.nom||' '||v_emp.apes);
+		dbms_output.put_line('Retencion:'||v_emp.ret);
+		fetch pkg30.c_emp into v_emp;
+
+	end loop;
+	close pkg30.c_emp;
+	
+end;

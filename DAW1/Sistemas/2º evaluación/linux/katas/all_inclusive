@@ -1,0 +1,22 @@
+#!/bin/bash
+
+word=$1
+arr=$(echo $2 | tr ' ' '\n' | sort)
+
+rotate(){
+    local first=$(echo $1 | cut -c1)
+    local rest=$(echo $1 | cut -c2-)
+    echo $rest$first
+}
+
+first=$(for i in $(eval echo {1..${#word}}) ; do
+    echo $word
+    word=$(rotate $word)
+done | sort)
+
+result=$(join -1 1 -2 1 <(echo $first | tr ' ' '\n') <(echo $arr | tr ' ' '\n'))
+if [ "$first" == "$result" ] ; then
+    echo true
+else
+    echo false
+fi

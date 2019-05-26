@@ -1,0 +1,9 @@
+
+Nsquid:S1220""Move this file to a named package.8ñêéñï-HêRMINORZ
+CODE_SMELL
+}squid:S00116"ORename this field "a√±o" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÎÕ˚›HÊRMINORZ
+CODE_SMELL
+squid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ç¸‚£HÁRMINORZ
+CODE_SMELL
+Üsquid:S1210"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(á’‘œH„RMINORZ
+CODE_SMELL

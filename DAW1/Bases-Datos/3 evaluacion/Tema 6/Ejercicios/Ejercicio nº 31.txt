@@ -1,0 +1,50 @@
+-- Cabera
+
+create or replace package pkg31
+
+is
+
+ type r_nombre is record
+ (
+  nom a.emp.nom%type,
+  apes a.emp.apes%type
+ );
+
+ type r_salario is record
+ (
+  bruto a.emp.sal%type,
+  neto a.emp.sal%type,
+  retencion number(5,2)
+ );
+
+ type r_formacion is record
+ (
+  porcer number(3,0),
+  pornocer number(3,0),
+  horas number(4,0),
+  porhordep number(3,0),
+  porhoremp number(2,0)
+ );
+
+ type r_empleado is record
+ (
+  nombre r_nombre,
+  salario r_salario,
+  formacion r_formacion
+ );
+
+ cursor c_cod is select cod from a.emp;
+
+
+end pkg31;
+
+-- Cuerpo
+
+create or replace package body pkg31
+
+as
+
+end pkg31;
+
+
+

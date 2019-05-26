@@ -1,0 +1,31 @@
+select nom,apes from a.emp
+where
+(
+ sal<(select avg(sal) from a.emp e
+      where
+       (
+        e.num_dp=emp.num_dp
+        and
+        e.cod<>emp.cod
+       )
+      )
+);
+
+
+select ... from ...
+where
+ (
+  (select ... from ...)
+  and
+  (select ... from ...)
+ );
+
+select ... from ...
+where
+ (
+  select ... from ...
+   where
+    (
+     (select ... from ...)
+    )
+  );

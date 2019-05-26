@@ -1,0 +1,90 @@
+Escribe el bloque anónimo del ejercico nº 11 usando un cursor con parámetros:
+
+Nombre: -- del curso
+Duración:
+Ciudad:
+
+Relación de asistentes:
+Nombre: -- del empleado
+Faltas:
+Certificado: -- Si o No
+Gastos:
+
+======================================================================================================
+set serveroutput on size 1000000;
+set timing on;
+
+declare
+
+--CURSOR Y VARIABLES DE CURSOR
+
+	cursor c_cur is 
+		select distinct codcur,nom,dur,lug from a.cur,a.ast where codcur=codcur_cr;
+
+	v_cur c_cur%rowtype;
+
+	
+	cursor c_ast (p_codcur a.cur.codcur%type) is 
+		select cod_em,fal,cer from a.ast where p_codcur=codcur_cr;
+
+	v_ast c_ast%rowtype;
+
+--VARIABLES
+	
+	v_nomEmp char(10);
+	v_apesEmp char(25);
+	v_gas number(6,2);
+
+begin
+
+	open c_cur;
+	fetch c_cur into v_cur;
+	while c_cur%found loop
+		
+		--NOMBRE,DURACION,LUGAR CURSO
+
+		dbms_output.put_line('=========================================================');
+		dbms_output.put_line('Nombre:'||v_cur.nom);
+		dbms_output.put_line('Duración:'||v_cur.dur);
+		dbms_output.put_line('Ciudad:'||v_cur.lug);
+		dbms_output.put_line('=====================');
+		
+		open c_ast(v_cur.codcur);
+		fetch c_ast into v_ast;
+		while c_ast%found loop
+			
+			--NOMBRE EMPLEADO
+
+			select nom,apes into v_nomEmp,v_apesEmp from a.emp
+			where cod=v_ast.cod_em;
+
+			--GASTOS EMPLEADO
+
+			select sum(imp) into v_gas from a.gas
+			where cod_em_as=v_ast.cod_em and codcur_cr_as=v_cur.codcur;
+
+			--COMPROBACION SUM NULL
+
+			if v_gas is null
+				then
+				v_gas:=0;
+			end if;
+
+			dbms_output.put_line('Nombre:'||v_nomEmp||' '||v_apesEmp);
+			dbms_output.put_line('Faltas:'||v_ast.fal);
+                        if v_ast.cer='S'
+                         then
+                          dbms_output.put_line('Certificado:Si');
+                         else
+                          dbms_output.put_line('Certificado:No');
+                        end if;
+			dbms_output.put_line('Gastos:'||v_gas);
+			dbms_output.put_line(chr(10));
+
+			fetch c_ast into v_ast;
+		end loop;
+		close c_ast;
+		fetch c_cur into v_cur;
+	end loop;
+	close c_cur;
+end;

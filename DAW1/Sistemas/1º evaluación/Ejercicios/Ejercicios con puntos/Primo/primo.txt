@@ -1,0 +1,51 @@
+LDA #8
+STA $F9; NÚMERO
+LDA #2
+STA $FA; CONTADOR
+LDA #0
+STA $FC; DIVIDENDO
+STA $FD; DIVISOR
+STA $FE; DIVISORES
+LDA #1
+STA $FF; PRIMO
+
+LDA $F9
+CMP #2
+JC $1E
+LDA #0
+STA $FF
+HLT
+
+	LDA $F9
+ 	STA $FC
+	LDA $FA
+	STA $FD
+
+		LDA $FC
+		SUB $FD
+		STA $FC
+	CMP $FD
+	JC $26
+
+ 	CMP #0
+	JNZ $40
+ 		LDA $FE
+		INA
+		STA $FE
+		           CMP #1
+                           JNC $40
+                           JZ $40
+                           LDA #0
+                           STA $FF
+ 		           HLT
+	
+	LDA $FA
+	INA
+	STA $FA
+        LDA $F9
+	CMP $FA
+        JZ $4A
+	JNC $4C
+	JMP $1E
+
+HLT

@@ -1,0 +1,13 @@
+
+public class PruebaPunto {
+
+	public static void main(String[] args) throws Exception {
+				
+		Punto p1=new Punto(1,2);
+		Punto p2=new Punto(5,2);
+		Punto p3=new Punto(null);
+		double distancia = p1.distanciaOtroPunto(p2);
+		System.out.println(distancia);		
+	}
+
+}

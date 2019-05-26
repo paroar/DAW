@@ -1,0 +1,47 @@
+
+public class Nodo {
+	private Asignatura info;
+	private Nodo sig;
+	public Nodo() {
+		this.sig=null;
+	}
+	
+	public Nodo(Asignatura dato) {
+		this.sig=null;
+		this.info=dato;
+	}
+	public Asignatura getInfo() {
+		return info;
+	}
+	public void setInfo(Asignatura info) {
+		this.info = info;
+	}
+	public Nodo getSig() {
+		return sig;
+	}
+	public void setSig(Nodo sig) {
+		this.sig = sig;
+	}
+	
+	//Añadir por el principio
+	public void addPpio(Alumno a,Asignatura dato) {
+		Nodo nodo=new Nodo(dato);
+		nodo.setSig(a.getAsignaturas());
+		a.setAsignaturas(nodo);
+	}
+	
+	//Añadir por el final
+	public void addFinal(Alumno a,Asignatura dato) {
+		Nodo nodo;
+		Nodo p=a.getAsignaturas();
+		if(a.getAsignaturas()==null) {
+			this.addPpio(a,dato);
+		}else {
+			nodo=new Nodo(dato);
+			while(p.getSig()!=null) {
+				p=p.getSig();
+			}
+			p.setSig(nodo);
+		}
+	}
+}

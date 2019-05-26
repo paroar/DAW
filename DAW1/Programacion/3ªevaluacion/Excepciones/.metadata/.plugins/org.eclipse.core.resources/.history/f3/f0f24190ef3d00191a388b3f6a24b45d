@@ -1,0 +1,52 @@
+
+public class Grupo{
+	private NodoGrupo grupo;
+	private String nombreGrupo;
+	
+	public Grupo() {
+		this.grupo=null;
+	}
+
+	public NodoGrupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(NodoGrupo grupo) {
+		this.grupo = grupo;
+	}
+
+	public String getNombreGrupo() {
+		return nombreGrupo;
+	}
+
+	public void setNombreGrupo(String nombreGrupo) {
+		this.nombreGrupo = nombreGrupo;
+	}
+	
+	//Añadir alumno
+	
+	public void addOrdenado(Alumno a){
+		NodoGrupo nodo,p,q;
+		nodo=new NodoGrupo(a);
+		CompararPorApellidos comparador=new CompararPorApellidos();
+		if(this.grupo==null || comparador.compare(a, this.grupo.getAlumno())){
+			nodo.setSig(this.com);
+			this.com=nodo;
+		}else {
+			p=this.com;
+			q=p.getSig();
+			while(q!=null && q.getInfo()<dato) {
+				p=p.getSig();
+				q=q.getSig();
+			}
+			if(q==null) {
+				p.setSig(nodo);
+			}else {
+				nodo.setSig(p.getSig());
+				p.setSig(nodo);
+			}
+		}
+	}
+}
+
+

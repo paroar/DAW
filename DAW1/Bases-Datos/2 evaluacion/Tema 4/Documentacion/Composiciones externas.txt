@@ -1,0 +1,25 @@
+COMPOSICIONES EXTERNAS
+======================
+
+select ... from T1 LEFT OUTER JOIN T2
+ON pk=fk;
+
+select dep.nom,count(cod) from a.dep left outer join a.emp on num=num_dp
+group by dep.nom;
+
+select dep.nom,emp.nom,apes from a.emp left outer join a.dep on num=num_dp;
+
+select ... from T1 RIGHT OUTER JOIN T2
+ON pk=fk;
+
+select dep.nom,count(cod) from a.emp right outer join a.dep on num=num_dp
+group by dep.nom;
+
+select dep.nom,emp.nom,apes from a.dep right outer join a.emp on num=num_dp;
+
+select ... from T1 FULL OUTER JOIN T2 ON pk=fk;
+
+select emp.nom,apes,dep.nom from a.dep full join a.emp on num=num_dp;
+
+
+

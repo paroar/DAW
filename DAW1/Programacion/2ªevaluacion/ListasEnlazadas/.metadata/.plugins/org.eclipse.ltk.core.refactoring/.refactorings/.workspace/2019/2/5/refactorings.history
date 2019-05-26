@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;insertCeroAfterSum&apos;" deleteContents="true" description="Delete resource &apos;insertCeroAfterSum&apos;" element1="/insertCeroAfterSum" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1549137695752"/>&#x0A;<refactoring comment="Delete resource &apos;isContained&apos;" deleteContents="true" description="Delete resource &apos;isContained&apos;" element1="/isContained" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1549212217638"/>
+</session>

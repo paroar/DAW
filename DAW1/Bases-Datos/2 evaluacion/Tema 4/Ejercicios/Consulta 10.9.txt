@@ -1,0 +1,95 @@
+Nombre y apellidos de los empleados que tienen algún gasto superior al de todos los empleados del departamento Comercial que han asistido a cursos en los que obtuvieron certificado.
+
+
+- Gastos de los empleados de Comercial en cursos donde obtubieron certificado
+
+ select imp from a.gas,a.ast,a.emp,a.dep
+ where
+  (
+   num=num_dp
+   and
+   cod=cod_em
+   and
+   cod_em=cod_em_as
+   and codcur_cr=codcur_cr_as
+   and cer='S'
+   and dep.nom='Comercial'
+  );
+
+-------------------------------------------------------------------
+
+ select max(imp) from a.gas,a.ast,a.emp,a.dep
+ where
+  (
+   num=num_dp
+   and
+   cod=cod_em
+   and
+   cod_em=cod_em_as
+   and 
+   codcur_cr=codcur_cr_as
+   and
+   cer='S'
+   and dep.nom='Comercial'
+  );
+
+-------------------------------------------------------------------
+
+ select emp.nom,apes,imp from a.dep,a.emp,a.gas
+ where
+  (
+   num=num_dp
+   and
+   cod=cod_em_as
+   and 
+   dep.nom<>'Comercial'
+  );
+
+-------------------------------------------------------------------
+
+
+ select distinct emp.nom,apes from a.emp,a.gas
+ where
+  (
+   cod=cod_em_as
+   and
+   imp>
+    (
+     select max(imp) from a.gas,a.ast,a.emp,a.dep
+     where
+      (
+       num=num_dp
+       and
+       cod=cod_em
+       and
+       cod_em=cod_em_as
+       and
+       codcur_cr=codcur_cr_as
+       and
+       cer='S'
+       and
+       dep.nom='Comercial'
+      )
+    )
+  );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

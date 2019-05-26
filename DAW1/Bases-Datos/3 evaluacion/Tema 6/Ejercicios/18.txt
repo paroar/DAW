@@ -1,0 +1,122 @@
+Escribe un bloque anónimo que almacene la siguiente información del empleado de código 025100 en una variable de tipo registro:
+
+Nombre completo, salario bruto, salario neto, importe de la retención, % de certificados, % de no certificados, horas de formación y 
+% de formacion con respecto a la empresa y a su departamento. Los datos personales, salariales y de formación son, a su vez, de tipo registro.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+set serveroutput on size 100000;
+
+declare
+
+TYPE r_personales IS RECORD
+(
+ nomApes char(70)
+);
+
+TYPE r_salariales IS RECORD
+(
+ salBruto number(7,2),
+ salNeto number(7,2),
+ retencion number(7,2)
+);
+
+TYPE r_formacionales IS RECORD
+(
+ percenCer number(3,0),
+ percenNoCer number(3,0),
+ horasFormacion number(5),
+ percenHorasEmp number(3,0),
+ percenHorasDep number(3,0)
+);
+
+Type r_empleado IS RECORD
+(
+ personales r_personales,
+ salariales r_salariales,
+ formacionales r_formacionales 
+);
+
+v_empleado r_empleado;
+v_tcer number(3);
+v_cerS number(3);
+v_horEmp number(4);
+v_horDep number(4);
+v_codDep a.dep.num%type;
+v_tcerDep number(4);
+v_tcerEmp number(4);
+
+begin
+
+
+
+--DATOS PERSONALES
+
+ select nom||' '||apes into v_empleado.personales.nomApes from a.emp
+ where cod='025100';
+
+--DATOS SALARIALES
+ 
+ select sal,sal-(sal*irpf/100),sal*irpf/100 into v_empleado.salariales.salBruto,v_empleado.salariales.salNeto,v_empleado.salariales.retencion from a.emp
+ where cod='025100';
+
+--DATOS FORMACIONALES
+
+ select count(codcur_cr) into v_tcer from a.ast
+ where cod_em='025100';
+
+ if v_tcer>0
+ then
+
+	--CERTIFICADOS	
+
+ 	select count(codcur_cr) into v_cerS from a.ast
+ 	where cod_em='025100' and cer='S';
+ 
+ 	select count(codcur_cr) into v_tcerDep from a.ast,a.emp
+ 	where num_dp=v_codDep and cod=cod_em;  
+
+	--%CERTIFICADOS
+
+	v_empleado.formacionales.percenCer:=(v_cerS/v_tcer)*100;
+ 	v_empleado.formacionales.percenNoCer:=(1-v_cerS/v_tcer)*100;
+
+	--HORAS
+	
+ 	select sum(dur) into v_empleado.formacionales.horasFormacion from a.ast,a.cur
+ 	where cod_em='025100' and codcur_cr=codcur;
+
+	--HORAS
+
+	 select sum(dur) into v_horEmp from a.ast,a.cur where codcur_cr=codcur;
+	 select num_dp into v_codDep from a.emp where cod='025100';
+	 select sum(dur) into v_horDep from a.ast,a.cur,a.emp where codcur_cr=codcur and cod_em=cod and num_dp=v_codDep;
+
+	--%HORAS
+
+	v_empleado.formacionales.percenHorasEmp:=(v_empleado.formacionales.horasFormacion/v_horEmp)*100;
+	v_empleado.formacionales.percenHorasDep:=(v_empleado.formacionales.horasFormacion/v_horDep)*100;
+	
+ else
+
+	v_empleado.formacionales.percenCer:=0;
+	v_empleado.formacionales.percenNoCer:=0;
+	v_empleado.formacionales.horasFormacion:=0;
+	v_empleado.formacionales.percenHorasEmp:=0;
+	v_empleado.formacionales.percenHorasDep:=0;
+
+ end if;
+
+--MOSTRAR DATOS
+
+ dbms_output.put_line('Nombre:'||v_empleado.personales.nomApes);
+ dbms_output.put_line('Salario bruto:'||v_empleado.salariales.salBruto);
+ dbms_output.put_line('Salario neto:'||v_empleado.salariales.salNeto);
+ dbms_output.put_line('Retención:'||v_empleado.salariales.retencion);
+ dbms_output.put_line('%Certificados:'||v_empleado.formacionales.percenCer);
+ dbms_output.put_line('%NOCertificados:'||v_empleado.formacionales.percenNoCer);
+ dbms_output.put_line('Horas de formación:'||v_empleado.formacionales.horasFormacion);
+ dbms_output.put_line('%Horas formacion empresa:'||v_empleado.formacionales.percenHorasEmp);
+ dbms_output.put_line('%Horas formacion departamento:'||v_empleado.formacionales.percenHorasDep);
+
+ 
+end;

@@ -1,0 +1,10 @@
+
+d
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÝÝøÂH6RMAJORZ
+CODE_SMELL
+squid:S001126"FDefine and throw a dedicated exception instead of using a generic one.(¬¿³íúÿÿÿÿ8±·»õ’-H>RMAJORZ
+CODE_SMELL
+Tsquid:S1481/"(Remove this unused "res" local variable.(óœÏþH8RMINORZ
+CODE_SMELL
+Fsquid:S1220""Move this file to a named package.H7RMINORZ
+CODE_SMELL

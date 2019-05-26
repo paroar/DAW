@@ -1,0 +1,27 @@
+11.
+
+Nombre de las empresas cuyos profesores han impardido mas de dos sesiones.
+
+select distinct emp from a.pro,a.ses
+where
+ (
+  codpro=codpro_pr
+ )
+group by emp,codpro
+having count(codcur_cr)>2;
+
+
+
+-------------------
+
+group by emp,codpro
+
+select emp,nom,apes,codcur_cr from a.pro,a.ses
+where codpro=codpro_pr
+order by 1,2,3;
+
+group by emp,codcur_cr
+
+select emp,codcur_cr,nom,apes from a.pro,a.ses
+where codpro=codpro_pr
+order by 1,2;

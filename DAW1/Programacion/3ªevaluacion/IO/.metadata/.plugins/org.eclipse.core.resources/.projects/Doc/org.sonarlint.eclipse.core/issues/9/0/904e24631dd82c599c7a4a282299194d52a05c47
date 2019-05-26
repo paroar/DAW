@@ -1,0 +1,34 @@
+
+csquid:S1066t"/Merge this if statement with the enclosing one.(¨ñˆ‚8øêÚÛ©-H™	RMAJORZ
+CODE_SMELL
+»squid:S2681v"†This line will not be executed conditionally; only the first line of this 2-line block will be. The rest will execute unconditionally.(ì“³æ8øêÚÛ©-Hš	RMAJORZ
+CODE_SMELL
+Ssquid:S1659E"Declare "a" on a separate line.(¦³×8øêÚÛ©-H›	RMINORZ
+CODE_SMELL
+Ssquid:S1659k" Declare "an" on a separate line.(ò…áz8øêÚÛ©-Hœ	RMINORZ
+CODE_SMELL
+€squid:S1871`"LThis branch's code block is the same as the block for the branch on line 94.(¤ŠèÒ8øêÚÛ©-H	RMAJORZ
+CODE_SMELL
+hsquid:S1066="/Merge this if statement with the enclosing one.(¬Œ’ëÿÿÿÿÿ8øêÚÛ©-H	RMAJORZ
+CODE_SMELL
+“squid:S3973="WUse curly braces or indentation to denote the code conditionally executed by this "if".(¬Œ’ëÿÿÿÿÿ8øêÚÛ©-HŸ	RCRITICALZ
+CODE_SMELL
+squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(…¢¯´şÿÿÿÿH 	RMINORZ
+CODE_SMELL
+Rsquid:S1659k"Declare "a" on a separate line.(ò…áz8øêÚÛ©-H¡	RMINORZ
+CODE_SMELL
+Rsquid:S1659k"Declare "m" on a separate line.(ò…áz8øêÚÛ©-H¢	RMINORZ
+CODE_SMELL
+“squid:S39737"WUse curly braces or indentation to denote the code conditionally executed by this "if".(Ëô’Úúÿÿÿÿ8øêÚÛ©-H£	RCRITICALZ
+CODE_SMELL
+“squid:S3973p"WUse curly braces or indentation to denote the code conditionally executed by this "if".(Ğ£ˆúÿÿÿÿ8øêÚÛ©-H¤	RCRITICALZ
+CODE_SMELL
+squid:S3973s"WUse curly braces or indentation to denote the code conditionally executed by this "if".(Ù¸¦ß8øêÚÛ©-H¥	RCRITICALZ
+CODE_SMELL
+vsquid:S2583="DChange this condition so that it does not always evaluate to "false"(¬Œ’ëÿÿÿÿÿ8øêÚÛ©-H¦	RMAJORZBUG
+squid:S39733"WUse curly braces or indentation to denote the code conditionally executed by this "if".(ÂÔûé8øêÚÛ©-H§	RCRITICALZ
+CODE_SMELL
+squid:S3973t"WUse curly braces or indentation to denote the code conditionally executed by this "if".(¨ñˆ‚8øêÚÛ©-H¨	RCRITICALZ
+CODE_SMELL
+Ssquid:S1659E"Declare "m" on a separate line.(¦³×8øêÚÛ©-H©	RMINORZ
+CODE_SMELL

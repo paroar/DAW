@@ -1,0 +1,29 @@
+declare
+
+ cursor cur_empleado is
+ select nom,apes,sal,irpf,sal*irpf/100 as ret from a.emp;
+
+ v_empleado cur_empleado%rowtype;
+
+begin
+
+ open cur_empleado;
+
+ loop
+
+  fetch cur_empleado into v_empleado;
+
+  exit when cur_empleado%notfound;
+  
+  dbms_output.put_line('Nombre:'||v_empleado.nom||' '||v_empleado.apes);
+  dbms_output.put_line('Salario bruto:'||v_empleado.sal);
+  dbms_output.put_line('IRPF:'||v_empleado.irpf);
+  dbms_output.put_line('Retención:'||v_empleado.ret); 
+  
+ end loop;
+
+ dbms_output.put_line('Filas leidas:'||cur_empleado%rowcount);
+
+ close cur_empleado;
+
+end;

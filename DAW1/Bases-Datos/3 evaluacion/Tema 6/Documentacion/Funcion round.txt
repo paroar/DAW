@@ -1,0 +1,32 @@
+declare
+
+ v float;
+
+begin
+
+ v:=14.587/3.214;
+
+ v:=round(v,2);
+
+ dbms_output.put_line(v);
+
+ v:=round(v,0);
+
+ dbms_output.put_line(v);
+
+end;
+
+------------------------------------------------------
+
+declare
+
+ v float;
+
+begin
+
+ v:=14.587/3.214;
+
+ dbms_output.put_line(round(v,2));
+
+
+end;

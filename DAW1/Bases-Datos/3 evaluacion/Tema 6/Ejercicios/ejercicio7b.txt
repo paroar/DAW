@@ -1,0 +1,84 @@
+Escribe un bloque anónimo que visualice la siguiente información de todos los empleados de la bases de datos:
+
+INFORME DE EMPLEADOS
+
+Departamento:
+Nombre:
+Salario neto:
+Total de cursos realizados:
+Faltas de asistencia:
+Total de gastos:
+
+Si el empleado no pertenece a ningún departamento, en lugar del nombre vamos a visualizar el mensaje Sin asignar.
+
+===================================================================================================
+
+declare
+
+--CURSORES
+
+cursor cur_emp is
+select nom, apes, sal*(1-irpf)/100 as salNeto, num_dp, cod from a.emp;
+
+v_emp cur_emp%rowtype;
+
+--VARIABLES
+
+v_dep cur_emp.num%type;
+v_tc number(3,0);
+v_tfal number(3,0);
+v_tgas number(4,0);
+
+begin
+
+	open cur_emp;
+	fetch cur_emp into v_emp;
+	while cur_emp%found loop
+	
+		--DEPARTAMENTO
+
+		if v_emp.num_dp is null
+			then
+			dbms_output_line('Departamento:'||'sin asignar');
+		else
+			dbms_output_line('Departamento:'||v_emp.num_dp);
+		end if;
+		
+		--NOMBRE Y SALARIO NETO
+
+		dbms_output_line('Nombre:'||v_emp.nom||' '||v_emp.apes);
+		dbms_output_line('Salario neto:'||v_emp.salNeto);
+
+		--TOTAL CURSOS Y FALTAS
+		
+		select count(codcur), sum(fal) into v_tc,v_tfal from a.ast
+		where cod_em=v_emp.cod;
+
+		if v_fal is null
+			then
+			v_fal:=0;
+		end if;
+
+		dbms_output_line('Total cursos:'||v_tc);
+		dbms_output_line('Total faltas:'||v_tfal);
+
+		--TOTAL GASTOS
+
+		select sum(imp) into v_tgas from a.gas
+		where cod_em_as=v_emp.cod;
+
+		if v_tgas is null
+			then
+			v_tgas:=0;
+		end if;
+
+		dbms_output_line('Total gastos:'||v_tgas);
+
+		fetch cur_emp into v_emp;
+	end loop;
+	close cur_emp;
+end;
+		
+		
+
+		

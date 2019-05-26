@@ -1,0 +1,127 @@
+Convierte en un procedimiento almacenado el bloque anónimo del ejercico 18. Usa como parámetro de entrada el código de empleado. Las variables de tipo registro hay que declararlas haciendo referencia al paquete del ejercicio 31.
+
+create or replace procedure proc32
+(
+ p_cod in a.emp.cod%type
+)
+
+is
+
+ v_nombre pkg31.r_nombre;
+ v_salario pkg31.r_salario;
+ v_formacion pkg31.r_formacion;
+ v_empleado pkg31.r_empleado;
+
+ v_cer number(3,0);    -- nº de certificados del empleado
+ v_nocer number(3,0);  -- nº de no certificados del empleado
+ v_hor number(4,0);    -- horas de formación del empleado
+ v_hordep number(5,0); -- horas de formación del departamento
+ v_horemp number(6,0); -- horas de formación de la empresa
+ v_flag number(1);     -- para comprobar si el empleado tiene departamento asignado
+
+begin
+
+ -- datos personales
+
+ select nom,apes into v_nombre from a.emp
+ where cod=p_cod;
+
+ v_empleado.nombre:=v_nombre;
+
+ -- datos salariales
+
+ select sal,sal*(1-irpf/100),sal*irpf/100 into v_salario from a.emp
+ where cod=p_cod;
+
+ v_empleado.salario:=v_salario;
+
+ -- datos de certificación
+
+ select count(cer) into v_cer from a.ast
+ where cod_em=p_cod and cer='S';
+
+ select count(cer) into v_nocer from a.ast
+ where cod_em=p_cod and cer='N';
+
+ -- comprobar si el empleado ha hecho cursos
+
+ if v_cer+v_nocer>0
+  then
+   -- empleado con formación. Horas de formación
+
+   select sum(dur) into v_empleado.formacion.horas from a.ast,a.cur
+   where (codcur=codcur_cr) and cod_em=p_cod;
+
+   -- horas de formación de la empresa
+
+   select sum(dur) into v_horemp from a.ast,a.cur
+   where codcur=codcur_cr;
+
+   -- porcentaje respecto a la empresa
+
+   v_empleado.formacion.porhoremp:=100*v_empleado.formacion.horas/v_horemp;
+
+   -- comprobar si el empleado tiene departamento asignado
+
+   select count(num_dp) into v_flag from a.emp
+   where cod=p_cod;
+
+   if v_flag=1
+    then
+     -- Horas de formación del departamento y porcentaje respecto al mismo
+     select sum(dur) into v_hordep from a.ast,a.cur,a.emp
+     where codcur=codcur_cr
+     and
+     cod=cod_em
+     and
+     num_dp=(select num_dp from a.emp where cod=p_cod);
+     v_empleado.formacion.porhordep:=100*v_empleado.formacion.horas/v_hordep;
+    else
+     v_empleado.formacion.porhordep:=0;
+   end if;
+
+   -- comprobar si tiene todo certificado o todo no certificado
+
+   if v_cer=0
+    then
+     v_empleado.formacion.porcer:=0;
+     v_empleado.formacion.pornocer:=100;
+    elsif v_nocer=0
+     then
+      v_empleado.formacion.porcer:=100;
+      v_empleado.formacion.pornocer:=0;
+     else
+      v_empleado.formacion.porcer:=100*v_cer/(v_cer+v_nocer);
+      v_empleado.formacion.pornocer:=100*v_nocer/(v_cer+v_nocer);
+   end if;
+  else
+   -- empleado sin formación
+   v_empleado.formacion.porcer:=0;
+   v_empleado.formacion.pornocer:=0;
+   v_empleado.formacion.horas:=0;
+   v_empleado.formacion.porhordep:=0;
+   v_empleado.formacion.porhoremp:=0;
+ end if;
+
+ -- visualización de datos
+
+ dbms_output.put_line('Nombre:'||v_empleado.nombre.nom||' '||v_empleado.nombre.apes);
+ dbms_output.put_line('Salario bruto:'||v_empleado.salario.bruto);
+ dbms_output.put_line('Salario neto:'||v_empleado.salario.neto);
+ dbms_output.put_line('Retención:'||v_empleado.salario.retencion);
+ dbms_output.put_line('% de certificados:'||v_empleado.formacion.porcer);
+ dbms_output.put_line('% de no certificados:'||v_empleado.formacion.pornocer);
+ dbms_output.put_line('Horas de formación:'||v_empleado.formacion.horas);
+ dbms_output.put_line('% de formación con respecto a la empresa:'||v_empleado.formacion.porhoremp);
+ dbms_output.put('% de formación con respecto a su departamento:'||v_empleado.formacion.porhordep);
+
+ -- indicar si el empleado no tiene departamento asignado
+
+ if v_empleado.formacion.porhordep=0
+  then
+   dbms_output.put_line(' (Sin departamento asignado)');
+  else
+   dbms_output.put_line(' ');
+ end if;
+
+end proc32;

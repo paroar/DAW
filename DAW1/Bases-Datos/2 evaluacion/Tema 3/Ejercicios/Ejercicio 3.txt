@@ -1,0 +1,53 @@
+alter table cliente
+add telefono char(9)
+constraint cliente_nn1 not null;
+
+alter table vehiculo
+add combustible char(8);
+
+alter table vehiculo
+add fechacompra date;
+
+alter table vehiculo
+add puertas number(1,0);
+
+alter table oficina
+drop column ciudad;
+
+alter table oficina
+add direccion varchar(50);
+
+alter table oficina
+add poblacion varchar(50);
+
+alter table oficina
+add provincia varchar(50);
+
+alter table oficina
+add cp char(5);
+
+alter table vehiculo
+add constraint vehiculo_ck1 check (puertas in (3,5));
+
+alter table vehiculo
+add constraint vehiculo_ck2 check (combustible in ('Diesel','Sin Plomo'));
+
+alter table incidencia
+add tipo char(1)
+constraint incidencia_ck5 check (tipo in('A','R','F'));
+
+alter table incidencia
+add mat char(7);
+
+alter table incidencia
+add dni char(10);
+
+alter table incidencia
+add constraint incidencia_fk1 foreign key(dni,mat)
+references devolucion(dni,mat);
+
+alter table cliente
+drop constraint cliente_nn1;
+
+alter table oficina
+add constraint oficina_ck1 check (cp>='01000' and cp<='52999');

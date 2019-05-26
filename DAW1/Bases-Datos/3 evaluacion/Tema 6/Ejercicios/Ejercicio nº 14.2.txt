@@ -1,0 +1,59 @@
+Escribe un bloque anónimo que visualice la siguiente información para los empleados que han asistido a cursos con gastos:
+
+Nombre: -- del empleado
+Curso: -- nombre del curso
+
+Relación de gastos:
+Tipo: -- de gasto
+Fecha:
+Importe:
+
+======================================================================================================
+
+declare
+
+ -- Variables de aclopamiento
+
+ v_cod a.emp.cod%type;
+ v_codcur a.cur.codcur%type;
+
+ -- Cursores
+
+ cursor c_emp is select codcur,cur.nom as nomc,cod,emp.nom,apes from a.cur,a.emp,a.ast
+ where (cod=cod_em and codcur=codcur_cr)
+ and (select count(imp) from a.gas where cod_em_as=cod and codcur_cr_as=codcur)>0;
+
+ cursor c_gas is select den,imp,fec from a.gas,a.tgas
+ where (codgas=codgas_tg) and (cod_em_as=v_cod and codcur_cr_as=v_codcur);
+
+begin
+
+ for v_emp in c_emp loop
+
+  dbms_output.put_line('Nombre:'||v_emp.nom||' '||v_emp.apes);
+  dbms_output.put_line('Curso:'||v_emp.nomc);
+
+  dbms_output.put_line(chr(10));
+  dbms_output.put_line('Relación de gastos:');
+
+  v_cod:=v_emp.cod;
+  v_codcur:=v_emp.codcur;
+
+  for v_gas in c_gas loop
+
+   dbms_output.put_line('Tipo:'||v_gas.den);
+   dbms_output.put_line('Fecha:'||v_gas.fec);
+   dbms_output.put_line('Importe:'||v_gas.imp);
+   dbms_output.put_line(chr(10));
+
+  end loop;
+
+ end loop;
+
+end;
+
+
+
+
+
+

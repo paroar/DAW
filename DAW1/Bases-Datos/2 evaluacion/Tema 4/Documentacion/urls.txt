@@ -1,0 +1,3 @@
+URL						CONTENIDO
+---						---------
+https://www.aulaclic.es/sql/t_3_5.htm		Composiciones externas

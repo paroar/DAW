@@ -1,0 +1,47 @@
+DESC producto;
+
+INSERT INTO producto VALUES
+('REI','2A45C','V stago Trinquete',79,210);
+('FEA','114','Bancada Motor',243,15)
+
+commit;
+
+INSERT INTO repventa VALUES
+('106','Jose Maldonado',52,11,'VP Ventas','14/06/1998',NULL,25.000,32.958)
+
+INSERT INTO oficina values
+('22','Toledo','Centro',null,27500,34432)
+
+INSERT INTO cliente values
+('2101','Exclusivas Soriano S.A.','106',65000)
+
+INSERT INTO pedido values
+('112989','03/01/2000','2101','106','FEA','114',6,1458)
+
+---------------------------------------------------------------------------------------
+
+
+insert into oficina values
+(22,'Toledo','Centro','108',27500,34432);
+
+insert into repventa values
+('107','Natalia Martin',49,'22','Rep. Ventas','14/11/1998','108',27500,34432);
+
+insert into cliente values
+('2124','Domingo S.L.','107',40000);
+
+insert into pedido values
+('113062','24/02/2000','2124','107','FEA','114',10,2430);
+
+
+
+
+
+
+
+
+
+
+
+insert into pedido values
+('113042','02/02/2000','2113','101','REI','2A44R',5,22500);

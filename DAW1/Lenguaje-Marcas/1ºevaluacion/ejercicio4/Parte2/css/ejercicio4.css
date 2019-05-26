@@ -1,0 +1,49 @@
+/*Global*/
+body{
+	background-image: url("../img/sponge.png");
+}
+
+ul{
+	border-style: solid;
+	border-width: 1px;
+	display: inline-block;
+	background-color: #f1f1f1;
+}
+
+/*Topnav position*/
+.topnav ul{
+	padding-left: 0;
+}
+
+.topnav li{
+	display: inline-block;
+	padding: 6px;
+}
+
+/*Topnav decoration*/
+.underline{
+	text-decoration: underline;
+}
+
+.topnav li:hover{
+	background-color: #ccc;
+}
+
+/*Botlist position*/
+.botlist ul{
+	padding: 10px 10px 10px 45px;
+	margin: 10px;
+}
+
+/*Bottom-list Icons*/
+.list1 li{
+	list-style-image: url("../img/pumba.png");
+}
+
+.list2 li{
+	list-style-image: url("../img/mouse.png");
+}
+
+.list3 li{
+	list-style-image: url("../img/pooh.png");
+}

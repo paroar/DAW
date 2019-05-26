@@ -1,0 +1,9 @@
+Contenidos del documento SQL-I que entran en el examen
+======================================================
+
+3.5.4
+3.5.6
+3.5.7
+3.6 excepto 3.6.6, 3.6.9
+3.7
+

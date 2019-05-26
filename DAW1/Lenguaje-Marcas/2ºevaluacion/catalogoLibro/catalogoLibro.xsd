@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="tipoNombre">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="tipoMes">
+    <xs:restriction base="xs:positiveInteger">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="12"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="tipoAño">
+    <xs:restriction base="xs:positiveInteger">
+      <xs:minInclusive value="1990"/>
+      <xs:maxInclusive value="2011"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="tipoISBN">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="13"/>
+      <xs:maxLength value="17"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+<!--elementos simples-->
+
+<xs:element name="titulo" type="tipoNombre"/>
+<xs:element name="autor" type="tipoNombre"/>
+<xs:element name="mes" type="tipoMes"/>
+<xs:element name="año" type="tipoAño"/>
+<xs:element name="isbn" type="tipoISBN"/>
+<xs:element name="editor" type="tipoNombre"/>
+
+
+<!--elementos complejos-->
+
+  <xs:element name="catalogoLibro">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="libro" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>  
+  
+  <xs:element name="libro">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="titulo" type="tipoNombre"/>
+        <xs:element name="autor" maxOccurs="unbounded" type="tipoNombre"/>
+        <xs:element ref="fecha"/>
+        <xs:element name="isbn" type="tipoISBN"/>
+        <xs:element name="editor" type="tipoNombre"/>
+      </xs:sequence>
+      <xs:attribute name="categoria" type="xs:string"/>
+      <xs:attribute name="enstock" type="xs:string"/>
+      <xs:attribute name="revisor" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="fecha">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="mes" maxOccurs="1" type="tipoMes"/>
+        <xs:element name="año" minOccurs="1" maxOccurs="1" type="tipoAño"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+</xs:schema>

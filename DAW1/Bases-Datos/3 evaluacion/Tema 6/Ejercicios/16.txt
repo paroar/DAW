@@ -1,0 +1,51 @@
+Escribe un bloque anónimo que almacene la siguiente información del empleado de código 025100 en una variable de tipo registro:
+
+Nombre completo, nombre del departamento, salario bruto, importe de la retención, gastos de formación y número de cursos realizados.
+=======================================================
+
+declare
+
+TYPE r_nombre IS RECORD
+(
+ nomApes char(70),
+ depNom a.dep.nom%type,
+ salBruto number(7,2),
+ retencion number(7,2),
+ gastos number(7,2),
+ nCur number(3)
+);
+
+v_nombre r_nombre;
+v_nom a.emp.nom%type;
+v_apes a.emp.apes%type;
+
+begin
+
+select emp.nom||' '||apes,dep.nom,sal,sal*irpf/100 into v_nombre.nomApes,v_nombre.depNom,v_nombre.salBruto,v_nombre.retencion from a.emp left join a.dep
+on num=num_dp where cod='125030';
+
+select count(codcur_cr) into v_nombre.nCur from a.ast
+where cod_em='025100';
+
+select sum(imp) into v_nombre.gastos from a.gas 
+where cod_em_as='025100';
+
+if v_nombre.gastos=null
+	then
+	v_nombre.gastos:=0;
+end if;
+
+if v_nombre.depNom is null
+	then
+	v_nombre.depNom:='Sin asignar';
+end if;
+
+dbms_output.put_line('Nombre:'||v_nombre.nomApes);
+dbms_output.put_line('Departamento:'||v_nombre.depNom);
+dbms_output.put_line('Salario bruto:'||v_nombre.salBruto);
+dbms_output.put_line('Retención:'||v_nombre.retencion);
+dbms_output.put_line('Total gastos:'||v_nombre.gastos);
+dbms_output.put_line('Número cursos:'||v_nombre.nCur);
+
+
+end;

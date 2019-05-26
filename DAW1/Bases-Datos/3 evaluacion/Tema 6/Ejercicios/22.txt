@@ -1,0 +1,17 @@
+Escribe un bloque anónimo que use el procedimiento almacenado del ejercicio 21 para visualizar 
+la información de todos los empleados de la empresa.
+
+-----------------------------------------------------------------------------------------
+
+declare
+
+cursor c_emp is select cod from a.emp;
+
+begin
+
+ for v_cod in c_emp loop
+	proc1521(v_cod.cod);
+	dbms_output.put_line(chr(10));
+ end loop;
+
+end;

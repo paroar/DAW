@@ -1,0 +1,15 @@
+declare
+
+v_cur number(3);
+v_flag boolean;
+
+begin
+
+proc25('025100',v_cur,v_flag);
+
+if v_flag
+then
+dbms_output.put_line('Cursos:'||v_cur);
+end if;
+
+end;

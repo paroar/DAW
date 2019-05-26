@@ -1,0 +1,64 @@
+Escribe un bloque anónimo que visualice la siguiente información para los tipos de gastos orgininados por los departamentos:
+
+Tipo de gasto: 
+
+Departamento: 
+Total de gasto:
+Importe medio:
+Importe máximo:
+Importe mínimo:
+
+======================================================================================================
+set serveroutput on size 100000;
+set timing on;
+
+declare
+
+--CURSORES Y VARIABLE DE CURSOR
+
+	cursor c_den is select distinct codgas,den from a.tgas,a.gas 
+	where codgas=codgas_tg;
+
+	v_acoplamientoCodgas a.tgas.codgas%type;
+
+	cursor c_dep is select distinct num,dep.nom from a.dep,a.emp,a.gas 
+	where num=num_dp and cod=cod_em_as and v_acoplamientoCodgas=codgas_tg;
+
+--VARIABLES
+
+v_sum number(7,2);
+v_avg number(7,2);
+v_max a.gas.imp%type;
+v_min a.gas.imp%type;
+
+
+begin
+
+	for v_den in c_den loop
+
+		--MOSTRAR TIPO DE GASTO
+		
+		dbms_output.put_line('========================================');
+		dbms_output.put_line('Tipo de gasto:'||v_den.den);
+		dbms_output.put_line(chr(10));
+	
+		v_acoplamientoCodgas:=v_den.codgas;
+		for v_dep in c_dep loop
+			
+			--SUMA,AVG,MIN,MAX
+			
+			select sum(imp),avg(imp),max(imp),min(imp) into v_sum,v_avg,v_max,v_min from a.gas,a.emp 
+			where cod=cod_em_as and v_acoplamientoCodgas=codgas_tg and v_dep.num=num_dp;
+
+			--MOSTRAR DEPARTAMENTO,SUMA,AVG,MAX,MIN
+
+			dbms_output.put_line('Departamento:'||v_dep.nom);
+			dbms_output.put_line('Total de gasto:'||v_sum);
+			dbms_output.put_line('Importe medio:'||v_avg);
+			dbms_output.put_line('Total de gasto:'||v_max);
+			dbms_output.put_line('Total de gasto:'||v_min);
+			dbms_output.put_line(chr(10));
+			 
+		end loop;
+	end loop;
+end;

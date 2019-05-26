@@ -1,0 +1,126 @@
+Escribe un bloque anónimo que almacene la siguiente información del empleado de código 125030 en una variable de tipo registro y visualice los datos. Si el empleado no tiene asignado departamento, el contenido del elemento debe ser 'Sin asignar'.
+
+Nombre completo, nombre del departamento, salario neto, importe de la retención, gastos de formación y número de cursos realizados.
+
+
+declare
+ 
+ type r_empleado is record
+ (
+  nombre char(51),
+  dep a.dep.nom%type,
+  salneto a.emp.sal%type,
+  retencion number(5,2),
+  gastos number(6,2),
+  cursos number(3,0)
+ );
+
+ v_empleado r_empleado;
+
+begin
+
+ select nom||' '||apes,sal*(1-irpf/100),sal*irpf/100
+ into v_empleado.nombre,v_empleado.salneto,v_empleado.retencion
+ from a.emp where cod='125030';
+
+ select count(codcur_cr) into v_empleado.cursos from a.ast
+ where cod_em='125030';
+
+ select sum(imp) into v_empleado.gastos from a.gas
+ where cod_em_as='125030';
+
+ if v_empleado.gastos is null
+  then
+   v_empleado.gastos:=0;
+ end if;
+
+ select nom into v_empleado.dep from a.dep
+ where num=(select num_dp from a.emp where cod='125030');
+
+ dbms_output.put_line('Nombre:'||v_empleado.nombre);
+ dbms_output.put_line('Departamento:'||v_empleado.dep);
+ dbms_output.put_line('Salario Neto:'||v_empleado.salneto);
+ dbms_output.put_line('Retención:'||v_empleado.retencion);
+ dbms_output.put_line('Gastos:'||v_empleado.gastos);
+ dbms_output.put_line('Cursos:'||v_empleado.cursos);
+
+exception
+
+ when no_data_found
+  then
+   dbms_output.put_line('Nombre:'||v_empleado.nombre);
+   dbms_output.put_line('Departamento:Sin asignar');
+   dbms_output.put_line('Salario Neto:'||v_empleado.salneto);
+   dbms_output.put_line('Retención:'||v_empleado.retencion);
+   dbms_output.put_line('Gastos:'||v_empleado.gastos);
+   dbms_output.put_line('Cursos:'||v_empleado.cursos);  
+
+end;
+
+
+-- Sin sección EXCEPTION
+
+declare
+ 
+ type r_empleado is record
+ (
+  nombre char(51),
+  dep a.dep.nom%type,
+  salneto a.emp.sal%type,
+  retencion number(5,2),
+  gastos number(6,2),
+  cursos number(3,0)
+ );
+
+ v_empleado r_empleado;
+
+ v_cnt number(1,0);
+
+begin
+
+ select nom||' '||apes,sal*(1-irpf/100),sal*irpf/100
+ into v_empleado.nombre,v_empleado.salneto,v_empleado.retencion
+ from a.emp where cod='125030';
+
+ select count(codcur_cr) into v_empleado.cursos from a.ast
+ where cod_em='125030';
+
+ select sum(imp) into v_empleado.gastos from a.gas
+ where cod_em_as='125030';
+
+ if v_empleado.gastos is null
+  then
+   v_empleado.gastos:=0;
+ end if;
+
+ -- Comprobar si el empleado tiene departamento asignado
+
+ select count(num_dp) into v_cnt from a.emp
+ where cod='125030';
+
+ if v_cnt=0
+  then
+   v_empleado.dep:='Sin asignar';
+  else
+   select nom into v_empleado.dep from a.dep
+   where num=(select num_dp from a.emp where cod='125030');
+ end if;
+
+ dbms_output.put_line('Nombre:'||v_empleado.nombre);
+ dbms_output.put_line('Departamento:'||v_empleado.dep);
+ dbms_output.put_line('Salario Neto:'||v_empleado.salneto);
+ dbms_output.put_line('Retención:'||v_empleado.retencion);
+ dbms_output.put_line('Gastos:'||v_empleado.gastos);
+ dbms_output.put_line('Cursos:'||v_empleado.cursos);
+
+end;
+
+
+
+
+
+
+
+
+
+

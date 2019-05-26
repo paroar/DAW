@@ -1,0 +1,9 @@
+
+vsquid:S1206*"PThis class overrides "equals()" and should therefore also override "hashCode()".(ÜÑãH³RMINORZBUG
+Esquid:S2097*"Add a type test to this method.(ÜÑãH´RMINORZBUG
+Œsquid:S3973/"WUse curly braces or indentation to denote the code conditionally executed by this "if".(ÑÔêúÿÿÿÿHµRCRITICALZ
+CODE_SMELL
+Gsquid:S1220""Move this file to a named package.H¶RMINORZ
+CODE_SMELL
+isquid:S2259-"CA "NullPointerException" could be thrown; "other" is nullable here.(Åçï†H·RMAJORZBUG
+nsquid:S2259/"CA "NullPointerException" could be thrown; "other" is nullable here.(ÑÔêúÿÿÿÿH¸RMAJORZBUG

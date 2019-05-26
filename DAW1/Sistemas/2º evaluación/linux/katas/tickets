@@ -1,0 +1,20 @@
+#!bin/bash
+
+calcular(){
+exponencial=$1
+while true 
+do
+    let veces++
+    lineal=$(awk "BEGIN {print $veces*$2}")
+    exponencial=$(awk "BEGIN {print $exponencial+$2*$3^$veces}")
+    echo $lineal $exponencial
+    if [ "$(echo "$lineal>$exponencial" | bc )" -eq 1 ]
+    then
+    echo $(($veces))        
+    exit
+    fi
+done
+
+}
+
+calcular $1 $2 $3

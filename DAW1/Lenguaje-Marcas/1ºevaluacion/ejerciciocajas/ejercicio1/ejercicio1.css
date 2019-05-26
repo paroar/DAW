@@ -1,0 +1,24 @@
+*{
+	margin: 15px 20px;
+}
+
+body{
+	border:solid red;
+	border-width: 3px;
+}
+
+h1{
+	border:solid blue;
+	border-width: 3px;
+}
+
+h2{
+	border:solid #ddd;
+	border-width: 3px;
+}
+
+ul{
+	border:solid #4dff4d;
+	border-width: 3px;
+	padding-left: 15px;
+}

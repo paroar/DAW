@@ -1,0 +1,107 @@
+
+public class Lista {
+
+	private Nodo comienzo;
+	
+	public Lista() {
+		this.comienzo = null;
+	}
+	
+	public void addBegin(int dato) {
+		Nodo nuevo = new Nodo(dato);
+		nuevo.setSig(this.comienzo);
+		this.comienzo = nuevo;
+	}
+	
+	public void addEnd(int dato) {
+		Nodo nuevo = new Nodo(dato);
+		Nodo p = this.comienzo;
+		if(p == null) {
+			this.comienzo = nuevo;
+		}else {
+			while(p.getSig() != null) {
+				p = p.getSig();
+			}
+			p.setSig(nuevo);
+		}
+	}
+	
+	public String mostrarLista() {
+		String salida = "";
+		if(this.comienzo == null) {
+			return salida;
+		}
+		Nodo p = this.comienzo;
+		while(p.getSig() != null) {
+			salida += p.getDato() + "-->";
+			p = p.getSig();
+		}
+		salida += p.getDato();
+		return salida;
+	}
+
+	public int maxDistance(int dato) {
+		Nodo p = this.comienzo;
+		while(p != null && p.getDato() != dato) {
+			p = p.getSig();
+		}
+		if(p == null) {
+			return -1;
+		}else {
+			int distance = -1;
+			while(p != null) {
+				int newDistance = Lista.distanceBetweenInfo(p.getSig(), dato) + 1;
+				for(int i = 0 ; p != null && i < newDistance + 1; i++) {			//advance to the next Node
+					p = p.getSig();													//where you found the data
+				}																	//newDistance+1
+				if(newDistance > distance) {
+					distance = newDistance;
+				}
+			}
+			return distance;
+		}
+	}
+	
+	public static int distanceBetweenInfo(Nodo p, int dato) {
+		int distance = 0;
+		while(p != null && p.getDato() != dato) {
+			p = p.getSig();
+			distance++;
+		}
+		if(p == null) {
+			return -1;
+		}else {
+			return distance;
+		}
+	}
+	
+	public int maximaDistancia(int info) {
+		int max = -1;
+		int cont;
+		Nodo p = this.comienzo;
+		this.distancia(p, info);
+		while(p != null) {
+			cont = this.distancia(p, info);
+			if(cont > max) {
+				max = cont;
+			}
+			p = p.getSig();
+		}
+		return max;
+	}
+	
+	public int distancia(Nodo p, int info) {
+		int cont = 0;
+		while(p != null && p.getDato() != info) {
+			p = p.getSig();
+			cont++;
+		}
+		if(p == null) {
+			return -1;
+		}else {
+			return cont;
+		}
+		
+		
+	}
+}

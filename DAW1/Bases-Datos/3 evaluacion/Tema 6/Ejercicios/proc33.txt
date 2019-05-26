@@ -1,0 +1,16 @@
+Crea un procedimiento almacenado que use el procedimiento del ejercicio 32 
+para todos los empleados de la BBDD
+
+-------------------------------------------------------------------------------------
+
+create or replace procedure proc33
+
+is begin
+
+	for v_cod in pkg31.c_cod loop
+
+		proc32(v_cod.cod);
+
+	end loop;
+
+end proc33;

@@ -1,0 +1,28 @@
+Nombre de los departamentos cuyos empleados no han coincidido en cursos con los empleados del departamento Financiero.
+
+
+- Códigos de cursos donde no han asistido empleados del departamento financiero
+
+ select distinct dep.nom from a.ast a,a.emp,a.dep
+ where 
+  (
+   num=num_dp
+   and
+   cod=cod_em
+   and
+   codcur_cr not in (
+                     select codcur_cr from a.ast,a.emp,a.dep
+                     where
+                      (
+                       num=num_dp
+                       and
+                       cod=cod_em
+                       and
+                       dep.nom='Financiero'
+                      )
+                     )
+  );
+
+    
+
+

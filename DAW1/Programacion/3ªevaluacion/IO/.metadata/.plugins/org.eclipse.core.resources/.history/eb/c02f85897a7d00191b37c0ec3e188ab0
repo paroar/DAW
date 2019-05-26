@@ -1,0 +1,63 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class Prueba {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		RandomAccessFile raf = null;
+		try {
+			raf = new RandomAccessFile("D:\\accesoAleatorio.ddr","rw");
+		}catch(IOException e){
+			System.out.println(e);
+		}
+		Scanner scanner = new Scanner(System.in);
+		String name;
+		int age;
+		char sex;
+		int option;
+		while(true) {
+			System.out.println("\n--------------------\n"
+					+"Elige una opción:\n"
+					+"1. Escribir persona\n"
+					+"2. Buscar persona\n"
+					+"3. Copiar archivo\n"
+					+"4. Mostrar archivo\n"
+					+"5. Salir\n");
+			option = scanner.nextInt();
+			//menú de opciones
+			switch(option) {
+				case 1: 
+						System.out.println("1. Escribir persona\n");
+						System.out.println("Name:");
+						name = scanner.next();
+						System.out.println("Age:");
+						age = scanner.nextInt();
+						System.out.println("Sex:");
+						sex = scanner.next().charAt(0);
+						AccesoAleatorio.escribir(raf,name,age,sex);
+						break;
+				case 2: 
+						System.out.println("2. Borrar persona\n");
+						System.out.println("Name:");
+						name = scanner.next();
+						AccesoAleatorio.copiar(raf);
+						break;
+				case 3: 
+						System.out.println("3. Buscar persona\n");
+						System.out.println("Name:");
+						name = scanner.next();
+						AccesoAleatorio.buscar(raf,name);
+						break;
+				case 4: 
+						System.out.println("4. Mostrar archivo\n");
+						AccesoAleatorio.mostrar(raf);
+						break;
+				case 5: System.exit(1);
+				default:
+			}
+		}
+		
+	}
+
+}

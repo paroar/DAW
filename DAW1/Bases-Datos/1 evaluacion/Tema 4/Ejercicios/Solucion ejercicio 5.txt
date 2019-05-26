@@ -1,0 +1,136 @@
+Solución ejercicio nº 5
+=======================
+
+1.
+
+select distinct cur.nom from a.dep,a.emp,a.ast,a.cur
+where (num=num_dp and cod=cod_em and codcur=codcur_cr)
+and dep.nom='Financiero';
+
+2.
+
+select distinct emp.nom,apes from a.emp,a.cur,a.ast
+where (cod=cod_em and codcur=codcur_cr)
+and lug='Madrid';
+
+3.
+
+select distinct dep.nom from a.dep,a.emp,a.ast
+where (num=num_dp and cod=cod_em);
+
+4.
+
+select distinct emp from a.pro,a.ses,a.ast,a.emp,a.dep
+where
+(
+ codpro=codpro_pr
+ and
+ ses.codcur_cr=ast.codcur_cr
+ and
+ cod=cod_em
+ and
+ num=num_dp
+)
+and dep.nom like 'Ingenier_a';
+
+5.
+
+select distinct emp.nom,apes from a.emp,a.ast,a.ses,a.cur
+where
+(
+ cod=cod_em
+ and
+ codcur=ast.codcur_cr
+ and
+ codcur=ses.codcur_cr
+)
+and dur=hor;
+
+6.
+
+select emp.nom,apes,fal,dep.nom from a.emp,a.ast,a.ses,a.cur,a.dep
+where
+(
+ cod=cod_em
+ and
+ codcur=ast.codcur_cr
+ and
+ codcur=ses.codcur_cr
+ and
+ num=num_dp
+)
+and dur=hor;
+
+7.
+
+select distinct den from a.emp,a.ast,a.cur,a.dep,a.gas,a.tgas
+where
+(
+ cod=cod_em
+ and
+ codcur=codcur_cr
+ and
+ codgas=codgas_tg
+ and
+ num=num_dp
+ and
+ cod_em=cod_em_as
+ and 
+ codcur_cr=codcur_cr_as
+)
+and lug='Madrid'
+and dep.nom like 'Ingenier_a';
+
+8.
+
+select fec,imp from a.emp,a.ast,a.dep,a.gas
+where
+(
+ cod=cod_em
+ and
+ num=num_dp
+ and
+ cod_em=cod_em_as
+ and 
+ codcur_cr=codcur_cr_as
+)
+and cer='N'
+and dep.nom='Financiero';
+
+9.
+
+select imp from a.emp,a.dep,a.gas,a.tgas
+where
+(
+ num=num_dp
+ and
+ cod=cod_em_as
+ and
+ codgas=codgas_tg
+)
+and den='Dietas'
+and dep.nom='Comercial';
+
+10.
+
+ALTER SESSION SET NLS_DATE_FORMAT='DD/MM/YYYY';
+
+select distinct dep.nom from a.emp,a.ast,a.cur,a.dep
+where
+(
+ cod=cod_em
+ and
+ codcur=codcur_cr
+ and
+ num=num_dp
+)
+and fini between '01/01/2000' and '31/12/2000'
+or  ffin between '01/01/2000' and '31/12/2000';
+
+
+
+
+
+
+
+

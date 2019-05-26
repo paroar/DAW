@@ -1,0 +1,63 @@
+Escribe un bloque anónimo que visualice la siguiente información para el empleado de código 136900.
+
+
+Datos del empleado
+
+Nombre:Apellido1 Apellido1, Nombre
+Número de cursos realizados:
+Total de faltas de asistencia:
+Total de gastos:
+
+declare
+
+ v_nom a.emp.nom%type;
+ v_apes a.emp.apes%type;
+ v_nc number(3,0);
+ v_tf number(3,0);
+ v_tg number(6,2);
+
+begin
+
+ select nom,apes into v_nom,v_apes from a.emp
+ where cod='136900';
+ 
+ select count(codcur_cr) into v_nc from a.ast
+ where cod_em='136900';
+
+ if v_nc>0
+  then
+   select sum(fal) into v_tf from a.ast
+   where cod_em='136900';
+
+   select sum(imp) into v_tg from a.gas
+   where cod_em_as='136900';
+
+  if v_tg is null
+   then
+    v_tg:=0;
+  end if;
+
+ end if;
+
+ dbms_output.put_line('Nombre:'||v_apes||', '||v_nom);
+
+ if v_nc>0
+  then
+   dbms_output.put_line('Número de cursos realizados:'||v_nc);
+   dbms_output.put_line('Total de faltas de asistencia:'||v_tf);
+   dbms_output.put_line('Total de gastos:'||v_tg);
+  else
+   dbms_output.put_line('El empleado no ha hecho cursos');
+ end if;
+
+exception
+
+ when no_data_found
+  then
+    dbms_output.put_line('El empleado no existe');
+
+ when too_many_rows
+  then
+    dbms_output.put_line('Select obtiene más de una fila');
+
+end;

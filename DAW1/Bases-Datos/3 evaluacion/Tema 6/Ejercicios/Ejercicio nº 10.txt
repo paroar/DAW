@@ -1,0 +1,125 @@
+Escribe un bloque anónimo que visualice la siguiente información para todos los departamentos de la empresa:
+
+
+Nombre:
+Número de empleados: -- Si el departamento está vacío, no se visulizan el resto de datos
+Total nómina neta:
+% de empleados que han asistido a cursos: -- Tres dígitos enteros máximo.
+Total de gastos de formación:
+Total de horas de formación:
+% de empleados: -- Con respecto al total de la empresa. Dos dígitos enteros máximo.
+Total de certificados obtenidos:
+
+declare
+
+ -- Cursor y variables de cursor
+
+ cursor cur_dep is select * from a.dep;
+
+ v_dep cur_dep%rowtype;
+
+ -- Variables
+
+ v_ne number(3,0);  -- Empleados del departamento
+ v_net number(3,0); -- Empleados de la empresa
+ v_tnn number(8,2); -- Total nómina neta
+ v_nec number(3,0); -- Empleados que han asistido a cursos. Tambien almacena el porcentaje
+ v_gf number(7,2);  -- Gastos de formación
+ v_hf number(5,0);  -- Horas de formación
+ v_nc number(3,0);  -- Certificados obtenidos
+ v_pe number(2,0);  -- % de empleados
+
+
+begin
+
+ -- Empleados de la empresa
+
+ select count(cod) into v_net from a.emp;
+
+ open cur_dep;
+
+ loop
+
+  fetch cur_dep into v_dep;
+  exit when cur_dep%notfound;
+  
+  -- Empleados del departamento
+
+  select count(cod) into v_ne from a.emp
+  where num_dp=v_dep.num;
+
+  if v_ne is null
+   then
+    v_ne:=0;
+  end if;
+
+  dbms_output.put_line('Nombre:'||v_dep.nom);
+  dbms_output.put_line('Número de empleados:'||v_ne);
+
+  -- Buscar el resto de datos si departamento no vacío
+
+  if v_ne>0
+   then
+
+    -- Nomina neta
+    select sum(sal*(1-irpf/100)) into v_tnn from a.emp
+    where num_dp=v_dep.num;
+    if v_tnn is null
+     then
+      v_tnn:=0;
+    end if;
+
+    -- % asistentes a cursos
+    select count(cod) into v_nec from a.emp
+    where num_dp=v_dep.num
+    and cod in (select cod_em from a.ast);
+
+    -- Gastos y horas de formación y certificados obtenidos si hay asistentes a cursos
+
+    if v_nec>0
+     then
+      -- Gastos de formación
+      select sum(imp) into v_gf from a.gas
+      where cod_em_as in
+      (select cod from a.emp where num_dp=v_dep.num);
+      if v_gf is null
+       then
+        v_gf:=0;
+      end if;
+     
+      -- Horas de formación
+      select sum(dur) into v_hf from a.cur,a.ast,a.emp
+      where (codcur=codcur_cr and cod_em=cod) and (num_dp=v_dep.num);
+
+      -- Certificados obtenidos
+      select count(cer) into v_nc from a.ast
+      where cod_em in (select cod from a.emp where num_dp=v_dep.num)
+      and cer='S';
+    end if;
+
+    -- % de empleados que han asistido a cursos
+
+    v_nec:=(v_nec/v_ne)*100;
+
+    -- % de empleados con respecto al total de la empresa
+
+    v_pe:=(v_ne/v_net)*100;
+
+    dbms_output.put_line('Total nómina neta:'||v_tnn);
+    dbms_output.put_line('% de empleados que han asistido a cursos:'||v_nec);
+    dbms_output.put_line('Total de gastos de formación:'||v_gf);
+    dbms_output.put_line('Total de horas de formación:'||v_hf);
+    dbms_output.put_line('% de empleados:'||v_pe);
+    dbms_output.put_line('Total de certificados obtenidos:'||v_nc);
+    
+  end if;
+
+-- Salto de linea
+
+  dbms_output.put_line(chr(10));  
+
+ end loop;
+
+ close cur_dep;
+
+end;

@@ -1,0 +1,52 @@
+Escribe un bloque anónimo que visualice la siguiente información de todos los empleados de la bases de datos:
+
+INFORME DE EMPLEADOS
+
+Departamento:
+Nombre:
+Salario neto:
+Total de cursos realizados:
+
+Si el empleado no pertenece a ningún departamento, en lugar del nombre vamos a visualizar el mensaje Sin asignar.
+
+===========================================================================================
+
+declare
+
+cursor cur_emp is
+select cod, num_dp, nom, apes, sal-sal(irpf)/100 as salneto from emp;
+
+v_emp cur_emp%rowtype;
+
+v_nom dep.nom%type;
+v_tc number(3,0);
+
+begin
+    
+    open cur_emp;
+    fetch cur_emp into v_emp;
+    while cur_emp%rowfound loop
+        
+        if v_emp.num_dp is null
+        then
+            dbms_output.put_line('Departamento:sin asignar');
+        else
+            select nom into v_nom from dep
+            where num=v_emp.num_dp;
+            dbms_output.put_line('Departamento:'||v_nom);
+        end if;
+        
+        dbms_output.put_line('Nombre:'||v_emp.nom);
+        dbms_output.put_line('Salario neto:'||v_emp.salneto);
+        
+        select count(codcur_cr) into v_tc from ast
+        where cod_em=v_emp.cod;   
+        dbms_output.put_line('Total cursos:'||v_tc);
+    
+        dbms_output.put_line(chr(10));
+
+        fetch cur_emp into v_emp;
+    end loop;
+
+    close cur_emp;
+end;  
