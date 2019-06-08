@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="convert.xsl"?>
+<cursos>
+  <curso>
+    <nombre>Surf</nombre>
+     <precio>30</precio>
+    <dias>1</dias>
+    <horas>2</horas>
+    <material>incluido</material>
+  </curso>
+   <curso>
+    <nombre>Surf</nombre>
+     <precio>60</precio>
+    <dias>2</dias>
+    <horas>4</horas>
+    <material>incluido</material>
+  </curso>
+   <curso>
+    <nombre>Surf</nombre>
+    <precio>130</precio>
+    <dias>5</dias>
+    <horas>10</horas>
+    <material>incluido</material>
+  </curso>
+   <curso>
+    <nombre>Bodyboard</nombre>
+    <precio>25</precio>
+    <dias>1</dias>
+    <horas>2</horas>
+    <material>incluido</material>
+  </curso>
+   <curso>
+    <nombre>Bodyboard</nombre>
+    <precio>50</precio>
+    <dias>2</dias>
+    <horas>4</horas>
+    <material>incluido</material>
+  </curso>
+   <curso>
+    <nombre>Bodyboard</nombre>
+      <precio>120</precio>
+    <dias>5</dias>
+    <horas>10</horas>
+    <material>incluido</material>
+  </curso>
+ </cursos>
